@@ -1,6 +1,7 @@
-# what_can_i_cook
+# What can i cook
 
 A new Flutter project.
+If you want clone this repository, you must create your own Firebase project.
 
 ## Getting Started
 
