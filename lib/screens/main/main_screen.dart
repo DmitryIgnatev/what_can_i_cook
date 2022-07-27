@@ -2,10 +2,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
-import 'package:what_can_i_cook/constants.dart';
-import 'package:what_can_i_cook/screens/main/pages/home/home_page.dart';
-import 'package:what_can_i_cook/screens/main/pages/add/add_page.dart';
-import 'package:what_can_i_cook/screens/main/pages/find/find_page.dart';
+import 'package:what_can_i_cook/components/constants.dart';
+import 'package:what_can_i_cook/screens/main/primary_pages/home/home_page.dart';
+import 'package:what_can_i_cook/screens/main/primary_pages/add/add_page.dart';
+import 'package:what_can_i_cook/screens/main/primary_pages/find/find_page.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);

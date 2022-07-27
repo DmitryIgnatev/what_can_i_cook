@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:what_can_i_cook/constants.dart';
+import 'package:what_can_i_cook/components/constants.dart';
 
 class Categories extends StatefulWidget {
   const Categories({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class _CategoriesState extends State<Categories> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical:1.h ),
       child: SizedBox(
-        height: 45,
+        height: 40,
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: categories.length,

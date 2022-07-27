@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:what_can_i_cook/constants.dart';
-import 'package:what_can_i_cook/screens/main/pages/add/item_card.dart';
+import 'package:what_can_i_cook/screens/main/primary_pages/add/item_card.dart';
 
 
 class AddBody extends StatefulWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:what_can_i_cook/constants.dart';
+import 'package:what_can_i_cook/components/constants.dart';
 
 class AuthorizationBody extends StatefulWidget {
   const AuthorizationBody({Key? key}) : super(key: key);
@@ -60,17 +60,6 @@ class _AuthorizationBodyState extends State<AuthorizationBody> with SingleTicker
               alignment: Alignment.center,
               decoration: const BoxDecoration(
                 color: kPrimaryColor,
-                /*
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color.fromARGB(250, 241, 12, 81),
-                    Color.fromARGB(255, 255, 0, 106),
-                    Color.fromARGB(255, 145, 0, 0),
-                  ],
-                ),
-                */
               ),
               child: Opacity(
                 opacity: _opacity.value,
