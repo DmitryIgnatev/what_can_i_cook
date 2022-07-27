@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:what_can_i_cook/screens/main/new_recipe/storage_service.dart';
+import 'package:what_can_i_cook/services/storage_service/storage_service.dart';
 
 class FuturePicture extends StatelessWidget {
   final String fileName;
@@ -19,6 +19,7 @@ class FuturePicture extends StatelessWidget {
                 );
               }
               /*
+              Кружок при подгрузке изображения, нужно заменить или убрать целиком
               if (snapshot.connectionState == ConnectionState.waiting ||
                   !snapshot.hasData) {
                 return const CircularProgressIndicator();

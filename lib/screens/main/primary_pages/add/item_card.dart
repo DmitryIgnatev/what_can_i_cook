@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:what_can_i_cook/constants.dart';
+import 'package:what_can_i_cook/components/constants.dart';
 import 'package:sizer/sizer.dart';
-import 'package:what_can_i_cook/screens/main/new_recipe/future_picture.dart';
+import 'package:what_can_i_cook/services/storage_service/future_picture.dart';
+import 'package:what_can_i_cook/screens/main/recipe/recipe_page.dart';
 
 class ItemCard extends StatefulWidget {
   const ItemCard({Key? key}) : super(key: key);
@@ -44,9 +45,13 @@ class _ItemCardState extends State<ItemCard> {
                           children: <Widget>[
                             GestureDetector(
                                 onTap: () {
-                                  Navigator.pop(context);
-                                  Navigator.pushNamedAndRemoveUntil(
-                                      context, '/recipe', (route) => false);
+                                  
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => RecipePage(index, pageIndex: index,)),
+                                  );
+                                  
                                 },
                                 child: SizedBox(
                                   height: 20.h,
@@ -88,7 +93,6 @@ class _ItemCardState extends State<ItemCard> {
                                     style: TextStyle(
                                         fontSize: 2.h, color: kTextColor),
                                   ),
-                                  
                                 ],
                               ),
                             ),
@@ -105,7 +109,7 @@ class _ItemCardState extends State<ItemCard> {
                           ),
                           onPressed: () {
                             setState(() {
-                              ////////////Delete items
+                              //Delete items
                               FirebaseFirestore.instance
                                   .collection('items')
                                   .doc((snapshot.data!).docs[index].id)

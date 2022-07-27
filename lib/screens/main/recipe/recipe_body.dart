@@ -1,46 +1,65 @@
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:what_can_i_cook/constants.dart';
-import 'package:what_can_i_cook/screens/main/recipe/photo_and_rating.dart';
+import 'package:sizer/sizer.dart';
+//import 'package:what_can_i_cook/components/constants.dart';
+import 'package:what_can_i_cook/screens/main/recipe/photo_and_title.dart';
 
 class RecipeBody extends StatelessWidget {
-  const RecipeBody({Key? key}) : super(key: key);
+  final int pageIndex;
+  const RecipeBody({Key? key, required this.pageIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        const PhotoAndRating(),
-        Padding(
-          padding: const EdgeInsets.all(kDefaultPaddin),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                  child: Column(
-                children: const <Widget>[],
-              )),
-              SizedBox(
-                height: 64,
-                width: 64,
-                child: ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                              side: const BorderSide(color: kPrimaryColor))),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(kPrimaryColor),
-                    ),
-                    child: const Icon(
-                      Icons.edit,
-                      size: 28,
-                      color: Colors.white,
-                    )),
-              )
-            ],
-          ),
-        )
-      ],
-    );
+    return CustomScrollView(
+  slivers: <Widget>[
+     SliverAppBar(
+      //?leading button created automatically?
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      pinned: true,
+      expandedHeight: 40.h,
+      flexibleSpace: FlexibleSpaceBar(
+        background: PhotoAndTitle(pageIndex: pageIndex),
+      ),
+    ),
+    SliverGrid(
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 100.w,
+        mainAxisSpacing: 10.0,
+        crossAxisSpacing: 10.0,
+        childAspectRatio: 4.0,
+      ),
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          return Container(
+            alignment: Alignment.center,
+            color: Colors.teal[100 * (index % 9)],
+            child: Text('Grid Item $index'),
+          );
+        },
+        childCount: 20,
+      ),
+    ),
+    
+  ],
+);
+    
+    /*
+    StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance.collection('items').snapshots(),
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (!snapshot.hasData) return const Text('Нет записей');
+            return Column(
+              children: <Widget>[
+                PhotoAndTitle(pageIndex: pageIndex),
+                const Padding(
+                  padding: EdgeInsets.all(kDefaultPaddin),
+
+                )
+              ],
+            );
+          });
+          */
   }
 }
