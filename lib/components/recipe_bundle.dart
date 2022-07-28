@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'constants.dart';
+
 class RecipeBundle {
   final int id, chefs, recipes;
   final String title, description, imageSrc;
@@ -24,7 +26,7 @@ List<RecipeBundle> recipeBundles = [
     title: "Готовьте что захотите и когда захотите каждый день",
     description: "Это очень просто и интересно",
     imageSrc: "assets/images/cooking_boy.png",
-    color: const Color(0xFF90AF17),
+    color: kGreenColor,
   ),
   RecipeBundle(
     id: 2,
@@ -33,7 +35,7 @@ List<RecipeBundle> recipeBundles = [
     title: "Добавляйте любимые рецепты в избранное",
     description: "Вы сможете в люой момент посмотреть список понравившихся вам рецептов",
     imageSrc: "assets/images/cooking_book.png",
-    color: const Color(0xFFD82D40),
+    color: kPrimaryRedColor,
   ),
   RecipeBundle(
     id: 3,
@@ -42,6 +44,6 @@ List<RecipeBundle> recipeBundles = [
     title: "Делитесь своими рецептами с остальными",
     description: "Цифровая энциклопедия рецептов",
     imageSrc: "assets/images/community.png",
-    color: const Color(0xFF2DBBD8),
+    color: kBlueColor,
   ),
 ];

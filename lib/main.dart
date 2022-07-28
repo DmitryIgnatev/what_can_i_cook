@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/screens/main/main_screen.dart';
 import 'package:what_can_i_cook/screens/main/primary_pages/add/add_page.dart';
-import 'package:what_can_i_cook/screens/main/favorite/favorite_screen.dart';
+import 'package:what_can_i_cook/screens/main/favorite/favorite_page.dart';
 import 'package:what_can_i_cook/screens/main/primary_pages/find/find_page.dart';
 import 'package:what_can_i_cook/screens/main/new_recipe/new_recipe.dart';
 import 'package:what_can_i_cook/screens/settings/settings_page.dart';
-import 'package:what_can_i_cook/screens/authorization/authorization_screen.dart';
+import 'package:what_can_i_cook/screens/user_screen/authorization/authorization_page.dart';
 import 'package:sizer/sizer.dart';
 import 'package:firebase_core/firebase_core.dart';
 

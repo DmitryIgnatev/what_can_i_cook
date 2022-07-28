@@ -93,10 +93,10 @@ class PhotoAndTitle extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(18.0),
                                         side: const BorderSide(
-                                            color: kPrimaryColor))),
+                                            color: kPrimaryRedColor))),
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        kPrimaryColor),
+                                        kPrimaryRedColor),
                               ),
                               child: const Icon(
                                 Icons.edit,
