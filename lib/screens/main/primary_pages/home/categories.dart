@@ -41,14 +41,14 @@ class _CategoriesState extends State<Categories> {
           horizontal: 5.w,
         ),
         decoration: BoxDecoration(
-          border: Border.all(color: kPrimaryColor),
+          border: Border.all(color: kPrimaryRedColor),
           color: selectedIndex==index? const Color.fromARGB(255, 235, 235, 235): Colors.transparent,
           borderRadius: BorderRadius.circular( 5.w )
         ),
         child: Text(
           categories[index],
           style: TextStyle(fontWeight: FontWeight.bold, 
-          color: selectedIndex==index? kPrimaryColor: kTextLigntColor ),
+          color: selectedIndex==index? kPrimaryRedColor: kTextLigntColor ),
         ),
       ),
     );

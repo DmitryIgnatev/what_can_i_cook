@@ -8,7 +8,7 @@ class FavoritePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kPrimaryColor,
+      backgroundColor: kPrimaryRedColor,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color.fromARGB(0, 0, 0, 0),

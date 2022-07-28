@@ -97,13 +97,13 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         
         title: Image.asset(
           "assets/images/pretty_title.png",
-          color: kPrimaryColor,
+          color: kPrimaryRedColor,
           scale: 0.2.h,
         ),
         
         elevation: 0,
         backgroundColor: const Color.fromARGB(0, 255, 255, 255),
-        foregroundColor: kPrimaryColor,
+        foregroundColor: kPrimaryRedColor,
         leading: IconButton(
           icon: const Icon(Icons.menu_rounded),
           splashColor: Colors.transparent,
@@ -142,9 +142,9 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         color: const Color.fromARGB(255, 255, 255, 255),
         child: TabBar(
           unselectedLabelColor: Colors.grey,
-          labelColor: kPrimaryColor,
+          labelColor: kPrimaryRedColor,
           //indicatorColor: Colors.transparent,
-          indicatorColor: kPrimaryColor,
+          indicatorColor: kPrimaryRedColor,
           tabs: _kTabs,
           controller: _tabController,
         ),
@@ -169,7 +169,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                 height: MediaQuery.of(context).orientation == Orientation.landscape ? 50.w : 30.h,
                 decoration: BoxDecoration(
                   //color: kPrimaryColor.withOpacity(_animation2.value),
-                  color: kPrimaryColor,
+                  color: kPrimaryRedColor,
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Column(

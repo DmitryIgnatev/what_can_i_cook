@@ -77,7 +77,7 @@ class _ItemCardState extends State<ItemCard> {
                                     (snapshot.data!).docs[index].get('name'),
                                     maxLines: 1,
                                     style: TextStyle(
-                                        fontSize: 3.h, color: kPrimaryColor),
+                                        fontSize: 3.h, color: kPrimaryRedColor),
                                   ),
                                   Text(
                                     (snapshot.data!)
@@ -105,7 +105,7 @@ class _ItemCardState extends State<ItemCard> {
                         child: IconButton(
                           icon: const Icon(
                             Icons.delete,
-                            color: kPrimaryColor,
+                            color: kPrimaryRedColor,
                           ),
                           onPressed: () {
                             setState(() {

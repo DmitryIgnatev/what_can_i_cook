@@ -12,11 +12,11 @@ class ActionButton extends StatelessWidget {
         backgroundColor: Colors.white,
         icon: const Icon(
           Icons.add_box_sharp,
-          color: kPrimaryColor,
+          color: kPrimaryRedColor,
         ),
         label: const Text(
           'Добавить собственный рецепт ',
-          style: TextStyle(color: kPrimaryColor),
+          style: TextStyle(color: kPrimaryRedColor),
         ),
         onPressed: () {
           Navigator.pop(context);
