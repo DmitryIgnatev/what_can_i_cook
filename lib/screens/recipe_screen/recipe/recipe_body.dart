@@ -1,8 +1,6 @@
-//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-//import 'package:what_can_i_cook/components/constants.dart';
-import 'package:what_can_i_cook/screens/main/recipe/photo_and_title.dart';
+import 'package:what_can_i_cook/screens/recipe_screen/recipe/photo_and_title.dart';
 
 class RecipeBody extends StatelessWidget {
   final int pageIndex;

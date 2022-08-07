@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/components/constants.dart';
-import 'package:what_can_i_cook/screens/main/recipe/recipe_body.dart';
+import 'package:what_can_i_cook/screens/recipe_screen/recipe/recipe_body.dart';
 
 class RecipePage extends StatefulWidget {
   final int pageIndex;

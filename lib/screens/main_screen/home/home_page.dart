@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/components/constants.dart';
-import 'package:what_can_i_cook/screens/main/primary_pages/home/home_body.dart';
+import 'package:what_can_i_cook/screens/main_screen/home/home_body.dart';
 
 
 class HomePage extends StatefulWidget {
