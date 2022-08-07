@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/components/constants.dart';
 import 'package:sizer/sizer.dart';
+import 'package:what_can_i_cook/screens/recipe_screen/recipe/recipe_page.dart';
 import 'package:what_can_i_cook/services/storage_service/future_picture.dart';
-import 'package:what_can_i_cook/screens/main/recipe/recipe_page.dart';
 
 class ItemCard extends StatefulWidget {
   const ItemCard({Key? key}) : super(key: key);
@@ -32,8 +32,9 @@ class _ItemCardState extends State<ItemCard> {
                               Orientation.landscape
                           ? 4
                           : 2,
-                      //crossAxisSpacing: 1.h,
-                      childAspectRatio: 0.6 //длина карточки
+                      crossAxisSpacing: 1.w,
+                      mainAxisSpacing: 1.h,
+                      childAspectRatio: 0.6 //?длина карточки, но есть проблемы с версткой экрана !
                       ),
                   itemBuilder: (BuildContext context, int index) {
                     return Stack(children: <Widget>[

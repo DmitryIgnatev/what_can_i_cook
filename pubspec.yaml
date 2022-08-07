@@ -38,6 +38,7 @@ dependencies:
   cloud_firestore:
   firebase_core:
   firebase_storage:
+  firebase_auth:
   file_picker: ^4.6.1
   fluttertoast: ^8.0.9
 

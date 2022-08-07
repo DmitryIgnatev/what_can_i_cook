@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/components/constants.dart';
-import 'package:what_can_i_cook/screens/main/favorite/favorite_body.dart';
+import 'package:what_can_i_cook/screens/auth_screen/registration/registration_card.dart';
 
-class FavoritePage extends StatelessWidget {
-  const FavoritePage({Key? key}) : super(key: key);
+class RegistrationPage extends StatelessWidget {
+  const RegistrationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kPrimaryRedColor,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color.fromARGB(0, 0, 0, 0),
@@ -22,7 +21,9 @@ class FavoritePage extends StatelessWidget {
               icon: const Icon(Icons.close))
         ],
       ),
-      body: const FavoriteBody()
+      backgroundColor: kPrimaryRedColor,
+      extendBodyBehindAppBar: true,
+      body: const RegistrationCard()
     );
   }
 }

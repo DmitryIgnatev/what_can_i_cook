@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:what_can_i_cook/screens/main/new_recipe/new_recipe_body.dart';
+import 'package:what_can_i_cook/components/constants.dart';
+import 'package:what_can_i_cook/screens/favorite/favorite_body.dart';
 
-class NewRecipe extends StatelessWidget {
-  const NewRecipe({Key? key}) : super(key: key);
+class FavoritePage extends StatelessWidget {
+  const FavoritePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
-        backgroundColor: const Color.fromARGB(250, 255, 255, 255),
-        foregroundColor: const Color.fromARGB(251, 241, 1, 73),
-        title: const Text('Новый рецепт'),
+      backgroundColor: kPrimaryRedColor,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: const Color.fromARGB(0, 0, 0, 0),
         centerTitle: true,
         actions: [
           IconButton(
@@ -20,8 +21,8 @@ class NewRecipe extends StatelessWidget {
                   },
               icon: const Icon(Icons.close))
         ],
-      ), 
-      body: const NewRecipeBody(),
+      ),
+      body: const FavoriteBody()
     );
   }
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:what_can_i_cook/screens/main/primary_pages/find/find_by_ingridients_card.dart';
-import 'package:what_can_i_cook/screens/main/primary_pages/find/find_by_name_card.dart';
+
+import 'find_by_ingridients_card.dart';
+import 'find_by_name_card.dart';
 
 class FindBody extends StatefulWidget {
   const FindBody({Key? key}) : super(key: key);

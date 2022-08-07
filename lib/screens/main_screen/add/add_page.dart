@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/components/constants.dart';
-import 'package:what_can_i_cook/screens/main/primary_pages/add/action_button.dart';
-import 'package:what_can_i_cook/screens/main/primary_pages/add/add_body.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:what_can_i_cook/screens/main_screen/add/action_button.dart';
+import 'package:what_can_i_cook/screens/main_screen/add/add_body.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({Key? key}) : super(key: key);

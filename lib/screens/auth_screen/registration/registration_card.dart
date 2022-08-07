@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/components/constants.dart';
-import 'package:what_can_i_cook/screens/user_screen/components/field.dart';
-import 'package:what_can_i_cook/screens/user_screen/components/user_button.dart';
+import 'package:what_can_i_cook/screens/auth_screen/components/field.dart';
+import 'package:what_can_i_cook/screens/auth_screen/components/user_button.dart';
 
 class RegistrationCard extends StatefulWidget {
   const RegistrationCard({Key? key}) : super(key: key);
