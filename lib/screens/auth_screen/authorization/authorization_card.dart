@@ -16,6 +16,11 @@ class AuthorizationCard extends StatefulWidget {
 }
 
 class _AuthorizationCardState extends State<AuthorizationCard> {
+
+  final TextEditingController _controllerUserName = TextEditingController();
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerPassword = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -52,10 +57,12 @@ class _AuthorizationCardState extends State<AuthorizationCard> {
                 ),
               ),
               const SizedBox(),
-              field(Icons.account_circle_outlined, 'Имя пользователя', false,
-                  false),
-              field(Icons.email_outlined, 'Email...', false, true),
-              field(Icons.lock_outline, 'Пароль...', true, false),
+              field(Icons.account_circle_outlined, 'Имя пользователя', false,false,
+              _controllerUserName),
+              field(Icons.email_outlined, 'Email...', false, true,
+              _controllerEmail),
+              field(Icons.lock_outline, 'Пароль...', true, false,
+              _controllerPassword),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -1,7 +1,7 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/components/constants.dart';
 import 'package:what_can_i_cook/screens/recipe_screen/recipe/recipe_body.dart';
+import 'package:what_can_i_cook/services/firebase/init_firebase.dart';
 
 class RecipePage extends StatefulWidget {
   final int pageIndex;
@@ -13,16 +13,12 @@ class RecipePage extends StatefulWidget {
 }
 
 class _RecipePageState extends State<RecipePage> {
-  void initFirebase() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
-  }
-
+  final InitFirebase initialise = InitFirebase();
   @override
   void initState() {
     super.initState();
 
-    initFirebase();
+    initialise.initFirebase();
   }
 
   @override
