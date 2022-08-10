@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/components/constants.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:what_can_i_cook/screens/main_screen/add/action_button.dart';
 import 'package:what_can_i_cook/screens/main_screen/add/add_body.dart';
+import 'package:what_can_i_cook/services/firebase/init_firebase.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({Key? key}) : super(key: key);
@@ -12,16 +12,13 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPageState extends State<AddPage> {
-  void initFirebase() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
-  }
+  final InitFirebase initialise = InitFirebase();
 
   @override
   void initState() {
     super.initState();
 
-    initFirebase();
+    initialise.initFirebase();
   }
   @override
   Widget build(BuildContext context)  {

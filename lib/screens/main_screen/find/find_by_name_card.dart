@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/components/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:what_can_i_cook/services/firebase/init_firebase.dart';
 import 'package:what_can_i_cook/services/storage_service/future_picture.dart';
 
 class FindByNameCard extends StatefulWidget {
@@ -13,16 +13,13 @@ class FindByNameCard extends StatefulWidget {
 }
 
 class _FindByNameCardState extends State<FindByNameCard> {
-  void initFirebase() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
-  }
+  final InitFirebase initialise = InitFirebase();
 
   @override
   void initState() {
     super.initState();
 
-    initFirebase();
+    initialise.initFirebase();
   }
   @override
   Widget build(BuildContext context) {

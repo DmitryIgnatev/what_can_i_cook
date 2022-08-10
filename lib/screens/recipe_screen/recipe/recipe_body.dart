@@ -22,7 +22,7 @@ class RecipeBody extends StatelessWidget {
     ),
     SliverGrid(
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 100.w,
+        maxCrossAxisExtent: 100.h,
         mainAxisSpacing: 10.0,
         crossAxisSpacing: 10.0,
         childAspectRatio: 4.0,
@@ -31,11 +31,12 @@ class RecipeBody extends StatelessWidget {
         (BuildContext context, int index) {
           return Container(
             alignment: Alignment.center,
-            color: Colors.teal[100 * (index % 9)],
-            child: Text('Grid Item $index'),
+            //color: kWhitethemecolor,
+            child:
+            const Text('*Информация о рецепе\nПредставим что она есть'),
           );
         },
-        childCount: 20,
+        childCount: 1,
       ),
     ),
     
