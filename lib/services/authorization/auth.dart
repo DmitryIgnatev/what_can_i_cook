@@ -7,7 +7,7 @@ class Auth{
 
   Stream<User?> get authChanges => _firebaseAuth.authStateChanges();
 
-  Future <void> signInWithEmailPassword({
+  Future <void> signInWithEmailAndPassword({
     required String email,
     required String password,
   })async
@@ -31,4 +31,6 @@ class Auth{
 Future <void> signOut()async{
   await _firebaseAuth.signOut();
 }
+
+
 }
