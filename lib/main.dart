@@ -7,6 +7,7 @@ import 'package:what_can_i_cook/screens/main_screen/add/add_page.dart';
 import 'package:what_can_i_cook/screens/main_screen/find/find_page.dart';
 import 'package:what_can_i_cook/screens/main_screen/main_screen.dart';
 import 'package:what_can_i_cook/screens/settings/settings_page.dart';
+import 'package:what_can_i_cook/screens/recipe_screen/new_recipe/new_recipe.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,9 +18,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +35,7 @@ class MyApp extends StatelessWidget {
           '/favorite': (context) =>  const FavoritePage(),
           '/settings': (context) => const SettingPage(),
           '/auth': (context) => const AuthorizationPage(),
-          //'/new_recipe': (context) => const NewRecipe(),
+          '/new_recipe': (context) => const NewRecipe(),
         },
       );
     });

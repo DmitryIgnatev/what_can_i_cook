@@ -11,25 +11,22 @@ import 'package:what_can_i_cook/services/authorization/auth.dart';
 class RegistrationCard extends StatefulWidget {
   const RegistrationCard({Key? key}) : super(key: key);
 
-  @override  State<RegistrationCard> createState() => _RegistrationCardState();
+  @override
+  State<RegistrationCard> createState() => _RegistrationCardState();
 }
 
 class _RegistrationCardState extends State<RegistrationCard> {
-
-
   String errorMessage = '';
   bool isLogin = true;
   final TextEditingController _controllerUserName = TextEditingController();
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
 
-  Future <void> createUserWithEmailAndPassword() async{
-    try{
+  Future<void> hereCreateUserWithEmailAndPassword() async {
+    try {
       await Auth().createUserWithEmailAndPassword(
-          email:_controllerEmail.text,
-          password:_controllerPassword.text
-      );
-    }on FirebaseException catch(e){
+          email: _controllerEmail.text, password: _controllerPassword.text);
+    } on FirebaseException catch (e) {
       setState(() {
         errorMessage = e.message!;
       });
@@ -72,12 +69,12 @@ class _RegistrationCardState extends State<RegistrationCard> {
                   ),
                 ),
                 const SizedBox(),
-                field(Icons.account_circle_outlined, 'Имя пользователя', false,false,
-                _controllerUserName),
+                field(Icons.account_circle_outlined, 'Имя пользователя', false,
+                    false, _controllerUserName),
                 field(Icons.email_outlined, 'Email...', false, true,
-                _controllerEmail),
+                    _controllerEmail),
                 field(Icons.lock_outline, 'Пароль...', true, false,
-                _controllerPassword),
+                    _controllerPassword),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -86,10 +83,7 @@ class _RegistrationCardState extends State<RegistrationCard> {
                       2.6,
                       () {
                         HapticFeedback.lightImpact();
-                        FirebaseAuth.instance.createUserWithEmailAndPassword(
-                            email: _controllerEmail.text,
-                            password:_controllerPassword.text,
-                        );
+                        hereCreateUserWithEmailAndPassword();
                         Fluttertoast.showToast(msg: 'button pressed');
                       },
                     ),

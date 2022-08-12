@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +8,7 @@ import 'package:what_can_i_cook/components/constants.dart';
 import 'package:what_can_i_cook/screens/auth_screen/components/field.dart';
 import 'package:what_can_i_cook/screens/auth_screen/components/user_button.dart';
 import 'package:what_can_i_cook/screens/auth_screen/registration/registration_page.dart';
+import 'package:what_can_i_cook/services/authorization/auth.dart';
 
 class AuthorizationCard extends StatefulWidget {
   const AuthorizationCard({Key? key}) : super(key: key);
@@ -17,9 +19,22 @@ class AuthorizationCard extends StatefulWidget {
 
 class _AuthorizationCardState extends State<AuthorizationCard> {
 
+  String errorMessage = '';
+  
   final TextEditingController _controllerUserName = TextEditingController();
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
+
+  Future<void> hereSignInWithEmailPassword() async {
+    try {
+      await Auth().signInWithEmailAndPassword(
+          email: _controllerEmail.text, password: _controllerPassword.text);
+    } on FirebaseException catch (e) {
+      setState(() {
+        errorMessage = e.message!;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
