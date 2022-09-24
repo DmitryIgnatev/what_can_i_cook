@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:what_can_i_cook/screens/auth_screen/authorization/authorization_page.dart';
-import 'package:what_can_i_cook/screens/favorite/favorite_page.dart';
-import 'package:what_can_i_cook/screens/main_screen/add/add_page.dart';
-import 'package:what_can_i_cook/screens/main_screen/find/find_page.dart';
-import 'package:what_can_i_cook/screens/main_screen/main_screen.dart';
-import 'package:what_can_i_cook/screens/settings/settings_page.dart';
-import 'package:what_can_i_cook/screens/recipe_screen/new_recipe/new_recipe.dart';
+import 'package:what_can_i_cook/view/screens/auth_screen/authorization/authorization_page.dart';
+import 'package:what_can_i_cook/view/screens/favorite/favorite_page.dart';
+import 'package:what_can_i_cook/view/screens/main_screen/add/add_page.dart';
+import 'package:what_can_i_cook/view/screens/main_screen/find/find_page.dart';
+import 'package:what_can_i_cook/view/screens/main_screen/main_screen.dart';
+import 'package:what_can_i_cook/view/screens/settings/settings_page.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/new_recipe/new_recipe.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
