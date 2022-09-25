@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/components/recipe_bundle.dart';
 import 'categories.dart';
-import 'recipe_bundle_card.dart';
+import '../../../widgets/recipe_bundle_card.dart';
 import 'package:sizer/sizer.dart';
 
 
