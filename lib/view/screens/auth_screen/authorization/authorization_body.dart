@@ -110,8 +110,7 @@ class _AuthorizationBodyState extends State<AuthorizationBody> {
               ),
               const SizedBox(),
             ],
-          )
-          ),
+          )),
     ));
   }
 }

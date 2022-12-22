@@ -31,8 +31,8 @@ class _FindByNameCardState extends State<FindByNameCard> {
 
           return Column(
             children: <Widget>[
-              Container(
-                height: 50.h,
+              SizedBox(
+                height: 100.h,
                 child: ListView.builder(
                   padding: const EdgeInsets.all(10.0),
                   itemCount: (snapshot.data!).docs.length,
@@ -40,7 +40,7 @@ class _FindByNameCardState extends State<FindByNameCard> {
                     return Card(
                       child: ListTile(
                         isThreeLine: true,
-                        leading: Container(
+                        leading: SizedBox(
                           width: 20.w,
                           child: FuturePicture(fileName: (snapshot.data!)
                                           .docs[index]

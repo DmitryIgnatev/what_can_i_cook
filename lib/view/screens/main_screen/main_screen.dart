@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/components/constants.dart';
+import 'package:what_can_i_cook/view/screens/favorite/favorite_page.dart';
 import 'package:what_can_i_cook/view/screens/main_screen/add/add_page.dart';
 import 'package:what_can_i_cook/view/screens/main_screen/find/find_page.dart';
 import 'package:what_can_i_cook/view/screens/main_screen/home/home_page.dart';
@@ -16,7 +17,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   late TabController _tabController;
-
   static const _kTabPages = <Widget>[
     Center(
       child: HomePage(),
@@ -87,13 +87,11 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        
         title: Image.asset(
           "assets/images/pretty_title.png",
           color: kPrimaryRedColor,
           scale: 0.2.h,
         ),
-        
         elevation: 0,
         backgroundColor: const Color.fromARGB(0, 255, 255, 255),
         foregroundColor: kPrimaryRedColor,
@@ -114,9 +112,12 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         actions: <Widget>[
           IconButton(
               onPressed: () {
-                Navigator.pop(context);
-                Navigator.pushNamedAndRemoveUntil(
-                    context, '/favorite', (route) => false);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => const FavoritePage(),
+                  ),
+                );
               },
               icon: const Icon(Icons.favorite))
         ],
