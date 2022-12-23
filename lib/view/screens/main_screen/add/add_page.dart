@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:what_can_i_cook/components/constants.dart';
 import 'package:what_can_i_cook/view/screens/main_screen/add/add_body.dart';
 import 'package:what_can_i_cook/services/firebase/init_firebase.dart';
@@ -20,12 +21,36 @@ class _AddPageState extends State<AddPage> {
 
     initialise.initFirebase();
   }
+
+  bool showFab = true;
   @override
-  Widget build(BuildContext context)  {
+  Widget build(BuildContext context) {
+    const duration = Duration(milliseconds: 300);
     return Scaffold(
-      backgroundColor: kWhitethemecolor,
-      body: const AddBody(),
-      floatingActionButton: appFloatingButton(context, 'Добавить собственный рецепт'),
+      backgroundColor: AppColors.kWhitethemecolor,
+      floatingActionButton: AnimatedSlide(
+        duration: duration,
+        offset: showFab ? Offset.zero : const Offset(0, 2),
+        child: AnimatedOpacity(
+          duration: duration,
+          opacity: showFab ? 1 : 0,
+          child: appFloatingButton(context, 'Добавить собственный рецепт'),
+        ),
+      ),
+      body: NotificationListener<UserScrollNotification>(
+        onNotification: (notification) {
+          final ScrollDirection direction = notification.direction;
+          setState(() {
+            if (direction == ScrollDirection.reverse) {
+              showFab = false;
+            } else if (direction == ScrollDirection.forward) {
+              showFab = true;
+            }
+          });
+          return true;
+        },
+        child: const AddBody(),
+      ),
     );
   }
 }

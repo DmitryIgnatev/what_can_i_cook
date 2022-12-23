@@ -17,7 +17,7 @@ Widget horisontallyScrollableItems(
         horizontal: 5.w,
       ),
       decoration: BoxDecoration(
-          border: Border.all(color: kPrimaryRedColor),
+          border: Border.all(color: AppColors.kPrimaryRedColor),
           color: selectedIndex == index
               ? const Color.fromARGB(255, 235, 235, 235)
               : Colors.transparent,
@@ -26,7 +26,9 @@ Widget horisontallyScrollableItems(
         items[index],
         style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: selectedIndex == index ? kPrimaryRedColor : kTextLigntColor),
+            color: selectedIndex == index
+                ? AppColors.kPrimaryRedColor
+                : AppColors.kTextLigntColor),
       ),
     ),
   );

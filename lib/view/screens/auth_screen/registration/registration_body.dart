@@ -42,7 +42,7 @@ class _RegistrationBodyState extends State<RegistrationBody> {
         child: Container(
           alignment: Alignment.center,
           decoration: const BoxDecoration(
-            color: kBlueColor,
+            color: AppColors.kBlueColor,
           ),
           child: bigInfoCard(context, 
             [

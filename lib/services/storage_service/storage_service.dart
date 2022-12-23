@@ -21,9 +21,17 @@ class Storage {
 
   }
   Future <String> downloadURL(String imageName ) async{
+    await Future.delayed(const Duration(seconds: 3));
+    try {
 
-    String downloadURL= await storage.ref('pics/$imageName').getDownloadURL();
-
-    return downloadURL;
+      String downloadURL= await storage.ref('pics/$imageName').getDownloadURL();
+      return downloadURL;
+    } catch (e) {
+      if(e == "[firebase_storage/object-not-found] No object exists at the desired reference.)"){
+      String downloadURL= await storage.ref('pics/$imageName').getDownloadURL();
+      return downloadURL;
+      }
+    }
+    return "";   
   }
 }

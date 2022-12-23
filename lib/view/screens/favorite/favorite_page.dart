@@ -10,7 +10,7 @@ class FavoritePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kPrimaryRedColor,
+      backgroundColor: AppColors.kPrimaryRedColor,
       appBar: transparentAppbar(context, [
         exitOnMainButton(context)
       ]),

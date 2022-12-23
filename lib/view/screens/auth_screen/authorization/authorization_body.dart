@@ -44,7 +44,7 @@ class _AuthorizationBodyState extends State<AuthorizationBody> {
       child: Container(
           alignment: Alignment.center,
           decoration: const BoxDecoration(
-            color: kPrimaryRedColor,
+            color: AppColors.kPrimaryRedColor,
           ),
           child: bigInfoCard(
             context,

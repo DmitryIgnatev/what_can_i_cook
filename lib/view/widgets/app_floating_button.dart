@@ -7,11 +7,11 @@ Widget appFloatingButton(BuildContext context, String title) {
       backgroundColor: Colors.white,
       icon: const Icon(
         Icons.add_box_sharp,
-        color: kPrimaryRedColor,
+        color: AppColors.kPrimaryRedColor,
       ),
       label: Text(
         title,
-        style: const TextStyle(color: kPrimaryRedColor),
+        style: const TextStyle(color: AppColors.kPrimaryRedColor),
       ),
       onPressed: () {
         Navigator.push(

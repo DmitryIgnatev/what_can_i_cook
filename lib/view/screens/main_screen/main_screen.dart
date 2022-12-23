@@ -89,12 +89,12 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
       appBar: AppBar(
         title: Image.asset(
           "assets/images/pretty_title.png",
-          color: kPrimaryRedColor,
+          color: AppColors.kPrimaryRedColor,
           scale: 0.2.h,
         ),
         elevation: 0,
         backgroundColor: const Color.fromARGB(0, 255, 255, 255),
-        foregroundColor: kPrimaryRedColor,
+        foregroundColor: AppColors.kPrimaryRedColor,
         leading: IconButton(
           icon: const Icon(Icons.menu_rounded),
           splashColor: Colors.transparent,
@@ -136,9 +136,9 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         color: const Color.fromARGB(255, 255, 255, 255),
         child: TabBar(
           unselectedLabelColor: Colors.grey,
-          labelColor: kPrimaryRedColor,
+          labelColor: AppColors.kPrimaryRedColor,
           //indicatorColor: Colors.transparent,
-          indicatorColor: kPrimaryRedColor,
+          indicatorColor: AppColors.kPrimaryRedColor,
           tabs: _kTabs,
           controller: _tabController,
         ),

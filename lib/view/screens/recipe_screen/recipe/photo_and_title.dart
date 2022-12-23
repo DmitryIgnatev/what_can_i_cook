@@ -51,7 +51,7 @@ Widget photoAndTitle(int pageIndex) {
                   child: Row(
                     children: <Widget>[
                       const SizedBox(
-                        width: kDefaultPaddin,
+                        width: 20,
                       ),
                       Expanded(
                           child: Column(
@@ -64,11 +64,11 @@ Widget photoAndTitle(int pageIndex) {
                             style: Theme.of(context).textTheme.headline5,
                           ),
                           const SizedBox(
-                            height: kDefaultPaddin / 2,
+                            height: 10,
                           ),
                           Text(
                             "Время приготовления: ${(snapshot.data!).docs[pageIndex].get('time')} минут",
-                            style: const TextStyle(color: kTextLigntColor),
+                            style: const TextStyle(color: AppColors.kTextLigntColor),
                           )
                         ],
                       )),
@@ -84,9 +84,9 @@ Widget photoAndTitle(int pageIndex) {
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18.0),
                                       side: const BorderSide(
-                                          color: kPrimaryRedColor))),
+                                          color: AppColors.kPrimaryRedColor))),
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  kPrimaryRedColor),
+                                  AppColors.kPrimaryRedColor),
                             ),
                             child: const Icon(
                               Icons.edit,
@@ -95,7 +95,7 @@ Widget photoAndTitle(int pageIndex) {
                             )),
                       ),
                       //*edit button end
-                      const SizedBox(width: kDefaultPaddin / 4)
+                      const SizedBox(width: 5)
                     ],
                   ),
                 ))

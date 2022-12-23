@@ -25,7 +25,7 @@ class _RecipePageState extends State<RecipePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: kWhitethemecolor,
+      backgroundColor: AppColors.kWhitethemecolor,
       body: RecipeBody(pageIndex:widget.pageIndex),
     );
   }

@@ -26,7 +26,7 @@ List<RecipeBundle> recipeBundles = [
     title: "Готовьте что захотите и когда захотите каждый день",
     description: "Это очень просто и интересно",
     imageSrc: "assets/images/cooking_boy.png",
-    color: kGreenColor,
+    color: AppColors.kGreenColor,
   ),
   RecipeBundle(
     id: 2,
@@ -35,7 +35,7 @@ List<RecipeBundle> recipeBundles = [
     title: "Добавляйте любимые рецепты в избранное",
     description: "Вы сможете в люой момент посмотреть список понравившихся вам рецептов",
     imageSrc: "assets/images/cooking_book.png",
-    color: kPrimaryRedColor,
+    color: AppColors.kPrimaryRedColor,
   ),
   RecipeBundle(
     id: 3,
@@ -44,6 +44,6 @@ List<RecipeBundle> recipeBundles = [
     title: "Делитесь своими рецептами с остальными",
     description: "Цифровая энциклопедия рецептов",
     imageSrc: "assets/images/community.png",
-    color: kBlueColor,
+    color: AppColors.kBlueColor,
   ),
 ];

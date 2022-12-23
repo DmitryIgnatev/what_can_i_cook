@@ -18,13 +18,11 @@ class FuturePicture extends StatelessWidget {
                   fit: BoxFit.cover,
                 );
               }
-              /*
-              Кружок при подгрузке изображения, нужно заменить или убрать целиком
               if (snapshot.connectionState == ConnectionState.waiting ||
                   !snapshot.hasData) {
-                return const CircularProgressIndicator();
+                return const Center(child: CircularProgressIndicator());
               }
-              */
+              
               return Container();
             });
   }

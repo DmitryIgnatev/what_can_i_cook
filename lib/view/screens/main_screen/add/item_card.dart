@@ -23,8 +23,18 @@ class _ItemCardState extends State<ItemCard> {
                   FirebaseFirestore.instance.collection('items').snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (!snapshot.hasData) return const Text('Нет записей');
-
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: Text(
+                      'Нет записей',
+                      style: TextStyle(
+                          fontSize: 34,
+                          color: AppColors.kTextLigntColor,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1),
+                    ),
+                  );
+                }
                 return GridView.builder(
                   itemCount: (snapshot.data!).docs.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -34,7 +44,8 @@ class _ItemCardState extends State<ItemCard> {
                           : 2,
                       crossAxisSpacing: 1.w,
                       mainAxisSpacing: 1.h,
-                      childAspectRatio: 0.6 //?длина карточки, но есть проблемы с версткой экрана !
+                      childAspectRatio:
+                          0.6 //?длина карточки, но есть проблемы с версткой экрана !
                       ),
                   itemBuilder: (BuildContext context, int index) {
                     return Stack(children: <Widget>[
@@ -46,13 +57,14 @@ class _ItemCardState extends State<ItemCard> {
                           children: <Widget>[
                             GestureDetector(
                                 onTap: () {
-                                  
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => RecipePage(index, pageIndex: index,)),
+                                        builder: (context) => RecipePage(
+                                              index,
+                                              pageIndex: index,
+                                            )),
                                   );
-                                  
                                 },
                                 child: SizedBox(
                                   height: 20.h,
@@ -78,7 +90,8 @@ class _ItemCardState extends State<ItemCard> {
                                     (snapshot.data!).docs[index].get('name'),
                                     maxLines: 1,
                                     style: TextStyle(
-                                        fontSize: 3.h, color: kPrimaryRedColor),
+                                        fontSize: 3.h,
+                                        color: AppColors.kPrimaryRedColor),
                                   ),
                                   Text(
                                     (snapshot.data!)
@@ -86,13 +99,15 @@ class _ItemCardState extends State<ItemCard> {
                                         .get('ingridients'),
                                     maxLines: 2,
                                     style: TextStyle(
-                                        fontSize: 2.h, color: kTextColor),
+                                        fontSize: 2.h,
+                                        color: AppColors.kTextColor),
                                   ),
                                   Text(
                                     "Время на приготовление:\n${(snapshot.data!).docs[index].get('time')} минут",
                                     maxLines: 3,
                                     style: TextStyle(
-                                        fontSize: 2.h, color: kTextColor),
+                                        fontSize: 2.h,
+                                        color: AppColors.kTextColor),
                                   ),
                                 ],
                               ),
@@ -106,7 +121,7 @@ class _ItemCardState extends State<ItemCard> {
                         child: IconButton(
                           icon: const Icon(
                             Icons.delete,
-                            color: kPrimaryRedColor,
+                            color: AppColors.kPrimaryRedColor,
                           ),
                           onPressed: () {
                             setState(() {

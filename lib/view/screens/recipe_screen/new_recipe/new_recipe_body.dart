@@ -5,6 +5,7 @@ import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/components/constants.dart';
 import 'package:what_can_i_cook/services/storage_service/future_picture.dart';
 import 'package:what_can_i_cook/services/storage_service/storage_service.dart';
+import 'package:what_can_i_cook/view/screens/main_screen/main_screen.dart';
 
 class NewRecipeBody extends StatefulWidget {
   const NewRecipeBody({Key? key}) : super(key: key);
@@ -58,7 +59,7 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                       filled: true,
                       hintText: 'Ингридиенты',
                       hintStyle:
-                          const TextStyle(color: kTextLigntColor, fontSize: 16),
+                          const TextStyle(color: AppColors.kTextLigntColor, fontSize: 16),
                     ),
                     onChanged: (String value) {
                       _ingridients = value;
@@ -71,7 +72,7 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                     ),
                     child: TextFormField(
                       maxLines: 10,
-                      cursorColor: kPrimaryRedColor,
+                      cursorColor: AppColors.kPrimaryRedColor,
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.0),
@@ -87,13 +88,13 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                         filled: true,
                         hintText: 'Опишите развернуто свой рецепт',
                         hintStyle: const TextStyle(
-                            color: kTextLigntColor, fontSize: 16),
+                            color: AppColors.kTextLigntColor, fontSize: 16),
                       ),
                       keyboardType: TextInputType.text,
                       style: const TextStyle(
                         fontSize: 18,
                         // fontWeight: FontWeight.w500,
-                        color: kWhitethemecolor,
+                        color: AppColors.kWhitethemecolor,
                       ),
                     ),
                   ),
@@ -140,7 +141,7 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                     child: Row(
                       children: <Widget>[
                         const SizedBox(
-                          width: kDefaultPaddin,
+                          width: 20,
                         ),
                         Expanded(
                             child: Column(
@@ -165,7 +166,7 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                                   filled: true,
                                   hintText: 'Название рецепта',
                                   hintStyle: const TextStyle(
-                                      color: kTextLigntColor, fontSize: 20),
+                                      color: AppColors.kTextLigntColor, fontSize: 20),
                                 ),
                                 onChanged: (String value) {
                                   _name = value;
@@ -190,7 +191,7 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                                   filled: true,
                                   hintText: 'Время на приготовление',
                                   hintStyle: const TextStyle(
-                                      color: kTextLigntColor, fontSize: 12),
+                                      color: AppColors.kTextLigntColor, fontSize: 12),
                                 ),
                                 onChanged: (String value) {
                                   _minutes = int.parse(value);
@@ -226,10 +227,11 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
 
                                   return;
                                 }
+
+                                final path = results.files.single.path!;
+                                final fileName = results.files.single.name;
+                                _fileName = fileName;
                                 setState(() {
-                                  final path = results.files.single.path!;
-                                  final fileName = results.files.single.name;
-                                  _fileName = fileName;
                                   storage.uploadFile(path, fileName);
                                 });
                               },
@@ -240,10 +242,10 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                                         borderRadius:
                                             BorderRadius.circular(18.0),
                                         side: const BorderSide(
-                                            color: kPrimaryRedColor))),
+                                            color: AppColors.kPrimaryRedColor))),
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        kPrimaryRedColor),
+                                        AppColors.kPrimaryRedColor),
                               ),
                               child: const Icon(
                                 Icons.photo_camera,
@@ -251,7 +253,7 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                                 color: Colors.white,
                               )),
                         ),
-                        const SizedBox(width: kDefaultPaddin / 4),
+                        const SizedBox(width: 5),
                         SizedBox(
                           height: 64,
                           width: 64,
@@ -266,8 +268,12 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                                   'pictureUrl': _fileName
                                 });
                                 Navigator.pop(context);
-                                Navigator.pushNamedAndRemoveUntil(
-                                    context, '/', (route) => false);
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                      builder: (BuildContext context) =>
+                                          const MainScreen()),
+                                );
                               },
                               style: ButtonStyle(
                                 shape: MaterialStateProperty.all<
@@ -276,10 +282,10 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                                         borderRadius:
                                             BorderRadius.circular(18.0),
                                         side: const BorderSide(
-                                            color: kPrimaryRedColor))),
+                                            color: AppColors.kPrimaryRedColor))),
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        kPrimaryRedColor),
+                                        AppColors.kPrimaryRedColor),
                               ),
                               child: const Icon(
                                 Icons.check,
@@ -288,7 +294,7 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                               )),
                         ),
                         //*edit button end
-                        const SizedBox(width: kDefaultPaddin / 4)
+                        const SizedBox(width: 5)
                       ],
                     ),
                   ))

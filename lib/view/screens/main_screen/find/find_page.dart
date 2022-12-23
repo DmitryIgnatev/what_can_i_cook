@@ -8,7 +8,7 @@ class FindPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: kWhitethemecolor,
+      backgroundColor: AppColors.kWhitethemecolor,
       body:FindBody(),
     );
   }

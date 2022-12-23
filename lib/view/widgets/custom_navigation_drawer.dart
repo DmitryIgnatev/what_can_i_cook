@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/components/constants.dart';
 import 'package:what_can_i_cook/view/screens/auth_screen/authorization/authorization_page.dart';
-import 'package:what_can_i_cook/view/screens/settings/settings_page.dart';
 import 'package:what_can_i_cook/view/widgets/my_tile.dart';
 
 Widget customNavigationDrawer(BuildContext context,
@@ -37,7 +36,7 @@ Widget customNavigationDrawer(BuildContext context,
                       ? 50.w
                       : 30.h,
               decoration: BoxDecoration(
-                color: kPrimaryRedColor,
+                color: AppColors.kPrimaryRedColor,
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Column(
@@ -65,13 +64,36 @@ Widget customNavigationDrawer(BuildContext context,
                   ),
                   Column(
                     children: [
-                      myTile(context, Icons.settings_outlined, 'Настройки', () {
-                        HapticFeedback.lightImpact();
-                        Navigator.push(context, MaterialPageRoute<void>(
-                          builder: (BuildContext context) =>
-                              const SettingPage(),
-                        ),);
-                      }),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: const [
+                            CircleAvatar(
+                              backgroundColor: Colors.black12,
+                              radius: 20,
+                              child: Icon(
+                                Icons.person_outline_rounded,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Spacer(),
+                            Text(
+                              'Темный режим',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1),
+                            ),
+                            Spacer(
+                              flex: 9,
+                            ),
+                            ThemeSwitch(),
+                            Spacer(),
+                          ],
+                        ),
+                      ),
                       myTile(context, Icons.info_outline_rounded, 'О нас', () {
                         HapticFeedback.lightImpact();
                       }),
@@ -86,4 +108,56 @@ Widget customNavigationDrawer(BuildContext context,
       ),
     ),
   );
+}
+
+class ThemeSwitch extends StatefulWidget {
+  const ThemeSwitch({super.key});
+
+  @override
+  State<ThemeSwitch> createState() => _ThemeSwitchState();
+}
+
+class _ThemeSwitchState extends State<ThemeSwitch> {
+  //late bool isDarkMode;
+  bool isDarkMode = false;
+  @override
+  Widget build(BuildContext context) {
+    /*
+    return ValueListenableBuilder(
+      valueListenable: AdaptiveTheme.of(context).modeChangeNotifier,
+      builder: (_, mode, child) {
+        mode == AdaptiveThemeMode.dark ? isDarkMode = true : isDarkMode = false;
+        // update your UI
+        return Switch(
+          value: isDarkMode,
+          onChanged: (value) => setState(() {
+            isDarkMode = value;
+            if (!isDarkMode) {
+              debugPrint("isDarkMod : $isDarkMode");
+              AdaptiveTheme.of(context).setLight();
+            } else {
+              debugPrint("isDarkMod: $isDarkMode");
+              AdaptiveTheme.of(context).setDark();
+            }
+          }),
+          inactiveThumbColor: ViRentColors.white,
+          activeColor: ViRentColors.orange,
+        );
+      },
+    );
+    */
+    return Switch(
+      value: isDarkMode,
+      onChanged: (value) => setState(() {
+        isDarkMode = value;
+        if (!isDarkMode) {
+          debugPrint("isDarkMod : $isDarkMode");
+        } else {
+          debugPrint("isDarkMod: $isDarkMode");
+        }
+      }),
+      inactiveThumbColor: AppColors.kWhitethemecolor,
+      activeColor: AppColors.kTextLigntColor,
+    );
+  }
 }
