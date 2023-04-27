@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:flutter/material.dart';
 
 class Storage {
   final firebase_storage.FirebaseStorage storage =
@@ -27,10 +28,7 @@ class Storage {
       String downloadURL= await storage.ref('pics/$imageName').getDownloadURL();
       return downloadURL;
     } catch (e) {
-      if(e == "[firebase_storage/object-not-found] No object exists at the desired reference.)"){
-      String downloadURL= await storage.ref('pics/$imageName').getDownloadURL();
-      return downloadURL;
-      }
+      debugPrint("$e");
     }
     return "";   
   }
