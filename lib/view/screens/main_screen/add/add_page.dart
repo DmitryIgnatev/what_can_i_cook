@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:what_can_i_cook/components/constants.dart';
+import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/view/screens/main_screen/add/add_body.dart';
 import 'package:what_can_i_cook/services/firebase/init_firebase.dart';
-import 'package:what_can_i_cook/view/widgets/app_floating_button.dart';
+import 'package:what_can_i_cook/view/screens/main_screen/add/add_recipe_button.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({Key? key}) : super(key: key);
@@ -34,7 +34,7 @@ class _AddPageState extends State<AddPage> {
         child: AnimatedOpacity(
           duration: duration,
           opacity: showFab ? 1 : 0,
-          child: appFloatingButton(context, 'Добавить собственный рецепт'),
+          child: const AddRecipeButton(),
         ),
       ),
       body: NotificationListener<UserScrollNotification>(

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:what_can_i_cook/components/constants.dart';
+import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/services/storage_service/future_picture.dart';
 
 Widget photoAndTitle(int pageIndex) {
@@ -61,7 +61,7 @@ Widget photoAndTitle(int pageIndex) {
                           Text(
                             (snapshot.data!).docs[pageIndex].get('name'),
                             //'Название рецепта',
-                            style: Theme.of(context).textTheme.headline5,
+                            style: Theme.of(context).textTheme.headlineSmall,
                           ),
                           const SizedBox(
                             height: 10,

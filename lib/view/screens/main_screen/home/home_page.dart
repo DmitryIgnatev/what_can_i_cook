@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:what_can_i_cook/components/constants.dart';
+import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/view/screens/main_screen/home/home_body.dart';
 
 

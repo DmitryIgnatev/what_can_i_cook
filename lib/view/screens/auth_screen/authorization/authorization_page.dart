@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:what_can_i_cook/controller/exit_on_main_button.dart';
 import 'package:what_can_i_cook/view/screens/auth_screen/authorization/authorization_body.dart';
-import 'package:what_can_i_cook/view/widgets/transparent_appbar.dart';
+import 'package:what_can_i_cook/view/widgets/main_screen_appbar.dart';
 
 class AuthorizationPage extends StatefulWidget {
   const AuthorizationPage({Key? key}) : super(key: key);
@@ -12,18 +11,13 @@ class AuthorizationPage extends StatefulWidget {
 
 class _AuthorizationPageState extends State<AuthorizationPage>
     with SingleTickerProviderStateMixin {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: transparentAppbar(context, 
-      [
-          exitOnMainButton(context)
-        ],
+        extendBodyBehindAppBar: true,
+        appBar: mainScreenAppbar(
+          context,
         ),
-      body: const AuthorizationBody()
-    );
+        body: const AuthorizationBody());
   }
-
 }

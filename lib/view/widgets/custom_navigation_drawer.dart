@@ -2,9 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
-import 'package:what_can_i_cook/components/constants.dart';
+import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/view/screens/auth_screen/authorization/authorization_page.dart';
-import 'package:what_can_i_cook/view/widgets/my_tile.dart';
 
 Widget customNavigationDrawer(BuildContext context,
     Animation<double> animation1, Animation<double> animation2, bool bool) {
@@ -94,9 +93,38 @@ Widget customNavigationDrawer(BuildContext context,
                           ],
                         ),
                       ),
-                      myTile(context, Icons.info_outline_rounded, 'О нас', () {
-                        HapticFeedback.lightImpact();
-                      }),
+                      Column(
+                        children: [
+                          ListTile(
+                            tileColor: Colors.black.withOpacity(.08),
+                            leading: const CircleAvatar(
+                              backgroundColor: Colors.black12,
+                              child: Icon(
+                                Icons.info_outline_rounded,
+                                color: Colors.white,
+                              ),
+                            ),
+                            onTap: () {
+                              HapticFeedback.lightImpact();
+                            },
+                            title: const Text(
+                              'О нас',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1),
+                            ),
+                            trailing: const Icon(
+                              Icons.arrow_right,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                            width: MediaQuery.of(context).size.width,
+                          )
+                        ],
+                      )
                     ],
                   ),
                   const SizedBox(),

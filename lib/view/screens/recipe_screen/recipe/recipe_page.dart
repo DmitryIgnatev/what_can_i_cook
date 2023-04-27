@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:what_can_i_cook/components/constants.dart';
+import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/view/screens/recipe_screen/recipe/recipe_body.dart';
 import 'package:what_can_i_cook/services/firebase/init_firebase.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:what_can_i_cook/components/recipe_bundle.dart';
+import 'package:what_can_i_cook/utils/recipe_bundle.dart';
 import 'package:sizer/sizer.dart';
 
 class RecipeBundleCard extends StatelessWidget {
@@ -45,14 +45,12 @@ class RecipeBundleCard extends StatelessWidget {
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  
                 ],
               ),
             )),
             AspectRatio(
                 aspectRatio: 0.71,
-                child:
-                    Image.asset(recipeBundle.imageSrc, fit: BoxFit.cover)),
+                child: Image.asset(recipeBundle.imageSrc, fit: BoxFit.cover)),
           ],
         ),
       ),
