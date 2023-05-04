@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 Widget field(
-      IconData icon, String hintText, bool isPassword, bool isEmail, TextEditingController controller) {
+      IconData icon, String hintText, bool isPassword, bool isEmail, void Function(String)? onChanged) {
     return Container(
       height: 7.h,
       width: 82.w,
@@ -13,7 +13,6 @@ Widget field(
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
-        controller: controller,
         style: TextStyle(color: Colors.black.withOpacity(.8)),
         obscureText: isPassword,
         keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
@@ -28,6 +27,8 @@ Widget field(
           hintStyle:
               TextStyle(fontSize: 14, color: Colors.black.withOpacity(.5)),
         ),
+        onChanged: onChanged,
       ),
+      
     );
   }

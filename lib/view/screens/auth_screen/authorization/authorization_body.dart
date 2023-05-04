@@ -1,4 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +7,7 @@ import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/view/widgets/field.dart';
 import 'package:what_can_i_cook/view/screens/auth_screen/registration/registration_page.dart';
-import 'package:what_can_i_cook/services/authorization/auth.dart';
+//import 'package:what_can_i_cook/services/authorization/auth.dart';
 
 class AuthorizationBody extends StatefulWidget {
   const AuthorizationBody({Key? key}) : super(key: key);
@@ -18,21 +18,6 @@ class AuthorizationBody extends StatefulWidget {
 
 class _AuthorizationBodyState extends State<AuthorizationBody> {
   String errorMessage = '';
-
-  final TextEditingController _controllerUserName = TextEditingController();
-  final TextEditingController _controllerEmail = TextEditingController();
-  final TextEditingController _controllerPassword = TextEditingController();
-
-  Future<void> hereSignInWithEmailPassword() async {
-    try {
-      await Auth().signInWithEmailAndPassword(
-          email: _controllerEmail.text, password: _controllerPassword.text);
-    } on FirebaseException catch (e) {
-      setState(() {
-        errorMessage = e.message!;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,11 +56,13 @@ class _AuthorizationBodyState extends State<AuthorizationBody> {
                 ),
                 const SizedBox(),
                 field(Icons.account_circle_outlined, 'Имя пользователя', false,
-                    false, _controllerUserName),
+                    false, 
+                    (value){}
+                    ),
                 field(Icons.email_outlined, 'Email...', false, true,
-                    _controllerEmail),
+                   (value){}),
                 field(Icons.lock_outline, 'Пароль...', true, false,
-                    _controllerPassword),
+                   (value){}),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
