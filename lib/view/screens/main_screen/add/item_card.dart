@@ -20,7 +20,7 @@ class _ItemCardState extends State<ItemCard> {
             padding: EdgeInsets.symmetric(horizontal: 2.w),
             child: StreamBuilder(
               stream:
-                  FirebaseFirestore.instance.collection('items').snapshots(),
+                  FirebaseFirestore.instance.collection('recipes').snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData) {
@@ -125,9 +125,9 @@ class _ItemCardState extends State<ItemCard> {
                           ),
                           onPressed: () {
                             setState(() {
-                              //Delete items
+                              //Delete recipes
                               FirebaseFirestore.instance
-                                  .collection('items')
+                                  .collection('recipes')
                                   .doc((snapshot.data!).docs[index].id)
                                   .delete();
                             });

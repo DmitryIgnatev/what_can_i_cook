@@ -6,7 +6,7 @@ import 'package:what_can_i_cook/services/storage_service/future_picture.dart';
 
 Widget photoAndTitle(int pageIndex) {
   return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('items').snapshots(),
+      stream: FirebaseFirestore.instance.collection('recipes').snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData) return const Text('Error');
         return SizedBox(

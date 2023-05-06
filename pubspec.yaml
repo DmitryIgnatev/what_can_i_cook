@@ -16,7 +16,7 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   sizer: ^2.0.15
-  file_picker: ^4.6.1
+  file_picker: ^5.2.11
   fluttertoast: ^8.0.9
 
   #State management

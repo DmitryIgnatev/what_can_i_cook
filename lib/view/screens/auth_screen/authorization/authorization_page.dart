@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/view/screens/auth_screen/authorization/authorization_body.dart';
-import 'package:what_can_i_cook/view/widgets/main_screen_appbar.dart';
+import 'package:what_can_i_cook/view/widgets/transparent_appbar.dart';
 
 class AuthorizationPage extends StatefulWidget {
   const AuthorizationPage({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class _AuthorizationPageState extends State<AuthorizationPage>
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: mainScreenAppbar(
+        appBar: transparentAppBar(
           context,
         ),
         body: const AuthorizationBody());

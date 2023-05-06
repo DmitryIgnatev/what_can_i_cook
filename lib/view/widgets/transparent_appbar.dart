@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../screens/main_screen/main_screen.dart';
 
-PreferredSizeWidget mainScreenAppbar(BuildContext context) {
+PreferredSizeWidget transparentAppBar(BuildContext context) {
   return AppBar(
       elevation: 0,
       backgroundColor: const Color.fromARGB(0, 0, 0, 0),

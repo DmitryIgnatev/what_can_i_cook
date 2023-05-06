@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
-import 'package:what_can_i_cook/view/screens/favorite/favorite_page.dart';
 import 'package:what_can_i_cook/view/screens/main_screen/add/add_page.dart';
 import 'package:what_can_i_cook/view/screens/main_screen/find/find_page.dart';
 import 'package:what_can_i_cook/view/screens/main_screen/home/home_page.dart';
@@ -87,10 +85,12 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Image.asset(
-          "assets/images/pretty_title.png",
-          color: AppColors.kPrimaryRedColor,
-          scale: 0.2.h,
+        title: SizedBox(
+          height: 35,
+          child: Image.asset(
+            "assets/images/pretty_title.png",
+            color: AppColors.kPrimaryRedColor,
+          ),
         ),
         elevation: 0,
         backgroundColor: const Color.fromARGB(0, 255, 255, 255),
@@ -109,18 +109,6 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         ),
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) => const FavoritePage(),
-                  ),
-                );
-              },
-              icon: const Icon(Icons.favorite))
-        ],
       ),
       body: Stack(
         children: [

@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:what_can_i_cook/models/recipe.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/services/storage_service/future_picture.dart';
 import 'package:what_can_i_cook/services/storage_service/storage_service.dart';
-import 'package:what_can_i_cook/view/screens/main_screen/main_screen.dart';
 
 class NewRecipeBody extends StatefulWidget {
   const NewRecipeBody({Key? key}) : super(key: key);
@@ -15,15 +15,42 @@ class NewRecipeBody extends StatefulWidget {
 }
 
 class _NewRecipeBodyState extends State<NewRecipeBody> {
-  late String _name;
-  late String _ingridients;
-  late int _minutes;
-  late String _fileName = 'DefaultPicture.jpg';
+  String _name = "";
+  String _ingridients = "";
+  int _minutes = 0;
+  String _fileName = 'DefaultPicture.jpg';
+
+  void createRecipe(Recipe recipe) async {
+    final recipeDoc = FirebaseFirestore.instance.collection('recipes').doc();
+    final json = recipe.toJson();
+    await recipeDoc.set(json);
+  }
+
+  void pickPictire() async {
+    final Storage storage = Storage();
+    final results = await FilePicker.platform.pickFiles(
+      allowMultiple: false,
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'jpeg', 'bmp', 'png'],
+    );
+    if (results == null) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Вы не выбрали ни одного файла")));
+
+      return;
+    }
+
+    final path = results.files.single.path!;
+    final fileName = results.files.single.name;
+    _fileName = fileName;
+    setState(() {
+      storage.uploadFile(path, fileName);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final Storage storage = Storage();
-
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
@@ -33,8 +60,7 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
           pinned: true,
           expandedHeight: 40.h,
           flexibleSpace: FlexibleSpaceBar(
-              background: newPhotoAndTitle(
-                  storage, FuturePicture(fileName: _fileName))),
+              background: newPhotoAndTitle(FuturePicture(fileName: _fileName))),
         ),
         SliverGrid(
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -58,8 +84,8 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                       fillColor: Theme.of(context).cardColor,
                       filled: true,
                       hintText: 'Ингридиенты',
-                      hintStyle:
-                          const TextStyle(color: AppColors.kTextLigntColor, fontSize: 16),
+                      hintStyle: const TextStyle(
+                          color: AppColors.kTextLigntColor, fontSize: 16),
                     ),
                     onChanged: (String value) {
                       _ingridients = value;
@@ -108,9 +134,9 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
     );
   }
 
-  Widget newPhotoAndTitle(storage, photo) {
+  Widget newPhotoAndTitle(photo) {
     return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('items').snapshots(),
+        stream: FirebaseFirestore.instance.collection('recipes').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) return const Text('Error');
           return SizedBox(
@@ -166,7 +192,8 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                                   filled: true,
                                   hintText: 'Название рецепта',
                                   hintStyle: const TextStyle(
-                                      color: AppColors.kTextLigntColor, fontSize: 20),
+                                      color: AppColors.kTextLigntColor,
+                                      fontSize: 20),
                                 ),
                                 onChanged: (String value) {
                                   _name = value;
@@ -191,7 +218,8 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                                   filled: true,
                                   hintText: 'Время на приготовление',
                                   hintStyle: const TextStyle(
-                                      color: AppColors.kTextLigntColor, fontSize: 12),
+                                      color: AppColors.kTextLigntColor,
+                                      fontSize: 12),
                                 ),
                                 onChanged: (String value) {
                                   _minutes = int.parse(value);
@@ -206,34 +234,7 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                           width: 64,
                           child: ElevatedButton(
                               onPressed: () async {
-                                final results =
-                                    await FilePicker.platform.pickFiles(
-                                  allowMultiple: false,
-                                  type: FileType.custom,
-                                  allowedExtensions: [
-                                    'jpg',
-                                    'jpeg',
-                                    'bmp',
-                                    'png'
-                                  ],
-                                );
-
-                                if (results == null) {
-                                  if (!mounted) return;
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text(
-                                              "Вы не выбрали ни одного файла")));
-
-                                  return;
-                                }
-
-                                final path = results.files.single.path!;
-                                final fileName = results.files.single.name;
-                                _fileName = fileName;
-                                setState(() {
-                                  storage.uploadFile(path, fileName);
-                                });
+                                pickPictire();
                               },
                               style: ButtonStyle(
                                 shape: MaterialStateProperty.all<
@@ -242,7 +243,8 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                                         borderRadius:
                                             BorderRadius.circular(18.0),
                                         side: const BorderSide(
-                                            color: AppColors.kPrimaryRedColor))),
+                                            color:
+                                                AppColors.kPrimaryRedColor))),
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
                                         AppColors.kPrimaryRedColor),
@@ -259,21 +261,13 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                           width: 64,
                           child: ElevatedButton(
                               onPressed: () {
-                                FirebaseFirestore.instance
-                                    .collection('items')
-                                    .add({
-                                  'name': _name,
-                                  'ingridients': _ingridients,
-                                  'time': _minutes,
-                                  'pictureUrl': _fileName
-                                });
+                                final Recipe recipe = Recipe(
+                                    name: _name,
+                                    ingridients: _ingridients,
+                                    time: _minutes,
+                                    pictureUrl: _fileName);
+                                createRecipe(recipe);
                                 Navigator.pop(context);
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute<void>(
-                                      builder: (BuildContext context) =>
-                                          const MainScreen()),
-                                );
                               },
                               style: ButtonStyle(
                                 shape: MaterialStateProperty.all<
@@ -282,7 +276,8 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                                         borderRadius:
                                             BorderRadius.circular(18.0),
                                         side: const BorderSide(
-                                            color: AppColors.kPrimaryRedColor))),
+                                            color:
+                                                AppColors.kPrimaryRedColor))),
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
                                         AppColors.kPrimaryRedColor),
