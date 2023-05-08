@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:what_can_i_cook/models/recipe.dart';
+import 'package:what_can_i_cook/models/tag.dart';
+import 'package:what_can_i_cook/services/firebase/firestore.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/services/storage_service/future_picture.dart';
 import 'package:what_can_i_cook/services/storage_service/storage_service.dart';
@@ -20,85 +20,35 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
   int _minutes = 0;
   String _fileName = 'DefaultPicture.jpg';
 
-  void createRecipe(Recipe recipe) async {
-    final recipeDoc = FirebaseFirestore.instance.collection('recipes').doc();
-    final json = recipe.toJson();
-    await recipeDoc.set(json);
-  }
-
-  void pickPictire() async {
-    final Storage storage = Storage();
-    final results = await FilePicker.platform.pickFiles(
-      allowMultiple: false,
-      type: FileType.custom,
-      allowedExtensions: ['jpg', 'jpeg', 'bmp', 'png'],
-    );
-    if (results == null) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Вы не выбрали ни одного файла")));
-
-      return;
-    }
-
-    final path = results.files.single.path!;
-    final fileName = results.files.single.name;
-    _fileName = fileName;
-    setState(() {
-      storage.uploadFile(path, fileName);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          //?leading button created automatically?
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          pinned: true,
-          expandedHeight: 40.h,
-          flexibleSpace: FlexibleSpaceBar(
-              background: newPhotoAndTitle(FuturePicture(fileName: _fileName))),
-        ),
-        SliverGrid(
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 100.h,
-          ),
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(children: [
-                  TextField(
-                    decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: const BorderSide(color: Colors.transparent),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      fillColor: Theme.of(context).cardColor,
-                      filled: true,
-                      hintText: 'Ингридиенты',
-                      hintStyle: const TextStyle(
-                          color: AppColors.kTextLigntColor, fontSize: 16),
-                    ),
-                    onChanged: (String value) {
-                      _ingridients = value;
-                    },
-                  ),
-                  const SizedBox(height: 10),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          newPhotoAndTitle(FuturePicture(fileName: _fileName)),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(children: [
+              Row(
+                children: [
                   Container(
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                        color: AppColors.kBlueColor,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(25),
+                        )),
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
                     ),
-                    child: TextFormField(
-                      maxLines: 10,
-                      cursorColor: AppColors.kPrimaryRedColor,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: TextField(
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.0),
@@ -112,25 +62,78 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                         ),
                         fillColor: Theme.of(context).cardColor,
                         filled: true,
-                        hintText: 'Опишите развернуто свой рецепт',
+                        hintText: 'Ингридиенты',
                         hintStyle: const TextStyle(
                             color: AppColors.kTextLigntColor, fontSize: 16),
                       ),
-                      keyboardType: TextInputType.text,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        // fontWeight: FontWeight.w500,
-                        color: AppColors.kWhitethemecolor,
-                      ),
+                      onChanged: (String value) {
+                        _ingridients = value;
+                      },
                     ),
                   ),
-                ]),
-              );
-            },
-            childCount: 1,
+                ],
+              ),
+              StreamBuilder<List<Tag>>(
+                stream: ReadStore().readTags(),
+                builder: (BuildContext context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(
+                        child: Text(
+                      'Нет записей',
+                    ));
+                  } else {
+                    final tags = snapshot.data!;
+                    return SizedBox(
+                      width: 100.w,
+                      height: 30,
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: tags.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text("${tags[index].tag}"),
+                            );
+                          }),
+                    );
+                  }
+                },
+              ),
+              const SizedBox(height: 10),
+              Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                ),
+                child: TextFormField(
+                  maxLines: 10,
+                  cursorColor: AppColors.kPrimaryRedColor,
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: const BorderSide(color: Colors.transparent),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    fillColor: Theme.of(context).cardColor,
+                    filled: true,
+                    hintText: 'Опишите развернуто свой рецепт',
+                    hintStyle: const TextStyle(
+                        color: AppColors.kTextLigntColor, fontSize: 16),
+                  ),
+                  keyboardType: TextInputType.text,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    // fontWeight: FontWeight.w500,
+                    color: AppColors.kWhitethemecolor,
+                  ),
+                ),
+              ),
+            ]),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -140,10 +143,11 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) return const Text('Error');
           return SizedBox(
+            height: 40.h,
             child: Stack(children: <Widget>[
               SizedBox(
                   width: 100.h,
-                  height: 40.h,
+                  height: 40.h - 30,
                   child: ClipRRect(
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(5.h),
@@ -234,7 +238,8 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                           width: 64,
                           child: ElevatedButton(
                               onPressed: () async {
-                                pickPictire();
+                                _fileName =
+                                    await StorageService().pickPictire();
                               },
                               style: ButtonStyle(
                                 shape: MaterialStateProperty.all<
@@ -261,12 +266,8 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
                           width: 64,
                           child: ElevatedButton(
                               onPressed: () {
-                                final Recipe recipe = Recipe(
-                                    name: _name,
-                                    ingridients: _ingridients,
-                                    time: _minutes,
-                                    pictureUrl: _fileName);
-                                createRecipe(recipe);
+                                FireStore().createRecipe(
+                                    _name, _ingridients, _minutes, _fileName);
                                 Navigator.pop(context);
                               },
                               style: ButtonStyle(

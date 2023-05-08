@@ -9,39 +9,27 @@ class RecipeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          //?leading button created automatically?
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          pinned: true,
-          expandedHeight: 40.h,
-          flexibleSpace: FlexibleSpaceBar(background: photoAndTitle(pageIndex)),
-        ),
-        SliverGrid(
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 100.h,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            height: 40.h,
+            child: photoAndTitle(pageIndex),
           ),
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return const Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Text(
-                  '1. Сельдерей порезать на небольшие кусочки, луковицы на четвертинки, корень кориандра и корень имбиря порезать очень мелко. Положите все ингредиенты в большую кастрюлю, дайте закипеть, подержите на большом огне несколько минут, уменьшите огонь и снимите пенку с бульона. Накройте крышкой и дайте жидкости побулькать примерно час. 2. Процедите в случае необходимости несколько раз через мелкое ситечко, чтобы получить как можно более чистый бульон. Охладите и еще раз снимите пенку с поверхности. Бульон можно хранить в холодильнике несколько дней или заморозить для более долгого хранения. Подавайте бульон с вареными яйцами, лапшой и вареными креветками.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: AppColors.kTextLigntColor,
-                    fontFamily: 'museosanscyrl',
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              );
-            },
-            childCount: 1,
+          Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Text(
+              '1. Сельдерей порезать на небольшие кусочки, луковицы на четвертинки, корень кориандра и корень имбиря порезать очень мелко. Положите все ингредиенты в большую кастрюлю, дайте закипеть, подержите на большом огне несколько минут, уменьшите огонь и снимите пенку с бульона. Накройте крышкой и дайте жидкости побулькать примерно час. 2. Процедите в случае необходимости несколько раз через мелкое ситечко, чтобы получить как можно более чистый бульон. Охладите и еще раз снимите пенку с поверхности. Бульон можно хранить в холодильнике несколько дней или заморозить для более долгого хранения. Подавайте бульон с вареными яйцами, лапшой и вареными креветками.',
+              style: TextStyle(
+                fontSize: 16,
+                color: AppColors.kTextLigntColor,
+                fontFamily: 'museosanscyrl',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

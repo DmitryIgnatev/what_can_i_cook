@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/view/screens/recipe_screen/recipe/recipe_body.dart';
-import 'package:what_can_i_cook/services/firebase/init_firebase.dart';
+import 'package:what_can_i_cook/view/widgets/transparent_appbar.dart';
 
 class RecipePage extends StatefulWidget {
   final int pageIndex;
@@ -13,13 +13,6 @@ class RecipePage extends StatefulWidget {
 }
 
 class _RecipePageState extends State<RecipePage> {
-  final InitFirebase initialise = InitFirebase();
-  @override
-  void initState() {
-    super.initState();
-
-    initialise.initFirebase();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +20,7 @@ class _RecipePageState extends State<RecipePage> {
       extendBodyBehindAppBar: true,
       backgroundColor: AppColors.kWhitethemecolor,
       body: RecipeBody(pageIndex:widget.pageIndex),
+      appBar: transparentAppBar(context),
     );
   }
 }

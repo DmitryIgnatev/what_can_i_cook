@@ -3,7 +3,7 @@ import 'package:what_can_i_cook/services/storage_service/storage_service.dart';
 
 class FuturePicture extends StatelessWidget {
   final String fileName;
-  final Storage storage = Storage();
+  final StorageService storage = StorageService();
   FuturePicture({Key? key, required this.fileName}) : super(key: key);
   
   @override

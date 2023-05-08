@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:what_can_i_cook/services/firebase/init_firebase.dart';
 import 'package:what_can_i_cook/services/storage_service/future_picture.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
+
+import '../../../../models/recipe.dart';
+import '../../../../services/firebase/firestore.dart';
 
 class FindByNameCard extends StatefulWidget {
   const FindByNameCard({Key? key}) : super(key: key);
@@ -13,69 +14,64 @@ class FindByNameCard extends StatefulWidget {
 }
 
 class _FindByNameCardState extends State<FindByNameCard> {
-  final InitFirebase initialise = InitFirebase();
-
-  @override
-  void initState() {
-    super.initState();
-
-    initialise.initFirebase();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<List<Recipe>>(
       //*WORKING WITH ELEMENTS in firebase
-      stream: FirebaseFirestore.instance.collection('recipes').snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (!snapshot.hasData) return const Text('Нет записей');
-        return Column(
-          children: <Widget>[
-            SizedBox(
-              height: 100.h,
-              child: ListView.builder(
-                itemCount: (snapshot.data!).docs.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 90,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.kPrimaryRedColor),
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(14),
-                              bottomLeft: Radius.circular(14),
-                            ),
-                            child: SizedBox(
-                              width: 30.w,
-                              child: FuturePicture(
-                                fileName: (snapshot.data!)
-                                    .docs[index]
-                                    .get('pictureUrl'),
+      stream: ReadStore().readRecipes(),
+      builder: (BuildContext context, snapshot) {
+        if (!snapshot.hasData)
+          return const Text('Нет записей');
+        else {
+          final recipes = snapshot.data!;
+          return Column(
+            children: <Widget>[
+              SizedBox(
+                height: 100.h,
+                child: ListView.builder(
+                  itemCount: recipes.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 90,
+                        decoration: BoxDecoration(
+                            border:
+                                Border.all(color: AppColors.kPrimaryRedColor),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(14),
+                                bottomLeft: Radius.circular(14),
+                              ),
+                              child: SizedBox(
+                                width: 30.w,
+                                child: FuturePicture(
+                                  fileName: recipes[index].pictureUrl,
+                                ),
                               ),
                             ),
-                          ),
-                          Column(
-                            children: [
-                              Text((snapshot.data!).docs[index].get('name')),
-                              Text((snapshot.data!)
-                                  .docs[index]
-                                  .get('ingridients'))
-                            ],
-                          ),
-                        ],
+                            Column(
+                              children: [
+                                Text(recipes[index].name),
+                                Text(recipes[index].ingridients),
+                                Text("${recipes[index].time}")
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
-        );
+            ],
+          );
+        }
       },
     );
   }

@@ -10,12 +10,11 @@ Widget photoAndTitle(int pageIndex) {
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData) return const Text('Error');
         return SizedBox(
-          // height:100.h,
-          //width: 40.w,
+          height: 40.h,
           child: Stack(children: <Widget>[
             SizedBox(
                 width: 100.h,
-                height: 40.h,
+                height: 40.h-30,
                 child: ClipRRect(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(5.h),
@@ -37,15 +36,13 @@ Widget photoAndTitle(int pageIndex) {
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(5.h),
                         topLeft: Radius.circular(5.h)),
-                    /*
-                      boxShadow: const [
-                        BoxShadow(
-                          offset: Offset(0, 5),
-                          blurRadius: 50,
-                          color: kTextLigntColor,
-                        )
-                      ],
-                      */
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(0, 5),
+                        blurRadius: 5,
+                        color: AppColors.kTextLigntColor,
+                      )
+                    ],
                     color: Colors.white,
                   ),
                   child: Row(
@@ -68,7 +65,8 @@ Widget photoAndTitle(int pageIndex) {
                           ),
                           Text(
                             "Время приготовления: ${(snapshot.data!).docs[pageIndex].get('time')} минут",
-                            style: const TextStyle(color: AppColors.kTextLigntColor),
+                            style: const TextStyle(
+                                color: AppColors.kTextLigntColor),
                           )
                         ],
                       )),
