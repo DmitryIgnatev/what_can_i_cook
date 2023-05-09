@@ -1,18 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:what_can_i_cook/models/ingredient.dart';
 
 import '../../models/recipe.dart';
 import '../../models/tag.dart';
 
 class FireStore {
-  void createRecipe(
-      String name, String ingridients, int minutes, String fileName) async {
+  void createRecipe(String name, List<String> ingridients, int minutes,
+      String fileName, String description) async {
     final recipeDoc = FirebaseFirestore.instance.collection('recipes').doc();
     final Recipe recipe = Recipe(
         id: recipeDoc.id,
         name: name,
-        ingridients: ingridients,
+        ingredients: ingridients,
         time: minutes,
-        pictureUrl: fileName);
+        pictureUrl: fileName,
+        description: description);
 
     final json = recipe.toJson();
     await recipeDoc.set(json);
@@ -21,9 +23,10 @@ class FireStore {
   void deleteRecipe(Recipe recipe) async {
     FirebaseFirestore.instance.collection('recipes').doc(recipe.id).delete();
   }
+  //TODO добавить сюда
 }
 
-class ReadStore extends FireStore {
+class ReadStore {
   Stream<List<Recipe>> readRecipes() => FirebaseFirestore.instance
       .collection('recipes')
       .snapshots()
@@ -35,4 +38,10 @@ class ReadStore extends FireStore {
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => Tag.fromJson(doc.data())).toList());
+
+  Stream<List<Ingredient>> readIngredients() => FirebaseFirestore.instance
+      .collection('ingredients')
+      .snapshots()
+      .map((snapshot) =>
+          snapshot.docs.map((doc) => Ingredient.fromJson(doc.data())).toList());
 }

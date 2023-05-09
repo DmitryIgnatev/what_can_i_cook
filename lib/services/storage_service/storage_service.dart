@@ -32,19 +32,24 @@ class StorageService {
     return "";
   }
 
-  Future <String>  pickPictire() async {
+  Future <String>  pickPictire(context) async {
     final StorageService storage = StorageService();
     final results = await FilePicker.platform.pickFiles(
       allowMultiple: false,
       type: FileType.custom,
       allowedExtensions: ['jpg', 'jpeg', 'bmp', 'png'],
     );
+    if (results == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Вы не выбрали ни одного файла")));
 
-    final path = results!.files.single.path!;
+      return 'DefaultPicture.jpg';
+    }
+    final path = results.files.single.path!;
     final fileName = results.files.single.name;
 
     storage.uploadFile(path, fileName);
-
+    
     return fileName;
   }
 }

@@ -10,12 +10,12 @@ class Ingredient {
   factory Ingredient.fromJson(Map<String, dynamic> json) {
     return Ingredient(
       id: json['id'] ?? "",
-      ingredient: json['tag'] ?? "",
+      ingredient: json['ingredient'] ?? "",
     );
   }
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'tag': ingredient,
+        'ingredient': ingredient,
       };
 }

@@ -58,7 +58,7 @@ class _FindByNameCardState extends State<FindByNameCard> {
                             Column(
                               children: [
                                 Text(recipes[index].name),
-                                Text(recipes[index].ingridients),
+                                Text("${recipes[index].ingredients}"),
                                 Text("${recipes[index].time}")
                               ],
                             ),

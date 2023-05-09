@@ -26,16 +26,28 @@ class _ItemCardState extends State<ItemCard> {
                   if (!snapshot.hasData) {
                     return const Center(
                       child: Text(
-                        'Нет записей',
+                        'Произошла ошибка',
                         style: TextStyle(
-                            fontSize: 34,
-                            color: AppColors.kTextLigntColor,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1),
+                          fontSize: 34,
+                          color: AppColors.kTextLigntColor,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     );
                   } else {
                     final recipes = snapshot.data!;
+                    if (recipes.length == 0) {
+                      return const Center(
+                        child: Text(
+                          'Нет записей',
+                          style: TextStyle(
+                            fontSize: 34,
+                            color: AppColors.kTextLigntColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
+                    }
                     return GridView.builder(
                       itemCount: recipes.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -94,7 +106,7 @@ class _ItemCardState extends State<ItemCard> {
                                             color: AppColors.kPrimaryRedColor),
                                       ),
                                       Text(
-                                        recipes[index].ingridients,
+                                        "${recipes[index].ingredients}",
                                         maxLines: 2,
                                         style: TextStyle(
                                             fontSize: 2.h,
