@@ -5,7 +5,10 @@ import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/view/widgets/field.dart';
 import 'package:what_can_i_cook/services/authorization/auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'bloc/registration_bloc.dart';
+
+import '../../../../blocs/registration/bloc/registration_bloc.dart';
+
+
 
 class RegistrationBody extends StatefulWidget {
   const RegistrationBody({Key? key}) : super(key: key);

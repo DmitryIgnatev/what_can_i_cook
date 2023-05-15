@@ -23,7 +23,19 @@ class FireStore {
   void deleteRecipe(Recipe recipe) async {
     FirebaseFirestore.instance.collection('recipes').doc(recipe.id).delete();
   }
-  //TODO добавить сюда
+
+  void createIngredient(
+      String ingredient) async {
+    final ingredientDoc =
+        FirebaseFirestore.instance.collection('ingredients').doc();
+    final Ingredient recipe = Ingredient(
+      id: ingredientDoc.id,
+      ingredient: ingredient,
+    );
+
+    final json = recipe.toJson();
+    await ingredientDoc.set(json);
+  }
 }
 
 class ReadStore {

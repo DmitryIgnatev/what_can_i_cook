@@ -17,7 +17,7 @@ class AddIngredient extends StatefulWidget {
 
 class _AddIngredientState extends State<AddIngredient> {
   bool preloader = true;
-  String _ingredient ="";
+  String _ingredient = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,8 +87,10 @@ class _AddIngredientState extends State<AddIngredient> {
                             hintStyle: const TextStyle(
                                 color: AppColors.kTextLigntColor, fontSize: 16),
                           ),
-                          onChanged: (value) {
-                            setState(() {});
+                          onChanged: (String value) {
+                            setState(() {
+                              _ingredient = value;
+                            });
                           },
                         );
                       }
@@ -98,10 +100,11 @@ class _AddIngredientState extends State<AddIngredient> {
                 ElevatedButton(
                   onPressed: preloader
                       ? () {
-                          //TODO добавить действие добавления нового ингредиента
+                          FireStore().createIngredient(_ingredient);
                           setState(() {
                             preloader = false;
                           });
+                          Navigator.pop(context);
                         }
                       : null,
                   style: ElevatedButton.styleFrom(
