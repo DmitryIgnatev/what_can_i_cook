@@ -17,7 +17,7 @@ class _CategoriesState extends State<Categories> {
     "Простые рецепты",
     "Популярные рецепты"
   ];
-  int selectedIndex = 0;
+  int? selectedIndex;
 
   @override
   Widget build(BuildContext context) {

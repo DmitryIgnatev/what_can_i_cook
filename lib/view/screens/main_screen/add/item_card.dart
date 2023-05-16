@@ -134,10 +134,8 @@ class _ItemCardState extends State<ItemCard> {
                                 color: AppColors.kPrimaryRedColor,
                               ),
                               onPressed: () {
-                                setState(() {
-                                  //Delete recipes
-                                  FireStore().deleteRecipe(recipes[index]);
-                                });
+                                //Delete recipes
+                                FireStore().deleteRecipe(recipes[index]);
                               },
                             ),
                           )

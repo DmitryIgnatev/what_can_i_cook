@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+import 'package:what_can_i_cook/blocs/filtered_items/bloc/filtered_items_bloc.dart';
 import 'package:what_can_i_cook/models/tag.dart';
 import 'package:what_can_i_cook/services/firebase/firestore.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
@@ -9,24 +10,22 @@ import 'package:what_can_i_cook/services/storage_service/future_picture.dart';
 import 'package:what_can_i_cook/services/storage_service/storage_service.dart';
 
 import '../../../../blocs/recipe/bloc/recipe_bloc.dart';
-import '../../../../models/ingredient.dart';
-import '../../main_screen/add/widgets/add_ingredient.dart';
+import '../../../widgets/find_ingredients_module.dart';
 
-
-class NewRecipeBody extends StatefulWidget {
+class NewRecipeBody extends StatelessWidget {
   const NewRecipeBody({Key? key}) : super(key: key);
 
   @override
-  State<NewRecipeBody> createState() => _NewRecipeBodyState();
-}
-
-class _NewRecipeBodyState extends State<NewRecipeBody> {
-  List<Ingredient> _filteredItems = [];
-
-  @override
   Widget build(BuildContext context) {
-    return BlocProvider<RecipeBloc>(
-      create: (context) => RecipeBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<RecipeBloc>(
+          create: (context) => RecipeBloc(),
+        ),
+        BlocProvider<FilteredItemsBloc>(
+          create: (context) => FilteredItemsBloc(),
+        )
+      ],
       child: BlocBuilder<RecipeBloc, RecipeState>(builder: (context, state) {
         return SingleChildScrollView(
           child: Column(
@@ -251,111 +250,18 @@ class _NewRecipeBodyState extends State<NewRecipeBody> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(children: [
-                  SizedBox(
-                    height: 45,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: _filteredItems.length,
-                      itemBuilder: (context, index) {
-                        final filteredItem = _filteredItems[index];
-                        return Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
-                          child: GestureDetector(
-                            onTap: () {
-                              context.read<RecipeBloc>().add(
-                                  RecipeAddIngredientsEvent(
-                                      ingredient: filteredItem.ingredient));
-                            },
-                            child: Container(
-                                width: 100,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                    border: Border.all(
-                                        color: AppColors.kPrimaryRedColor)),
-                                child: Center(
-                                    child: Text(
-                                  filteredItem.ingredient,
-                                  style: TextStyle(
-                                      color: AppColors.kPrimaryRedColor,
-                                      fontWeight: FontWeight.bold),
-                                ))),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (_) => AddIngredient(),
-                          );
+                  BlocBuilder<FilteredItemsBloc, FilteredItemsState>(
+                    builder: (context, state) {
+                      return FindIngreidentsModule(
+                        isAddButtonEnabled: true,
+                        onItemTap: () {
+                          context.read<RecipeBloc>().add(
+                              RecipeAddIngredientsEvent(
+                                  ingredient:
+                                      state.items[state.index].ingredient));
                         },
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              color: AppColors.kBlueColor,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(25),
-                              )),
-                          child: Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: StreamBuilder<List<Ingredient>>(
-                          stream: ReadStore().readIngredients(),
-                          builder: (BuildContext context, snapshot) {
-                            if (!snapshot.hasData) {
-                              return const Center(
-                                  child: Text(
-                                'Функция недоступна',
-                              ));
-                            } else {
-                              final items = snapshot.data!;
-                              return TextField(
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                  fillColor: Theme.of(context).cardColor,
-                                  filled: true,
-                                  hintText: 'Ингридиенты',
-                                  hintStyle: const TextStyle(
-                                      color: AppColors.kTextLigntColor,
-                                      fontSize: 16),
-                                ),
-                                onChanged: (value) {
-                                  setState(() {
-                                    _filteredItems = items
-                                        .where((item) => item.ingredient
-                                            .toLowerCase()
-                                            .contains(value.toLowerCase()))
-                                        .toList();
-                                  });
-                                },
-                              );
-                            }
-                          },
-                        ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
                   SizedBox(
                     height: 10,
