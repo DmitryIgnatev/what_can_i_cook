@@ -28,10 +28,9 @@ class FindIngreidentsModule extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
                     child: GestureDetector(
                       onTap: () {
-                        int chosenIndex = index;
-                        context
-                            .read<FilteredItemsBloc>()
-                            .add(FilteredIndexChangedEvent(index: chosenIndex));
+                        context.read<FilteredItemsBloc>().add(
+                            FilteredItemChosedEvent(
+                                ingredient: state.items[index]));
                         onItemTap();
                       },
                       child: Container(

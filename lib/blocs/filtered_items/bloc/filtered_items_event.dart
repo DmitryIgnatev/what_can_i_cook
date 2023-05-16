@@ -13,8 +13,8 @@ class FilteredItemsChangedEvent extends FilteredItemsEvent {
   const FilteredItemsChangedEvent({required this.items});
 }
 
-class FilteredIndexChangedEvent extends FilteredItemsEvent {
-  final int index;
+class FilteredItemChosedEvent extends FilteredItemsEvent {
+  final Ingredient ingredient;
 
-  const FilteredIndexChangedEvent({required this.index});
+  const FilteredItemChosedEvent({required this.ingredient});
 }

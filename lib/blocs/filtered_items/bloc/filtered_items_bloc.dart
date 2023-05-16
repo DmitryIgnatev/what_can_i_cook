@@ -9,7 +9,7 @@ part 'filtered_items_state.dart';
 class FilteredItemsBloc extends Bloc<FilteredItemsEvent, FilteredItemsState> {
   FilteredItemsBloc() : super(FilteredItemsState.initial()) {
     on<FilteredItemsChangedEvent>(_filteredItemsChanged);
-    on<FilteredIndexChangedEvent>(_filteredIndexChanged);
+    on<FilteredItemChosedEvent>(_filteredIndexChanged);
   }
 
   void _filteredItemsChanged(
@@ -18,7 +18,7 @@ class FilteredItemsBloc extends Bloc<FilteredItemsEvent, FilteredItemsState> {
   }
 
   void _filteredIndexChanged(
-      FilteredIndexChangedEvent event, Emitter<FilteredItemsState> emit) {
-    emit(state.copyWith(index: event.index));
+      FilteredItemChosedEvent event, Emitter<FilteredItemsState> emit) {
+    emit(state.copyWith(ingredient: event.ingredient));
   }
 }

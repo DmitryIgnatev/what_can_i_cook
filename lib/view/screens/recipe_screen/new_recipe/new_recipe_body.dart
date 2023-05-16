@@ -257,8 +257,7 @@ class NewRecipeBody extends StatelessWidget {
                         onItemTap: () {
                           context.read<RecipeBloc>().add(
                               RecipeAddIngredientsEvent(
-                                  ingredient:
-                                      state.items[state.index].ingredient));
+                                  ingredient: state.ingredient.ingredient));
                         },
                       );
                     },
