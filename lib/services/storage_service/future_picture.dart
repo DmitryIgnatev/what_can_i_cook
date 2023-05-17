@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/services/storage_service/storage_service.dart';
 
 class FuturePicture extends StatelessWidget {
-  final String fileName;
+  final String pictureUrl;
   final StorageService storage = StorageService();
-  FuturePicture({Key? key, required this.fileName}) : super(key: key);
+  FuturePicture({Key? key, required this.pictureUrl}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-            future: storage.downloadURL(fileName),
+            future: storage.downloadURL(pictureUrl),
             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
               if (snapshot.connectionState == ConnectionState.done &&
                   snapshot.hasData) {

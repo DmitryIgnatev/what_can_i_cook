@@ -3,23 +3,16 @@ import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/view/screens/recipe_screen/recipe/recipe_body.dart';
 import 'package:what_can_i_cook/view/widgets/transparent_appbar.dart';
 
-class RecipePage extends StatefulWidget {
+class RecipePage extends StatelessWidget {
   final int pageIndex;
-  const RecipePage(int i, {Key? key, required this.pageIndex})
-      : super(key: key);
-
-  @override
-  State<RecipePage> createState() => _RecipePageState();
-}
-
-class _RecipePageState extends State<RecipePage> {
+  const RecipePage({super.key, required this.pageIndex});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: AppColors.kWhitethemecolor,
-      body: RecipeBody(pageIndex:widget.pageIndex),
+      body: RecipeBody(pageIndex: pageIndex),
       appBar: transparentAppBar(context),
     );
   }

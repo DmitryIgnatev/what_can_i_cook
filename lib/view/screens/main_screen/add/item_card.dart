@@ -74,7 +74,6 @@ class _ItemCardState extends State<ItemCard> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => RecipePage(
-                                                  index,
                                                   pageIndex: index,
                                                 )),
                                       );
@@ -88,7 +87,7 @@ class _ItemCardState extends State<ItemCard> {
                                           topRight: Radius.circular(3.h),
                                         ),
                                         child: FuturePicture(
-                                          fileName: recipes[index].pictureUrl,
+                                          pictureUrl: recipes[index].pictureUrl,
                                         ),
                                       ),
                                     )),

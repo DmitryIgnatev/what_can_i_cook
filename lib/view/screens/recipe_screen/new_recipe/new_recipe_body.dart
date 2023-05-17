@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -30,223 +29,203 @@ class NewRecipeBody extends StatelessWidget {
         return SingleChildScrollView(
           child: Column(
             children: [
-              StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection('recipes')
-                      .snapshots(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (!snapshot.hasData) return const Text('Error');
-                    return SizedBox(
-                      height: 40.h,
-                      child: Stack(children: <Widget>[
-                        SizedBox(
-                            width: 100.h,
-                            height: 40.h - 30,
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(5.h),
+              SizedBox(
+                height: 40.h,
+                child: Stack(children: <Widget>[
+                  SizedBox(
+                      width: 100.h,
+                      height: 40.h - 30,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(5.h),
+                          ),
+                          child: FuturePicture(pictureUrl: state.pictureUrl))),
+                  Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        height: 100,
+                        width: MediaQuery.of(context).orientation ==
+                                Orientation.landscape
+                            ? 95.h
+                            : 95.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(5.h),
+                              topLeft: Radius.circular(5.h)),
+                          color: Colors.white,
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                                child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(
+                                  height: 30,
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent),
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                      ),
+                                      fillColor: Theme.of(context).cardColor,
+                                      filled: true,
+                                      hintText: 'Название рецепта',
+                                      hintStyle: const TextStyle(
+                                          color: AppColors.kTextLigntColor,
+                                          fontSize: 20),
+                                    ),
+                                    onChanged: (String value) {
+                                      context
+                                          .read<RecipeBloc>()
+                                          .add(RecipeNameEvent(name: value));
+                                    },
+                                  ),
                                 ),
-                                child:
-                                    FuturePicture(fileName: state.pictureUrl))),
-                        Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Container(
-                              height: 100,
-                              width: MediaQuery.of(context).orientation ==
-                                      Orientation.landscape
-                                  ? 95.h
-                                  : 95.w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(5.h),
-                                    topLeft: Radius.circular(5.h)),
-                                color: Colors.white,
-                              ),
-                              child: Row(
-                                children: <Widget>[
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Expanded(
-                                      child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      SizedBox(
-                                        height: 30,
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(15.0),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent),
-                                              borderRadius:
-                                                  BorderRadius.circular(15.0),
-                                            ),
-                                            fillColor:
-                                                Theme.of(context).cardColor,
-                                            filled: true,
-                                            hintText: 'Название рецепта',
-                                            hintStyle: const TextStyle(
-                                                color:
-                                                    AppColors.kTextLigntColor,
-                                                fontSize: 20),
-                                          ),
-                                          onChanged: (String value) {
-                                            context.read<RecipeBloc>().add(
-                                                RecipeNameEvent(name: value));
-                                          },
-                                        ),
+                                SizedBox(
+                                  height: 20,
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent),
                                       ),
-                                      SizedBox(
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent),
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                      ),
+                                      fillColor: Theme.of(context).cardColor,
+                                      filled: true,
+                                      hintText: 'Время на приготовление',
+                                      hintStyle: const TextStyle(
+                                          color: AppColors.kTextLigntColor,
+                                          fontSize: 12),
+                                    ),
+                                    onChanged: (String value) {
+                                      context.read<RecipeBloc>().add(
+                                          RecipeTimeEvent(
+                                              minutes: int.parse(value)));
+                                    },
+                                  ),
+                                ),
+                                StreamBuilder<List<Tag>>(
+                                  stream: ReadStore().readTags(),
+                                  builder: (BuildContext context, snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return const Center(
+                                          child: Text(
+                                        'Нет записей',
+                                      ));
+                                    } else {
+                                      final tags = snapshot.data!;
+                                      return SizedBox(
                                         height: 20,
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(15.0),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent),
-                                              borderRadius:
-                                                  BorderRadius.circular(15.0),
-                                            ),
-                                            fillColor:
-                                                Theme.of(context).cardColor,
-                                            filled: true,
-                                            hintText: 'Время на приготовление',
-                                            hintStyle: const TextStyle(
-                                                color:
-                                                    AppColors.kTextLigntColor,
-                                                fontSize: 12),
-                                          ),
-                                          onChanged: (String value) {
-                                            context.read<RecipeBloc>().add(
-                                                RecipeTimeEvent(
-                                                    minutes: int.parse(value)));
-                                          },
-                                        ),
-                                      ),
-                                      StreamBuilder<List<Tag>>(
-                                        stream: ReadStore().readTags(),
-                                        builder:
-                                            (BuildContext context, snapshot) {
-                                          if (!snapshot.hasData) {
-                                            return const Center(
-                                                child: Text(
-                                              'Нет записей',
-                                            ));
-                                          } else {
-                                            final tags = snapshot.data!;
-                                            return SizedBox(
-                                              height: 20,
-                                              child: ListView.builder(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  itemCount: tags.length,
-                                                  itemBuilder:
-                                                      (BuildContext context,
-                                                          int index) {
-                                                    return Padding(
-                                                      padding: const EdgeInsets
-                                                              .fromLTRB(
-                                                          10, 0, 8, 0),
-                                                      child: Text(
-                                                          "${tags[index].tag}"),
-                                                    );
-                                                  }),
-                                            );
-                                          }
-                                        },
-                                      ),
-                                    ],
+                                        child: ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: tags.length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        10, 0, 8, 0),
+                                                child:
+                                                    Text("${tags[index].tag}"),
+                                              );
+                                            }),
+                                      );
+                                    }
+                                  },
+                                ),
+                              ],
+                            )),
+                            //*edit button
+                            SizedBox(
+                              height: 64,
+                              width: 64,
+                              child: ElevatedButton(
+                                  onPressed: () async {
+                                    context.read<RecipeBloc>().add(
+                                        RecipePicUrlEvent(
+                                            pictureUrl: await StorageService()
+                                                .pickPictire(context)));
+                                  },
+                                  style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(18.0),
+                                            side: const BorderSide(
+                                                color: AppColors
+                                                    .kPrimaryRedColor))),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            AppColors.kPrimaryRedColor),
+                                  ),
+                                  child: const Icon(
+                                    Icons.photo_camera,
+                                    size: 28,
+                                    color: Colors.white,
                                   )),
-                                  //*edit button
-                                  SizedBox(
-                                    height: 64,
-                                    width: 64,
-                                    child: ElevatedButton(
-                                        onPressed: () async {
-                                          context.read<RecipeBloc>().add(
-                                              RecipePicUrlEvent(
-                                                  pictureUrl:
-                                                      await StorageService()
-                                                          .pickPictire(
-                                                              context)));
-                                        },
-                                        style: ButtonStyle(
-                                          shape: MaterialStateProperty.all<
-                                                  RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          18.0),
-                                                  side: const BorderSide(
-                                                      color: AppColors
-                                                          .kPrimaryRedColor))),
-                                          backgroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  AppColors.kPrimaryRedColor),
-                                        ),
-                                        child: const Icon(
-                                          Icons.photo_camera,
-                                          size: 28,
-                                          color: Colors.white,
-                                        )),
+                            ),
+                            const SizedBox(width: 5),
+                            SizedBox(
+                              height: 64,
+                              width: 64,
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    FireStore().createRecipe(
+                                        state.name,
+                                        state.ingredients,
+                                        state.minutes,
+                                        state.pictureUrl,
+                                        state.description);
+                                    Navigator.pop(context);
+                                  },
+                                  style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(18.0),
+                                            side: const BorderSide(
+                                                color: AppColors
+                                                    .kPrimaryRedColor))),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            AppColors.kPrimaryRedColor),
                                   ),
-                                  const SizedBox(width: 5),
-                                  SizedBox(
-                                    height: 64,
-                                    width: 64,
-                                    child: ElevatedButton(
-                                        onPressed: () {
-                                          FireStore().createRecipe(
-                                              state.name,
-                                              state.ingredients,
-                                              state.minutes,
-                                              state.pictureUrl,
-                                              state.description);
-                                          Navigator.pop(context);
-                                        },
-                                        style: ButtonStyle(
-                                          shape: MaterialStateProperty.all<
-                                                  RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          18.0),
-                                                  side: const BorderSide(
-                                                      color: AppColors
-                                                          .kPrimaryRedColor))),
-                                          backgroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  AppColors.kPrimaryRedColor),
-                                        ),
-                                        child: const Icon(
-                                          Icons.check,
-                                          size: 28,
-                                          color: Colors.white,
-                                        )),
-                                  ),
-                                  //*edit button end
-                                  const SizedBox(width: 5),
-                                ],
-                              ),
-                            ))
-                      ]),
-                    );
-                  }),
+                                  child: const Icon(
+                                    Icons.check,
+                                    size: 28,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                            //*edit button end
+                            const SizedBox(width: 5),
+                          ],
+                        ),
+                      ))
+                ]),
+              ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(children: [

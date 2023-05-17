@@ -71,7 +71,7 @@ class _FindBodyState extends State<FindBody> {
                                         child: SizedBox(
                                           width: 30.w,
                                           child: FuturePicture(
-                                            fileName: recipes[index].pictureUrl,
+                                            pictureUrl: recipes[index].pictureUrl,
                                           ),
                                         ),
                                       ),
