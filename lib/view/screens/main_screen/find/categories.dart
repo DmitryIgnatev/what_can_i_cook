@@ -17,7 +17,7 @@ class _CategoriesState extends State<Categories> {
     "Простые рецепты",
     "Популярные рецепты"
   ];
-  int? selectedIndex;
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +41,14 @@ class _CategoriesState extends State<Categories> {
                       horizontal: 5.w,
                     ),
                     decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.kPrimaryRedColor),
+                        border: Border.all(
+                            color: selectedIndex == index
+                                ? AppColors.kPrimaryRedColor
+                                : AppColors.kTextLigntColor),
                         color: selectedIndex == index
                             ? const Color.fromARGB(255, 235, 235, 235)
                             : Colors.transparent,
-                        borderRadius: BorderRadius.circular(5.w)),
+                        borderRadius: BorderRadius.circular(5)),
                     child: Text(
                       categories[index],
                       style: TextStyle(

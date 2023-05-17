@@ -12,9 +12,3 @@ class FilteredItemsChangedEvent extends FilteredItemsEvent {
 
   const FilteredItemsChangedEvent({required this.items});
 }
-
-class FilteredItemChosedEvent extends FilteredItemsEvent {
-  final Ingredient ingredient;
-
-  const FilteredItemChosedEvent({required this.ingredient});
-}

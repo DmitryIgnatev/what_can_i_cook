@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:what_can_i_cook/blocs/filtered_items/bloc/filtered_items_bloc.dart';
+import 'package:what_can_i_cook/blocs/recipe/bloc/recipe_bloc.dart';
 import 'package:what_can_i_cook/services/firebase/firestore.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
 import '../../../../models/ingredient.dart';
@@ -8,9 +9,7 @@ import '../screens/main_screen/add/widgets/add_ingredient.dart';
 
 class FindIngreidentsModule extends StatelessWidget {
   final bool isAddButtonEnabled;
-  final void Function() onItemTap;
-  const FindIngreidentsModule(
-      {super.key, required this.onItemTap, this.isAddButtonEnabled = false});
+  const FindIngreidentsModule({super.key, this.isAddButtonEnabled = false});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class FindIngreidentsModule extends StatelessWidget {
         return Column(
           children: [
             SizedBox(
-              height: 45,
+              height: state.items.isEmpty ? 0 : 45,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: state.items.length,
@@ -28,23 +27,29 @@ class FindIngreidentsModule extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
                     child: GestureDetector(
                       onTap: () {
-                        context.read<FilteredItemsBloc>().add(
-                            FilteredItemChosedEvent(
-                                ingredient: state.items[index]));
-                        onItemTap();
+                        context.read<RecipeBloc>().add(
+                            RecipeAddIngredientsEvent(
+                                ingredient: state.items[index].ingredient));
                       },
                       child: Container(
                           width: 100,
                           decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
-                              border: Border.all(
-                                  color: AppColors.kPrimaryRedColor)),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 3),
+                                blurRadius: 1,
+                                color:
+                                    AppColors.kTextLigntColor.withOpacity(0.3),
+                              )
+                            ],
+                          ),
                           child: Center(
                               child: Text(
                             state.items[index].ingredient,
                             style: TextStyle(
-                                color: AppColors.kPrimaryRedColor,
+                                color: AppColors.kTextLigntColor,
                                 fontWeight: FontWeight.bold),
                           ))),
                     ),
@@ -125,6 +130,64 @@ class FindIngreidentsModule extends StatelessWidget {
                 ),
               ],
             ),
+            BlocBuilder<RecipeBloc, RecipeState>(
+              builder: (context, state) {
+                return Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                        height: state.ingredients.isEmpty ? 0 : 60,
+                        child: MediaQuery.removePadding(
+                          context: context,
+                          removeTop: true,
+                          child: GridView.builder(
+                            itemCount: state.ingredients.length,
+                            gridDelegate:
+                                SliverGridDelegateWithMaxCrossAxisExtent(
+                                    maxCrossAxisExtent: 120,
+                                    mainAxisExtent: 50),
+                            itemBuilder: (context, index) {
+                              final item = state.ingredients[index];
+                              return Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(25))),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Text(item),
+                                          GestureDetector(
+                                            onTap: () {
+                                              context.read<RecipeBloc>().add(
+                                                  RecipeDeleteIngredientsEvent(
+                                                      ingredient: item));
+                                            },
+                                            child: Icon(
+                                              Icons.close,
+                                              size: 15,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )),
+                              );
+                            },
+                          ),
+                        )),
+                  ],
+                );
+              },
+            )
           ],
         );
       },

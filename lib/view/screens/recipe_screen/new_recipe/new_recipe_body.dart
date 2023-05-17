@@ -254,63 +254,9 @@ class NewRecipeBody extends StatelessWidget {
                     builder: (context, state) {
                       return FindIngreidentsModule(
                         isAddButtonEnabled: true,
-                        onItemTap: () {
-                          context.read<RecipeBloc>().add(
-                              RecipeAddIngredientsEvent(
-                                  ingredient: state.ingredient.ingredient));
-                        },
                       );
                     },
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                      height: state.ingredients.isEmpty ? 0 : 100,
-                      child: MediaQuery.removePadding(
-                        context: context,
-                        removeTop: true,
-                        child: GridView.builder(
-                          itemCount: state.ingredients.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 4, childAspectRatio: 2),
-                          itemBuilder: (context, index) {
-                            final item = state.ingredients[index];
-                            return Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(25))),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Text(item),
-                                        GestureDetector(
-                                          onTap: () {
-                                            context.read<RecipeBloc>().add(
-                                                RecipeDeleteIngredientsEvent(
-                                                    ingredient: item));
-                                          },
-                                          child: Icon(
-                                            Icons.close,
-                                            size: 15,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  )),
-                            );
-                          },
-                        ),
-                      )),
                   const SizedBox(height: 10),
                   Container(
                     decoration: const BoxDecoration(
