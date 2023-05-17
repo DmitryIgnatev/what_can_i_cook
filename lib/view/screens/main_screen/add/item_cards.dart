@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:sizer/sizer.dart';
-import 'package:what_can_i_cook/view/screens/recipe_screen/recipe/recipe_page.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/recipe/selected_recipe.dart';
 import 'package:what_can_i_cook/services/storage_service/future_picture.dart';
 
 import '../../../../models/recipe.dart';
 import '../../../../services/firebase/firestore.dart';
 
-class ItemCard extends StatefulWidget {
-  const ItemCard({Key? key}) : super(key: key);
+class ItemCards extends StatefulWidget {
+  const ItemCards({Key? key}) : super(key: key);
 
   @override
-  State<ItemCard> createState() => _ItemCardState();
+  State<ItemCards> createState() => _ItemCardsState();
 }
 
-class _ItemCardState extends State<ItemCard> {
+class _ItemCardsState extends State<ItemCards> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -73,7 +73,7 @@ class _ItemCardState extends State<ItemCard> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => RecipePage(
+                                            builder: (context) => SelectedRecipe(
                                                   pageIndex: index,
                                                 )),
                                       );
@@ -124,20 +124,6 @@ class _ItemCardState extends State<ItemCard> {
                               ],
                             ),
                           ),
-                          Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: IconButton(
-                              icon: const Icon(
-                                Icons.delete,
-                                color: AppColors.kPrimaryRedColor,
-                              ),
-                              onPressed: () {
-                                //Delete recipes
-                                FireStore().deleteRecipe(recipes[index]);
-                              },
-                            ),
-                          )
                         ]);
                       },
                     );

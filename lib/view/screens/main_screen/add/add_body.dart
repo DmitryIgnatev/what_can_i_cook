@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:what_can_i_cook/view/screens/main_screen/add/item_card.dart';
+import 'package:what_can_i_cook/view/screens/main_screen/add/item_cards.dart';
 
 
 class AddBody extends StatefulWidget {
@@ -16,7 +16,7 @@ class _AddBodyState extends State<AddBody> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:const <Widget> [
-            ItemCard()
+            ItemCards()
         ],
       ),
     );

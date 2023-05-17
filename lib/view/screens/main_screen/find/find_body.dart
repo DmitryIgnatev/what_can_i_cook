@@ -8,6 +8,7 @@ import '../../../../blocs/filtered_items/bloc/filtered_items_bloc.dart';
 import '../../../../models/recipe.dart';
 import '../../../../services/firebase/firestore.dart';
 import '../../../../services/storage_service/future_picture.dart';
+import '../../recipe_screen/recipe/selected_recipe.dart';
 
 class FindBody extends StatefulWidget {
   const FindBody({Key? key}) : super(key: key);
@@ -60,50 +61,62 @@ class _FindBodyState extends State<FindBody> {
                             itemBuilder: (BuildContext context, int index) {
                               return Padding(
                                 padding: const EdgeInsets.all(5.0),
-                                child: SizedBox(
-                                  height: 90,
-                                  child: Row(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(14),
-                                        ),
-                                        child: SizedBox(
-                                          width: 30.w,
-                                          child: FuturePicture(
-                                            pictureUrl: recipes[index].pictureUrl,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SelectedRecipe(
+                                                pageIndex: index,
+                                              )),
+                                    );
+                                  },
+                                  child: SizedBox(
+                                    height: 90,
+                                    child: Row(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(14),
+                                          ),
+                                          child: SizedBox(
+                                            width: 30.w,
+                                            child: FuturePicture(
+                                              pictureUrl:
+                                                  recipes[index].pictureUrl,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            5, 2, 0, 0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              recipes[index].name,
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 20),
-                                            ),
-                                            SizedBox(
-                                                height: 30,
-                                                width: 50.w,
-                                                child: Text(
-                                                    "${recipes[index].ingredients}")),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                                "Время приготовления:${recipes[index].time} минут")
-                                          ],
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              5, 2, 0, 0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                recipes[index].name,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 20),
+                                              ),
+                                              SizedBox(
+                                                  height: 30,
+                                                  width: 50.w,
+                                                  child: Text(
+                                                      "${recipes[index].ingredients}")),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                  "Время приготовления:${recipes[index].time} минут")
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );

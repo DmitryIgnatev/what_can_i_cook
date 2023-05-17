@@ -47,3 +47,18 @@ class RecipePicUrlEvent extends RecipeEvent {
 
   const RecipePicUrlEvent({required this.pictureUrl});
 }
+
+class RecipeCopyEvent extends RecipeEvent {
+  final String name;
+  final List<String> ingredients;
+  final int minutes;
+  final String description;
+  final String pictureUrl;
+
+  const RecipeCopyEvent(
+      {required this.name,
+      required this.ingredients,
+      required this.minutes,
+      required this.description,
+      required this.pictureUrl});
+}

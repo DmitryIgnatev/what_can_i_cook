@@ -138,52 +138,50 @@ class FindIngreidentsModule extends StatelessWidget {
                       height: 10,
                     ),
                     SizedBox(
-                        height: state.ingredients.isEmpty ? 0 : 60,
                         child: MediaQuery.removePadding(
-                          context: context,
-                          removeTop: true,
-                          child: GridView.builder(
-                            itemCount: state.ingredients.length,
-                            gridDelegate:
-                                SliverGridDelegateWithMaxCrossAxisExtent(
-                                    maxCrossAxisExtent: 120,
-                                    mainAxisExtent: 50),
-                            itemBuilder: (context, index) {
-                              final item = state.ingredients[index];
-                              return Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(25))),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text(item),
-                                          GestureDetector(
-                                            onTap: () {
-                                              context.read<RecipeBloc>().add(
-                                                  RecipeDeleteIngredientsEvent(
-                                                      ingredient: item));
-                                            },
-                                            child: Icon(
-                                              Icons.close,
-                                              size: 15,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                              );
-                            },
-                          ),
-                        )),
+                      context: context,
+                      removeTop: true,
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        itemCount: state.ingredients.length,
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 120, mainAxisExtent: 50),
+                        itemBuilder: (context, index) {
+                          final item = state.ingredients[index];
+                          return Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(25))),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text(item),
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.read<RecipeBloc>().add(
+                                              RecipeDeleteIngredientsEvent(
+                                                  ingredient: item));
+                                        },
+                                        child: Icon(
+                                          Icons.close,
+                                          size: 15,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )),
+                          );
+                        },
+                      ),
+                    )),
                   ],
                 );
               },
