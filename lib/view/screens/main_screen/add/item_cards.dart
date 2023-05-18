@@ -73,7 +73,8 @@ class _ItemCardsState extends State<ItemCards> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => SelectedRecipe(
+                                            builder: (context) =>
+                                                SelectedRecipe(
                                                   pageIndex: index,
                                                 )),
                                       );
@@ -105,7 +106,7 @@ class _ItemCardsState extends State<ItemCards> {
                                             color: AppColors.kPrimaryRedColor),
                                       ),
                                       Text(
-                                        "${recipes[index].ingredients}",
+                                        "${recipes[index].ingredients.toString().replaceAll('[', '').replaceAll(']', '')}",
                                         maxLines: 2,
                                         style: TextStyle(
                                             fontSize: 2.h,

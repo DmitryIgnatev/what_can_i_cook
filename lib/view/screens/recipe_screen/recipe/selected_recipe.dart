@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
-import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/delete_recipe_button.dart';
-import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/recipe_description.dart';
-import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/recipe_ingredints.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_recipe_description.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/delete_recipe_button.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_recipe_name.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/selected/recipe_description.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/selected/recipe_ingredints.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/selected/recipe_name.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/selected/recipe_time.dart';
 import 'package:what_can_i_cook/view/widgets/transparent_appbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -12,6 +16,8 @@ import '../../../../blocs/filtered_items/bloc/filtered_items_bloc.dart';
 import '../../../../blocs/recipe/bloc/recipe_bloc.dart';
 import '../../../../models/recipe.dart';
 import '../../../../services/storage_service/future_picture.dart';
+import '../../../widgets/find_ingredients_module.dart';
+import '../widgets/new/new_recipe_time.dart';
 
 class SelectedRecipe extends StatefulWidget {
   final int pageIndex;
@@ -96,24 +102,15 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                             CrossAxisAlignment.start,
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Text(
-                                            recipe.name,
-                                            //'Название рецепта',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineSmall,
-                                          ),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            "Время приготовления: ${recipe.time} минут",
-                                            style: const TextStyle(
-                                                color:
-                                                    AppColors.kTextLigntColor),
-                                          )
-                                        ],
+                                        children: isEdited
+                                            ? <Widget>[
+                                                NewRecipeName(),
+                                                NewRecipeTime()
+                                              ]
+                                            : <Widget>[
+                                                RecipeName(recipe: recipe),
+                                                RecipeTime(recipe: recipe)
+                                              ],
                                       )),
                                       //*edit button
                                       isEdited
@@ -140,6 +137,13 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                                     setState(() {
                                                       isEdited = false;
                                                     });
+                                                    FireStore().updateRecipe(
+                                                        recipe,
+                                                        state.name,
+                                                        state.ingredients,
+                                                        state.minutes,
+                                                        state.pictureUrl,
+                                                        state.description);
                                                   },
                                                   child: const Icon(
                                                     Icons.check,
@@ -203,11 +207,22 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                 ))
                           ]),
                         ),
-                        RecipeIngredients(recipe: recipe),
-                        RecipeDescription(recipe: recipe),
-                        isEdited
-                            ? DeleteRecipeButton(recipe: recipe)
-                            : SizedBox()
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: isEdited
+                              ? [
+                                  FindIngreidentsModule(
+                                    isAddButtonEnabled: true,
+                                  ),
+                                  NewRecipeDescription(),
+                                  DeleteRecipeButton(recipe: recipe)
+                                ]
+                              : [
+                                  RecipeIngredients(recipe: recipe),
+                                  RecipeDescription(recipe: recipe),
+                                ],
+                        )
                       ],
                     );
                   } else {

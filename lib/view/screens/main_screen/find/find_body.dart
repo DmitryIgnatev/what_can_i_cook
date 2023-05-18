@@ -106,7 +106,7 @@ class _FindBodyState extends State<FindBody> {
                                                   height: 30,
                                                   width: 50.w,
                                                   child: Text(
-                                                      "${recipes[index].ingredients}")),
+                                                      "${recipes[index].ingredients.toString().replaceAll('[', '').replaceAll(']', '')}")),
                                               SizedBox(
                                                 height: 10,
                                               ),

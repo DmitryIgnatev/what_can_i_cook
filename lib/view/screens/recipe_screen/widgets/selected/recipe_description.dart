@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../models/recipe.dart';
-import '../../../../utils/constants.dart';
+import '../../../../../models/recipe.dart';
+import '../../../../../utils/constants.dart';
 
 class RecipeDescription extends StatelessWidget {
   final Recipe recipe;

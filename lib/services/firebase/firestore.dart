@@ -8,7 +8,7 @@ class FireStore {
   void createRecipe(String name, List<String> ingridients, int minutes,
       String fileName, String description) async {
     final recipeDoc = FirebaseFirestore.instance.collection('recipes').doc();
-    final Recipe recipe = Recipe(
+    final Recipe recipeModel = Recipe(
         id: recipeDoc.id,
         name: name,
         ingredients: ingridients,
@@ -16,7 +16,7 @@ class FireStore {
         pictureUrl: fileName,
         description: description);
 
-    final json = recipe.toJson();
+    final json = recipeModel.toJson();
     await recipeDoc.set(json);
   }
 
@@ -24,16 +24,31 @@ class FireStore {
     FirebaseFirestore.instance.collection('recipes').doc(recipe.id).delete();
   }
 
-  void createIngredient(
-      String ingredient) async {
+  void updateRecipe(Recipe recipe, String name, List<String> ingridients,
+      int minutes, String fileName, String description) async {
+    final recipeDoc =
+        FirebaseFirestore.instance.collection('recipes').doc(recipe.id);
+    final Recipe recipeModel = Recipe(
+        id: recipeDoc.id,
+        name: name,
+        ingredients: ingridients,
+        time: minutes,
+        pictureUrl: fileName,
+        description: description);
+
+    final json = recipeModel.toJson();
+    await recipeDoc.update(json);
+  }
+
+  void createIngredient(String ingredient) async {
     final ingredientDoc =
         FirebaseFirestore.instance.collection('ingredients').doc();
-    final Ingredient recipe = Ingredient(
+    final Ingredient ingredientModel = Ingredient(
       id: ingredientDoc.id,
       ingredient: ingredient,
     );
 
-    final json = recipe.toJson();
+    final json = ingredientModel.toJson();
     await ingredientDoc.set(json);
   }
 }

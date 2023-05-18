@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_recipe_description.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_recipe_name.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_recipe_time.dart';
 import 'package:what_can_i_cook/view/widgets/transparent_appbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/blocs/filtered_items/bloc/filtered_items_bloc.dart';
-import 'package:what_can_i_cook/models/tag.dart';
+//import 'package:what_can_i_cook/models/tag.dart';
 import 'package:what_can_i_cook/services/firebase/firestore.dart';
 import 'package:what_can_i_cook/services/storage_service/future_picture.dart';
 import 'package:what_can_i_cook/services/storage_service/storage_service.dart';
@@ -71,66 +74,10 @@ class NewRecipe extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  SizedBox(
-                                    height: 30,
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent),
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                        ),
-                                        fillColor: Theme.of(context).cardColor,
-                                        filled: true,
-                                        hintText: 'Название рецепта',
-                                        hintStyle: const TextStyle(
-                                            color: AppColors.kTextLigntColor,
-                                            fontSize: 20),
-                                      ),
-                                      onChanged: (String value) {
-                                        context
-                                            .read<RecipeBloc>()
-                                            .add(RecipeNameEvent(name: value));
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent),
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                        ),
-                                        fillColor: Theme.of(context).cardColor,
-                                        filled: true,
-                                        hintText: 'Время на приготовление',
-                                        hintStyle: const TextStyle(
-                                            color: AppColors.kTextLigntColor,
-                                            fontSize: 12),
-                                      ),
-                                      onChanged: (String value) {
-                                        context.read<RecipeBloc>().add(
-                                            RecipeTimeEvent(
-                                                minutes: int.parse(value)));
-                                      },
-                                    ),
-                                  ),
+                                  NewRecipeName(),
+                                  NewRecipeTime(),
+                                  //TODO вернуть тэги
+                                  /*
                                   StreamBuilder<List<Tag>>(
                                     stream: ReadStore().readTags(),
                                     builder: (BuildContext context, snapshot) {
@@ -161,6 +108,7 @@ class NewRecipe extends StatelessWidget {
                                       }
                                     },
                                   ),
+                                  */
                                 ],
                               )),
                               //*edit button
@@ -233,56 +181,10 @@ class NewRecipe extends StatelessWidget {
                         ))
                   ]),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(children: [
-                    BlocBuilder<FilteredItemsBloc, FilteredItemsState>(
-                      builder: (context, state) {
-                        return FindIngreidentsModule(
-                          isAddButtonEnabled: true,
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                      ),
-                      child: TextFormField(
-                        maxLines: 10,
-                        cursorColor: AppColors.kPrimaryRedColor,
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide:
-                                const BorderSide(color: Colors.transparent),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          fillColor: Theme.of(context).cardColor,
-                          filled: true,
-                          hintText: 'Опишите развернуто свой рецепт',
-                          hintStyle: const TextStyle(
-                              color: AppColors.kTextLigntColor, fontSize: 16),
-                        ),
-                        keyboardType: TextInputType.text,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          // fontWeight: FontWeight.w500,
-                          color: AppColors.kTextColor,
-                        ),
-                        onChanged: (String value) {
-                          context
-                              .read<RecipeBloc>()
-                              .add(RecipeDescriptionEvent(description: value));
-                        },
-                      ),
-                    ),
-                  ]),
+                FindIngreidentsModule(
+                  isAddButtonEnabled: true,
                 ),
+                NewRecipeDescription()
               ],
             ),
           );
