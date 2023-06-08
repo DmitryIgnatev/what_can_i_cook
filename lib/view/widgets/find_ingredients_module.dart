@@ -37,13 +37,14 @@ class FindIngreidentsModule extends StatelessWidget {
                             width: 100,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(25)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
                               boxShadow: [
                                 BoxShadow(
                                   offset: Offset(0, 3),
                                   blurRadius: 1,
-                                  color:
-                                      AppColors.kTextLigntColor.withOpacity(0.3),
+                                  color: AppColors.kTextLigntColor
+                                      .withOpacity(0.3),
                                 )
                               ],
                             ),
@@ -112,9 +113,10 @@ class FindIngreidentsModule extends StatelessWidget {
                               ),
                               fillColor: Theme.of(context).cardColor,
                               filled: true,
-                              hintText: 'Ингридиенты',
+                              hintText: 'Ингредиенты',
                               hintStyle: const TextStyle(
-                                  color: AppColors.kTextLigntColor, fontSize: 16),
+                                  color: AppColors.kTextLigntColor,
+                                  fontSize: 16),
                             ),
                             onChanged: (value) {
                               context.read<FilteredItemsBloc>().add(
@@ -146,8 +148,9 @@ class FindIngreidentsModule extends StatelessWidget {
                         child: GridView.builder(
                           shrinkWrap: true,
                           itemCount: state.ingredients.length,
-                          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                              maxCrossAxisExtent: 120, mainAxisExtent: 50),
+                          gridDelegate:
+                              SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 120, mainAxisExtent: 50),
                           itemBuilder: (context, index) {
                             final item = state.ingredients[index];
                             return Padding(
@@ -155,8 +158,8 @@ class FindIngreidentsModule extends StatelessWidget {
                               child: Container(
                                   decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(25))),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(25))),
                                   child: Padding(
                                     padding: const EdgeInsets.all(4.0),
                                     child: Row(
@@ -165,7 +168,7 @@ class FindIngreidentsModule extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
-                                        Text(item),
+                                        SizedBox(width: 50, child: Text(item)),
                                         GestureDetector(
                                           onTap: () {
                                             context.read<RecipeBloc>().add(

@@ -15,8 +15,8 @@ class DeleteRecipeButton extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: GestureDetector(
           onTap: () {
-            FireStore().deleteRecipe(recipe);
             Navigator.pop(context);
+            FireStore().deleteRecipe(recipe);
           },
           child: Container(
             decoration: BoxDecoration(

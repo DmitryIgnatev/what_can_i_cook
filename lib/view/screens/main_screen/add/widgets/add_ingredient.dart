@@ -83,7 +83,7 @@ class _AddIngredientState extends State<AddIngredient> {
                             ),
                             fillColor: Theme.of(context).cardColor,
                             filled: true,
-                            hintText: 'Добавить новый ингридиент в базу данных',
+                            hintText: 'Добавить новый ингредиент в базу данных',
                             hintStyle: const TextStyle(
                                 color: AppColors.kTextLigntColor, fontSize: 16),
                           ),
