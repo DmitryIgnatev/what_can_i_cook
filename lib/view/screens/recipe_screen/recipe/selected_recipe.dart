@@ -82,13 +82,6 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                     borderRadius: BorderRadius.only(
                                         bottomLeft: Radius.circular(5.h),
                                         topLeft: Radius.circular(5.h)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        offset: Offset(0, 5),
-                                        blurRadius: 5,
-                                        color: AppColors.kTextLigntColor,
-                                      )
-                                    ],
                                     color: Colors.white,
                                   ),
                                   child: Row(
@@ -105,11 +98,9 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                         children: isEdited
                                             ? <Widget>[
                                                 NewRecipeName(),
-                                                NewRecipeTime()
                                               ]
                                             : <Widget>[
                                                 RecipeName(recipe: recipe),
-                                                RecipeTime(recipe: recipe)
                                               ],
                                       )),
                                       //*edit button
@@ -141,7 +132,8 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                                         recipe,
                                                         state.name,
                                                         state.ingredients,
-                                                        state.minutes,
+                                                        state.hours * 60 +
+                                                            state.minutes,
                                                         state.pictureUrl,
                                                         state.description);
                                                   },
@@ -171,8 +163,12 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                                             name: recipe.name,
                                                             ingredients: recipe
                                                                 .ingredients,
+                                                            hours:
+                                                                recipe.time ~/
+                                                                    60,
                                                             minutes:
-                                                                recipe.time,
+                                                                recipe.time %
+                                                                    60,
                                                             description: recipe
                                                                 .description,
                                                             pictureUrl: recipe
@@ -212,6 +208,7 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: isEdited
                               ? [
+                                  NewRecipeTime(),
                                   FindIngreidentsModule(
                                     isAddButtonEnabled: true,
                                   ),
@@ -219,6 +216,7 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                   DeleteRecipeButton(recipe: recipe)
                                 ]
                               : [
+                                  RecipeTime(recipe: recipe),
                                   RecipeIngredients(recipe: recipe),
                                   RecipeDescription(recipe: recipe),
                                 ],

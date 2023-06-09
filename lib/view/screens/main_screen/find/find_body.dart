@@ -111,7 +111,8 @@ class _FindBodyState extends State<FindBody> {
                                                 height: 10,
                                               ),
                                               Text(
-                                                  "Время приготовления:${recipes[index].time} минут")
+                                                "Время на приготовление: ${recipes[index].time ~/ 60} ч ${recipes[index].time % 60} минут",
+                                              )
                                             ],
                                           ),
                                         ),

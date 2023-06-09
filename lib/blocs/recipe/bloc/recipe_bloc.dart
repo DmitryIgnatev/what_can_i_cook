@@ -9,7 +9,8 @@ class RecipeBloc extends Bloc<RecipeEvent, RecipeState> {
     on<RecipeNameEvent>(_onNameChanged);
     on<RecipeAddIngredientsEvent>(_onAddIngridients);
     on<RecipeDeleteIngredientsEvent>(_onDeleteIngredients);
-    on<RecipeTimeEvent>(_onTimeChanged);
+    on<RecipeMinutesEvent>(_onMinutesChanged);
+    on<RecipeHoursEvent>(_onHoursChanged);
     on<RecipeDescriptionEvent>(_onDescriptionChanged);
     on<RecipePicUrlEvent>(_onPicUrlChanged);
     on<RecipeCopyEvent>(_onRecipeCopy);
@@ -31,8 +32,12 @@ class RecipeBloc extends Bloc<RecipeEvent, RecipeState> {
         ingredients: List.from(state.ingredients)..remove(event.ingredient)));
   }
 
-  void _onTimeChanged(RecipeTimeEvent event, Emitter<RecipeState> emit) {
+  void _onMinutesChanged(RecipeMinutesEvent event, Emitter<RecipeState> emit) {
     emit(state.copyWith(minutes: event.minutes));
+  }
+
+  void _onHoursChanged(RecipeHoursEvent event, Emitter<RecipeState> emit) {
+    emit(state.copyWith(hours: event.hours));
   }
 
   void _onDescriptionChanged(
@@ -48,6 +53,7 @@ class RecipeBloc extends Bloc<RecipeEvent, RecipeState> {
     emit(state.copyWith(
         name: event.name,
         ingredients: event.ingredients,
+        hours: event.hours,
         minutes: event.minutes,
         description: event.description,
         pictireUrl: event.pictureUrl));

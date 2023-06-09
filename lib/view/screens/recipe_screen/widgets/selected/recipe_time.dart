@@ -9,9 +9,12 @@ class RecipeTime extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      "Время приготовления: ${recipe.time} минут",
-      style: const TextStyle(color: AppColors.kTextLigntColor),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+      child: Text(
+        "Время на приготовление: ${recipe.time ~/ 60} ч ${recipe.time % 60} минут",
+        style: const TextStyle(fontSize: 20, color: AppColors.kTextLigntColor),
+      ),
     );
   }
 }

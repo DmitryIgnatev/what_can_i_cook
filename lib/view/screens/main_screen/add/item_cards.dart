@@ -113,7 +113,7 @@ class _ItemCardsState extends State<ItemCards> {
                                             color: AppColors.kTextColor),
                                       ),
                                       Text(
-                                        "Время на приготовление:\n${recipes[index].time} минут",
+                                        "Время на приготовление:\n${recipes[index].time ~/ 60} ч ${recipes[index].time % 60} минут",
                                         maxLines: 3,
                                         style: TextStyle(
                                             fontSize: 2.h,

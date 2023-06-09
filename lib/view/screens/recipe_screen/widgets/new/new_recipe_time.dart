@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../../blocs/recipe/bloc/recipe_bloc.dart';
 import '../../../../../utils/constants.dart';
 
@@ -13,30 +12,139 @@ class NewRecipeTime extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<RecipeBloc, RecipeState>(
       builder: (context, state) {
-        return SizedBox(
-          height: 20,
-          child: TextFormField(
-            initialValue: "${state.minutes}",
-            decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15.0),
-                borderSide: const BorderSide(color: Colors.transparent),
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(15))),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text(
+                    "Время приготовления: ",
+                    style: const TextStyle(
+                        fontSize: 20, color: AppColors.kTextLigntColor),
+                  ),
+                  Spacer(),
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            "ч:${state.hours}",
+                            style: const TextStyle(
+                                color: AppColors.kTextLigntColor),
+                          ),
+                          SizedBox(
+                            height: 40,
+                            width: 50,
+                            child: MediaQuery.removePadding(
+                              context: context,
+                              removeTop: true,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: 60,
+                                  itemBuilder: ((context, index) =>
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.read<RecipeBloc>().add(
+                                              RecipeHoursEvent(hours: (index)));
+                                        },
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          margin: EdgeInsets.only(bottom: 3),
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: state.hours == index
+                                                      ? AppColors
+                                                          .kPrimaryRedColor
+                                                      : AppColors
+                                                          .kTextLigntColor),
+                                              color: state.hours == index
+                                                  ? const Color.fromARGB(
+                                                      255, 235, 235, 235)
+                                                  : Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: Text(
+                                            "$index",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: state.hours == index
+                                                    ? AppColors.kPrimaryRedColor
+                                                    : AppColors
+                                                        .kTextLigntColor),
+                                          ),
+                                        ),
+                                      ))),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            "мин: ${state.minutes}",
+                            style: const TextStyle(
+                                color: AppColors.kTextLigntColor),
+                          ),
+                          SizedBox(
+                            height: 40,
+                            width: 50,
+                            child: MediaQuery.removePadding(
+                              context: context,
+                              removeTop: true,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: 60,
+                                  itemBuilder: ((context, index) =>
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.read<RecipeBloc>().add(
+                                              RecipeMinutesEvent(
+                                                  minutes: (index)));
+                                        },
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          margin: EdgeInsets.only(bottom: 3),
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: state.minutes == index
+                                                      ? AppColors
+                                                          .kPrimaryRedColor
+                                                      : AppColors
+                                                          .kTextLigntColor),
+                                              color: state.minutes == index
+                                                  ? const Color.fromARGB(
+                                                      255, 235, 235, 235)
+                                                  : Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: Text(
+                                            "$index",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: state.minutes == index
+                                                    ? AppColors.kPrimaryRedColor
+                                                    : AppColors
+                                                        .kTextLigntColor),
+                                          ),
+                                        ),
+                                      ))),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.transparent),
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              fillColor: Theme.of(context).cardColor,
-              filled: true,
-              hintText: 'Время на приготовление',
-              hintStyle: const TextStyle(
-                  color: AppColors.kTextLigntColor, fontSize: 12),
             ),
-            onChanged: (String value) {
-              context
-                  .read<RecipeBloc>()
-                  .add(RecipeTimeEvent(minutes: int.parse(value)));
-            },
           ),
         );
       },

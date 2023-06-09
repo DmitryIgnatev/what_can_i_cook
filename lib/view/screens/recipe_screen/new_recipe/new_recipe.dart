@@ -13,6 +13,7 @@ import 'package:what_can_i_cook/services/storage_service/future_picture.dart';
 import 'package:what_can_i_cook/services/storage_service/storage_service.dart';
 
 import '../../../../blocs/recipe/bloc/recipe_bloc.dart';
+import '../../../../models/tag.dart';
 import '../../../widgets/find_ingredients_module.dart';
 
 class NewRecipe extends StatelessWidget {
@@ -75,9 +76,6 @@ class NewRecipe extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   NewRecipeName(),
-                                  NewRecipeTime(),
-                                  //TODO вернуть тэги
-                                  /*
                                   StreamBuilder<List<Tag>>(
                                     stream: ReadStore().readTags(),
                                     builder: (BuildContext context, snapshot) {
@@ -108,7 +106,6 @@ class NewRecipe extends StatelessWidget {
                                       }
                                     },
                                   ),
-                                  */
                                 ],
                               )),
                               //*edit button
@@ -150,7 +147,7 @@ class NewRecipe extends StatelessWidget {
                                       FireStore().createRecipe(
                                           state.name,
                                           state.ingredients,
-                                          state.minutes,
+                                          state.hours * 60 + state.minutes,
                                           state.pictureUrl,
                                           state.description);
                                       Navigator.pop(context);
@@ -181,6 +178,7 @@ class NewRecipe extends StatelessWidget {
                         ))
                   ]),
                 ),
+                NewRecipeTime(),
                 FindIngreidentsModule(
                   isAddButtonEnabled: true,
                 ),

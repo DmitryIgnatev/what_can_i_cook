@@ -30,10 +30,16 @@ class RecipeDeleteIngredientsEvent extends RecipeEvent {
   List<Object> get props => [ingredient];
 }
 
-class RecipeTimeEvent extends RecipeEvent {
+class RecipeMinutesEvent extends RecipeEvent {
   final int minutes;
 
-  const RecipeTimeEvent({required this.minutes});
+  const RecipeMinutesEvent({required this.minutes});
+}
+
+class RecipeHoursEvent extends RecipeEvent {
+  final int hours;
+
+  const RecipeHoursEvent({required this.hours});
 }
 
 class RecipeDescriptionEvent extends RecipeEvent {
@@ -52,6 +58,7 @@ class RecipeCopyEvent extends RecipeEvent {
   final String name;
   final List<String> ingredients;
   final int minutes;
+  final int hours;
   final String description;
   final String pictureUrl;
 
@@ -59,6 +66,7 @@ class RecipeCopyEvent extends RecipeEvent {
       {required this.name,
       required this.ingredients,
       required this.minutes,
+      required this.hours,
       required this.description,
       required this.pictureUrl});
 }
