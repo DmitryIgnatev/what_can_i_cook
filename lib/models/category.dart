@@ -1,13 +1,13 @@
 import 'base_item_model.dart';
 
-class Tag extends BaseItemModel {
-  Tag({
+class RecipeCategory extends BaseItemModel {
+  RecipeCategory({
     required String id,
     required String name,
   }) : super(id: id, name: name);
 
-  factory Tag.fromJson(Map<String, dynamic> json) {
-    return Tag(
+  factory RecipeCategory.fromJson(Map<String, dynamic> json) {
+    return RecipeCategory(
       id: json['id'] ?? "",
       name: json['name'] ?? "",
     );

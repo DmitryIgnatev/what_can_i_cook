@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_category_list.dart';
 import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_recipe_description.dart';
 import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_recipe_name.dart';
 import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_recipe_time.dart';
@@ -13,7 +14,7 @@ import 'package:what_can_i_cook/services/storage_service/storage_service.dart';
 
 import '../../../../blocs/recipe/bloc/recipe_bloc.dart';
 import '../../../widgets/find_ingredients_module.dart';
-import '../widgets/new/tag_list.dart';
+import '../widgets/new/new_tag_list.dart';
 
 class NewRecipe extends StatelessWidget {
   const NewRecipe({Key? key}) : super(key: key);
@@ -118,7 +119,10 @@ class NewRecipe extends StatelessWidget {
                                           state.ingredients,
                                           state.hours * 60 + state.minutes,
                                           state.pictureUrl,
-                                          state.description);
+                                          state.description,
+                                          state.tags,
+                                          state.category
+                                          );
                                       Navigator.pop(context);
                                     },
                                     style: ButtonStyle(
@@ -147,7 +151,8 @@ class NewRecipe extends StatelessWidget {
                         ))
                   ]),
                 ),
-                TagList(),
+                NewCategoryList(),
+                NewTagList(),
                 NewRecipeTime(),
                 FindIngreidentsModule(
                   isAddButtonEnabled: true,

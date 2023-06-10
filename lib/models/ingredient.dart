@@ -1,11 +1,10 @@
-class Ingredient {
-  final String id;
-  final String name;
+import 'base_item_model.dart';
 
+class Ingredient extends BaseItemModel {
   Ingredient({
-    required this.id,
-    required this.name,
-  });
+    required String id,
+    required String name,
+  }) : super(id: id, name: name);
 
   factory Ingredient.fromJson(Map<String, dynamic> json) {
     return Ingredient(
@@ -13,7 +12,6 @@ class Ingredient {
       name: json['name'] ?? "",
     );
   }
-
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,

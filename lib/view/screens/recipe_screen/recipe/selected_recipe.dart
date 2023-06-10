@@ -129,13 +129,16 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                                       isEdited = false;
                                                     });
                                                     FireStore().updateRecipe(
-                                                        recipe,
-                                                        state.name,
-                                                        state.ingredients,
-                                                        state.hours * 60 +
-                                                            state.minutes,
-                                                        state.pictureUrl,
-                                                        state.description);
+                                                      recipe,
+                                                      state.name,
+                                                      state.ingredients,
+                                                      state.hours * 60 +
+                                                          state.minutes,
+                                                      state.pictureUrl,
+                                                      state.description,
+                                                      state.tags,
+                                                      state.category,
+                                                    );
                                                   },
                                                   child: const Icon(
                                                     Icons.check,
@@ -172,7 +175,10 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                                             description: recipe
                                                                 .description,
                                                             pictureUrl: recipe
-                                                                .pictureUrl));
+                                                                .pictureUrl,
+                                                            tags: recipe.tags,
+                                                            category: recipe
+                                                                .category));
                                                   },
                                                   style: ButtonStyle(
                                                     shape: MaterialStateProperty.all<

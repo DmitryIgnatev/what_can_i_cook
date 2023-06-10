@@ -4,16 +4,19 @@ import 'package:what_can_i_cook/models/ingredient.dart';
 import '../../models/recipe.dart';
 
 class FireStore {
-  void createRecipe(String name, List<String> ingridients, int minutes,
-      String fileName, String description) async {
+  void createRecipe(String name, List<String> ingredients, int minutes,
+      String fileName, String description, List<String> tags, String category) async {
     final recipeDoc = FirebaseFirestore.instance.collection('recipes').doc();
     final Recipe recipeModel = Recipe(
         id: recipeDoc.id,
         name: name,
-        ingredients: ingridients,
+        ingredients: ingredients,
         time: minutes,
         pictureUrl: fileName,
-        description: description);
+        description: description,
+        tags: tags,
+        category: category
+        );
 
     final json = recipeModel.toJson();
     await recipeDoc.set(json);
@@ -23,17 +26,21 @@ class FireStore {
     FirebaseFirestore.instance.collection('recipes').doc(recipe.id).delete();
   }
 
-  void updateRecipe(Recipe recipe, String name, List<String> ingridients,
-      int minutes, String fileName, String description) async {
+  void updateRecipe(Recipe recipe, String name, List<String> ingredients,
+      int minutes, String fileName, String description, 
+      List<String> tags, String category
+      ) async {
     final recipeDoc =
         FirebaseFirestore.instance.collection('recipes').doc(recipe.id);
     final Recipe recipeModel = Recipe(
         id: recipeDoc.id,
         name: name,
-        ingredients: ingridients,
+        ingredients: ingredients,
         time: minutes,
         pictureUrl: fileName,
-        description: description);
+        description: description,
+        tags: tags, category: category
+        );
 
     final json = recipeModel.toJson();
     await recipeDoc.update(json);
