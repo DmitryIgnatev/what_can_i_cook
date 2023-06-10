@@ -48,7 +48,7 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
         child: BlocBuilder<RecipeBloc, RecipeState>(builder: (context, state) {
           return SingleChildScrollView(
             child: StreamBuilder<List<Recipe>>(
-                stream: ReadStore().readRecipes(),
+                stream: ReadStore().readData('recipes', Recipe.fromJson),
                 builder: (BuildContext context, snapshot) {
                   if (snapshot.hasData) {
                     final recipe = snapshot.data![widget.pageIndex];

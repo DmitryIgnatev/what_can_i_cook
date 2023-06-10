@@ -31,7 +31,7 @@ class FindIngreidentsModule extends StatelessWidget {
                         onTap: () {
                           context.read<RecipeBloc>().add(
                               RecipeAddIngredientsEvent(
-                                  ingredient: state.items[index].ingredient));
+                                  ingredient: state.items[index].name));
                         },
                         child: Container(
                             width: 100,
@@ -50,7 +50,7 @@ class FindIngreidentsModule extends StatelessWidget {
                             ),
                             child: Center(
                                 child: Text(
-                              state.items[index].ingredient,
+                              state.items[index].name,
                               style: TextStyle(
                                   color: AppColors.kTextLigntColor,
                                   fontWeight: FontWeight.bold),
@@ -90,7 +90,8 @@ class FindIngreidentsModule extends StatelessWidget {
                       : SizedBox(),
                   Expanded(
                     child: StreamBuilder<List<Ingredient>>(
-                      stream: ReadStore().readIngredients(),
+                      stream: ReadStore()
+                          .readData('ingredients', Ingredient.fromJson),
                       builder: (BuildContext context, snapshot) {
                         if (!snapshot.hasData) {
                           return const Center(
@@ -122,7 +123,7 @@ class FindIngreidentsModule extends StatelessWidget {
                               context.read<FilteredItemsBloc>().add(
                                   FilteredItemsChangedEvent(
                                       items: items
-                                          .where((item) => item.ingredient
+                                          .where((item) => item.name
                                               .toLowerCase()
                                               .contains(value.toLowerCase()))
                                           .toList()));

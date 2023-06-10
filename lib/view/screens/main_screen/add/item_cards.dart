@@ -21,7 +21,7 @@ class _ItemCardsState extends State<ItemCards> {
         child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 2.w),
             child: StreamBuilder<List<Recipe>>(
-                stream: ReadStore().readRecipes(),
+                stream: ReadStore().readData('recipes', Recipe.fromJson),
                 builder: (BuildContext context, snapshot) {
                   if (!snapshot.hasData) {
                     return const Center(

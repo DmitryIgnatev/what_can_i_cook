@@ -1,21 +1,21 @@
 class Ingredient {
   final String id;
-  final String ingredient;
+  final String name;
 
   Ingredient({
     required this.id,
-    required this.ingredient,
+    required this.name,
   });
 
   factory Ingredient.fromJson(Map<String, dynamic> json) {
     return Ingredient(
       id: json['id'] ?? "",
-      ingredient: json['ingredient'] ?? "",
+      name: json['name'] ?? "",
     );
   }
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'ingredient': ingredient,
+        'name': name,
       };
 }

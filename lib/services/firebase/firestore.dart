@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:what_can_i_cook/models/ingredient.dart';
 
 import '../../models/recipe.dart';
-import '../../models/tag.dart';
 
 class FireStore {
   void createRecipe(String name, List<String> ingridients, int minutes,
@@ -45,7 +44,7 @@ class FireStore {
         FirebaseFirestore.instance.collection('ingredients').doc();
     final Ingredient ingredientModel = Ingredient(
       id: ingredientDoc.id,
-      ingredient: ingredient,
+      name: ingredient,
     );
 
     final json = ingredientModel.toJson();
@@ -54,21 +53,10 @@ class FireStore {
 }
 
 class ReadStore {
-  Stream<List<Recipe>> readRecipes() => FirebaseFirestore.instance
-      .collection('recipes')
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => Recipe.fromJson(doc.data())).toList());
-
-  Stream<List<Tag>> readTags() => FirebaseFirestore.instance
-      .collection('tags')
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => Tag.fromJson(doc.data())).toList());
-
-  Stream<List<Ingredient>> readIngredients() => FirebaseFirestore.instance
-      .collection('ingredients')
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => Ingredient.fromJson(doc.data())).toList());
+  Stream<List<T>> readData<T>(
+      String collection, T Function(Map<String, dynamic>) fromJson) {
+    return FirebaseFirestore.instance.collection(collection).snapshots().map(
+        (snapshot) =>
+            snapshot.docs.map((doc) => fromJson(doc.data())).toList());
+  }
 }

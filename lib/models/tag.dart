@@ -1,21 +1,21 @@
 class Tag {
   final String id;
-  final String tag;
+  final String name;
 
   Tag({
     required this.id,
-    required this.tag,
+    required this.name,
   });
 
   factory Tag.fromJson(Map<String, dynamic> json) {
     return Tag(
       id: json['id'] ?? "",
-      tag: json['tag'] ?? "",
+      name: json['name'] ?? "",
     );
   }
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'tag': tag,
+        'name': name,
       };
 }

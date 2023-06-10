@@ -61,7 +61,8 @@ class _AddIngredientState extends State<AddIngredient> {
                   height: 90,
                   width: 80.w,
                   child: StreamBuilder<List<Ingredient>>(
-                    stream: ReadStore().readIngredients(),
+                    stream: ReadStore()
+                        .readData('ingredients', Ingredient.fromJson),
                     builder: (BuildContext context, snapshot) {
                       if (!snapshot.hasData) {
                         return const Center(

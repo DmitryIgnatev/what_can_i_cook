@@ -7,14 +7,13 @@ import 'package:what_can_i_cook/view/widgets/transparent_appbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/blocs/filtered_items/bloc/filtered_items_bloc.dart';
-//import 'package:what_can_i_cook/models/tag.dart';
 import 'package:what_can_i_cook/services/firebase/firestore.dart';
 import 'package:what_can_i_cook/services/storage_service/future_picture.dart';
 import 'package:what_can_i_cook/services/storage_service/storage_service.dart';
 
 import '../../../../blocs/recipe/bloc/recipe_bloc.dart';
-import '../../../../models/tag.dart';
 import '../../../widgets/find_ingredients_module.dart';
+import '../widgets/new/tag_list.dart';
 
 class NewRecipe extends StatelessWidget {
   const NewRecipe({Key? key}) : super(key: key);
@@ -76,36 +75,6 @@ class NewRecipe extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   NewRecipeName(),
-                                  StreamBuilder<List<Tag>>(
-                                    stream: ReadStore().readTags(),
-                                    builder: (BuildContext context, snapshot) {
-                                      if (!snapshot.hasData) {
-                                        return const Center(
-                                            child: Text(
-                                          'Нет записей',
-                                        ));
-                                      } else {
-                                        final tags = snapshot.data!;
-                                        return SizedBox(
-                                          height: 20,
-                                          child: ListView.builder(
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: tags.length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                return Padding(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          10, 0, 8, 0),
-                                                  child: Text(
-                                                      "${tags[index].tag}"),
-                                                );
-                                              }),
-                                        );
-                                      }
-                                    },
-                                  ),
                                 ],
                               )),
                               //*edit button
@@ -178,6 +147,7 @@ class NewRecipe extends StatelessWidget {
                         ))
                   ]),
                 ),
+                TagList(),
                 NewRecipeTime(),
                 FindIngreidentsModule(
                   isAddButtonEnabled: true,

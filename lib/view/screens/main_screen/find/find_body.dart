@@ -40,7 +40,7 @@ class _FindBodyState extends State<FindBody> {
                       builder: (context, state) {
                     return Expanded(
                         child: StreamBuilder<List<Recipe>>(
-                      stream: ReadStore().readRecipes(),
+                      stream: ReadStore().readData('recipes', Recipe.fromJson),
                       builder: (BuildContext context, snapshot) {
                         if (!snapshot.hasData)
                           return Center(child: const Text('Нет записей'));
