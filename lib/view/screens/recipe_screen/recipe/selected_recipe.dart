@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_category_list.dart';
 import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_recipe_description.dart';
 import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/delete_recipe_button.dart';
 import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_recipe_name.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_tag_list.dart';
 import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/selected/recipe_description.dart';
 import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/selected/recipe_ingredints.dart';
 import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/selected/recipe_name.dart';
@@ -18,6 +20,8 @@ import '../../../../models/recipe.dart';
 import '../../../../services/storage_service/future_picture.dart';
 import '../../../widgets/find_ingredients_module.dart';
 import '../widgets/new/new_recipe_time.dart';
+import '../widgets/selected/recipe_category_text.dart';
+import '../widgets/selected/recipe_tag_list.dart';
 
 class SelectedRecipe extends StatefulWidget {
   final int pageIndex;
@@ -214,6 +218,8 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: isEdited
                               ? [
+                                  NewCategoryList(),
+                                  NewTagList(),
                                   NewRecipeTime(),
                                   FindIngreidentsModule(
                                     isAddButtonEnabled: true,
@@ -222,6 +228,8 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                   DeleteRecipeButton(recipe: recipe)
                                 ]
                               : [
+                                  RecipeCategoryText(recipe: recipe),
+                                  RecipeTagList(recipe: recipe),
                                   RecipeTime(recipe: recipe),
                                   RecipeIngredients(recipe: recipe),
                                   RecipeDescription(recipe: recipe),

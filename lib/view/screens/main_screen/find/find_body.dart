@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/blocs/recipe/bloc/recipe_bloc.dart';
-//import 'package:what_can_i_cook/view/screens/main_screen/find/categories.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_category_list.dart';
+import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_tag_list.dart';
 import 'package:what_can_i_cook/view/widgets/find_ingredients_module.dart';
 import '../../../../blocs/filtered_items/bloc/filtered_items_bloc.dart';
 import '../../../../models/recipe.dart';
@@ -34,7 +35,8 @@ class _FindBodyState extends State<FindBody> {
               padding: EdgeInsets.all(5),
               child: Column(
                 children: [
-                  //const Categories(),
+                  NewCategoryList(),
+                  NewTagList(),
                   FindIngreidentsModule(),
                   BlocBuilder<RecipeBloc, RecipeState>(
                       builder: (context, state) {
@@ -46,16 +48,21 @@ class _FindBodyState extends State<FindBody> {
                           return Center(child: const Text('Нет записей'));
                         else {
                           List<Recipe> recipes = snapshot.data!
-                              .where((list) => list.ingredients.any((element) =>
-                                  state.ingredients.contains(element)))
+                              .where((thisRecipe) =>
+                                      thisRecipe.ingredients.any((element) =>
+                                          state.ingredients
+                                              .contains(element)) &&
+                                      thisRecipe.category == state.category
+                                  //TODO добавить функционал, чтобы рецепты с тэгами были в приоритете
+                                  )
                               .toList();
+
                           /*
                           List<Recipe> recipes = snapshot.data!
                               .where((list) =>
                                   list.ingredients.contains(state.ingredients))
                               .toList();
                               */
-                          //final recipes = snapshot.data!;
                           return ListView.builder(
                             itemCount: recipes.length,
                             itemBuilder: (BuildContext context, int index) {

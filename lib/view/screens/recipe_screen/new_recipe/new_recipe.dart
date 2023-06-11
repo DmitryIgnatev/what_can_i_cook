@@ -71,13 +71,7 @@ class NewRecipe extends StatelessWidget {
                                 width: 20,
                               ),
                               Expanded(
-                                  child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  NewRecipeName(),
-                                ],
-                              )),
+                                  child: NewRecipeName()),
                               //*edit button
                               SizedBox(
                                 height: 64,
