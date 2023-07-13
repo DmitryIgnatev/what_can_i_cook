@@ -13,23 +13,23 @@ dependencies:
     sdk: flutter
 
   #UI
-  cupertino_icons: ^1.0.2
-  sizer: ^2.0.15
-  fluttertoast: ^8.0.9
+  cupertino_icons: 1.0.2
+  sizer: 2.0.15
+  fluttertoast: 8.0.9
 
   #State management
-  bloc: ^8.1.1
-  flutter_bloc: ^8.1.2
-  equatable: ^2.0.5
+  bloc: 8.1.1
+  flutter_bloc: 8.1.2
+  equatable: 2.0.5
 
   #Firebase
-  cloud_firestore:
-  firebase_core:
-  firebase_storage:
-  firebase_auth:
+  cloud_firestore: 4.8.2
+  firebase_core: 2.14.0
+  firebase_storage: 11.2.4
+  firebase_auth: 4.6.3
 
   #Other
-  file_picker: ^5.2.11
+  file_picker: 5.2.11
 
 dev_dependencies:
   flutter_test:
@@ -43,7 +43,7 @@ flutter_icons:
   image_path: "assets/cooking_book_icon.png"
   min_sdk_android: 21
 
-  flutter_lints: ^2.0.0
+  flutter_lints: 2.0.2
 
 flutter:
   uses-material-design: true

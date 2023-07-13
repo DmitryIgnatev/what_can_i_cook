@@ -33,7 +33,7 @@ The application currently supports only the Russian language, support for other 
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Страница промотра и редактирования рецептов</a>
+      <a href="#getting-started">Страница проcмотра и редактирования рецептов</a>
       <ul>
           <p float="left">
            <img src="https://github.com/DmitryIgnatev/what_can_i_cook/blob/main/assets/git/recipe_page.jpg" width="180" />
