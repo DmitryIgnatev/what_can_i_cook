@@ -6,7 +6,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 0.1.0+1
 
 environment:
-  sdk: ">=2.17.3 <3.0.0"
+  sdk: '>=3.2.3 <4.0.0'
 
 dependencies:
   flutter:
@@ -43,7 +43,7 @@ flutter_icons:
   image_path: "assets/cooking_book_icon.png"
   min_sdk_android: 21
 
-  flutter_lints: 2.0.2
+  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true
