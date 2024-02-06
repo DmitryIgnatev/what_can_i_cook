@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/blocs/recipe/bloc/recipe_bloc.dart';
 import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_category_list.dart';
 import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_tag_list.dart';
@@ -21,6 +20,7 @@ class FindBody extends StatefulWidget {
 class _FindBodyState extends State<FindBody> {
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return MultiBlocProvider(
       providers: [
         BlocProvider<FilteredItemsBloc>(
@@ -87,7 +87,7 @@ class _FindBodyState extends State<FindBody> {
                                             Radius.circular(14),
                                           ),
                                           child: SizedBox(
-                                            width: 30.w,
+                                            width: 0.30 * width,
                                             child: FuturePicture(
                                               pictureUrl:
                                                   recipes[index].pictureUrl,
@@ -110,8 +110,8 @@ class _FindBodyState extends State<FindBody> {
                                                     fontSize: 20),
                                               ),
                                               SizedBox(
-                                                  height: 30,
-                                                  width: 50.w,
+                                                  height: 20,
+                                                  width: 0.5 * width,
                                                   child: Text(
                                                       "${recipes[index].ingredients.toString().replaceAll('[', '').replaceAll(']', '')}")),
                                               SizedBox(

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 Widget field(
-      IconData icon, String hintText, bool isPassword, bool isEmail, void Function(String)? onChanged) {
+      IconData icon, String hintText, bool isPassword, bool isEmail, void Function(String)? onChanged, BuildContext context) {
+        final height = MediaQuery.of(context).size.height;
+  final width = MediaQuery.of(context).size.width;
     return Container(
-      height: 7.h,
-      width: 82.w,
+      height: 0.07*height,
+      width: 82* width,
       alignment: Alignment.center,
-      padding: EdgeInsets.only(right: 3.w),
+      padding: EdgeInsets.only(right: 0.03*width),
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(.05),
         borderRadius: BorderRadius.circular(10),

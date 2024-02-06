@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
 
 import '../../../../../models/ingredient.dart';
@@ -20,6 +19,7 @@ class _AddIngredientState extends State<AddIngredient> {
   String _ingredient = "";
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(
@@ -28,7 +28,7 @@ class _AddIngredientState extends State<AddIngredient> {
             color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.circular(20),
           ),
-          width: 90.w,
+          width: 0.90 * width,
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -59,7 +59,7 @@ class _AddIngredientState extends State<AddIngredient> {
                 ),
                 SizedBox(
                   height: 90,
-                  width: 80.w,
+                  width: 0.80 * width,
                   child: StreamBuilder<List<Ingredient>>(
                     stream: ReadStore()
                         .readData('ingredients', Ingredient.fromJson),
@@ -109,8 +109,8 @@ class _AddIngredientState extends State<AddIngredient> {
                         }
                       : null,
                   style: ElevatedButton.styleFrom(
-                    maximumSize: Size(70.w, 100),
-                    minimumSize: Size(70.w, 50),
+                    maximumSize: Size(0.70 * width, 100),
+                    minimumSize: Size(0.70 * width, 50),
                     elevation: 0,
                     backgroundColor: AppColors.kPrimaryRedColor,
                     foregroundColor: Colors.black,

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/view/screens/main_screen/main_screen.dart';
 
@@ -64,6 +63,8 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColors.kPrimaryRedColor,
       body: Stack(
@@ -73,7 +74,7 @@ class _SplashScreenState extends State<SplashScreen>
               AnimatedContainer(
                   duration: const Duration(milliseconds: 2000),
                   curve: Curves.fastLinearToSlowEaseIn,
-                  height: 100.h / _fontSize),
+                  height: height / _fontSize),
               AnimatedOpacity(
                 duration: const Duration(milliseconds: 1000),
                 opacity: _textOpacity,
@@ -96,8 +97,8 @@ class _SplashScreenState extends State<SplashScreen>
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 2000),
                 curve: Curves.fastLinearToSlowEaseIn,
-                height: 90.h,
-                width: 90.w,
+                height: 0.90 * height,
+                width: 0.90 * width,
                 alignment: Alignment.center,
                 child: Image.asset("assets/images/cooking_book.png",
                     fit: BoxFit.contain),

@@ -1,26 +1,19 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/view/screens/auth_screen/authorization/authorization_page.dart';
 
 Widget customNavigationDrawer(BuildContext context,
     Animation<double> animation1, Animation<double> animation2, bool bool) {
+  final height = MediaQuery.of(context).size.height;
+  final width = MediaQuery.of(context).size.width;
   return BackdropFilter(
     filter:
         ImageFilter.blur(sigmaY: animation1.value, sigmaX: animation1.value),
     child: Container(
-      height: bool
-          ? 0
-          : MediaQuery.of(context).orientation == Orientation.landscape
-              ? 100.w
-              : 100.h,
-      width: bool
-          ? 0
-          : MediaQuery.of(context).orientation == Orientation.landscape
-              ? 100.h
-              : 100.w,
+      height: bool ? 0 : height,
+      width: bool ? 0 : width,
       color: const Color.fromARGB(0, 255, 255, 255),
       child: Center(
         child: Transform.scale(
@@ -28,12 +21,12 @@ Widget customNavigationDrawer(BuildContext context,
           child: SafeArea(
             child: Container(
               width: MediaQuery.of(context).orientation == Orientation.landscape
-                  ? 50.h
-                  : 90.w,
+                  ? 0.50 * width
+                  : 0.90 * width,
               height:
                   MediaQuery.of(context).orientation == Orientation.landscape
-                      ? 50.w
-                      : 30.h,
+                      ? 0.50 * height
+                      : 0.30 * height,
               decoration: BoxDecoration(
                 color: AppColors.kPrimaryRedColor,
                 borderRadius: BorderRadius.circular(30),

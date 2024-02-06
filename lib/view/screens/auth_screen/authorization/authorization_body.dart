@@ -1,13 +1,10 @@
-//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/view/widgets/field.dart';
 import 'package:what_can_i_cook/view/screens/auth_screen/registration/registration_page.dart';
-//import 'package:what_can_i_cook/services/authorization/auth.dart';
 
 class AuthorizationBody extends StatefulWidget {
   const AuthorizationBody({Key? key}) : super(key: key);
@@ -21,17 +18,19 @@ class _AuthorizationBodyState extends State<AuthorizationBody> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
         child: SizedBox(
-      height: 100.h,
+      height: height,
       child: Container(
           alignment: Alignment.center,
           decoration: const BoxDecoration(
             color: AppColors.kPrimaryRedColor,
           ),
           child: Container(
-            width: 90.w,
-            height: 70.h,
+            width: 0.90 * width,
+            height: 0.70 * height,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(15),
@@ -56,13 +55,10 @@ class _AuthorizationBodyState extends State<AuthorizationBody> {
                 ),
                 const SizedBox(),
                 field(Icons.account_circle_outlined, 'Имя пользователя', false,
-                    false, 
-                    (value){}
-                    ),
-                field(Icons.email_outlined, 'Email...', false, true,
-                   (value){}),
-                field(Icons.lock_outline, 'Пароль...', true, false,
-                   (value){}),
+                    false, (value) {},context),
+                field(
+                    Icons.email_outlined, 'Email...', false, true, (value) {},context),
+                field(Icons.lock_outline, 'Пароль...', true, false, (value) {},context),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -74,8 +70,8 @@ class _AuthorizationBodyState extends State<AuthorizationBody> {
                         Fluttertoast.showToast(msg: 'Login button pressed');
                       },
                       child: Container(
-                        height: 7.h,
-                        width: 40.w,
+                        height: 0.07 * height,
+                        width: 0.40 * width,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: const Color(0xff4796ff),
@@ -88,9 +84,9 @@ class _AuthorizationBodyState extends State<AuthorizationBody> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 4.w),
+                    SizedBox(width: 0.04 * width),
                     Container(
-                      width: 40.w,
+                      width: 0.40 * width,
                       alignment: Alignment.center,
                       child: RichText(
                         text: TextSpan(

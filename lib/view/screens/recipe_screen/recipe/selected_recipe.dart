@@ -11,7 +11,6 @@ import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/selected/reci
 import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/selected/recipe_time.dart';
 import 'package:what_can_i_cook/view/widgets/transparent_appbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/services/firebase/firestore.dart';
 
 import '../../../../blocs/filtered_items/bloc/filtered_items_bloc.dart';
@@ -36,6 +35,8 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: AppColors.kWhitethemecolor,
@@ -60,14 +61,14 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 40.h,
+                          height: 0.40 * height,
                           child: Stack(children: <Widget>[
                             SizedBox(
-                                width: 100.h,
-                                height: 40.h - 30,
+                                width: height,
+                                height: 0.40 * height - 30,
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(5.h),
+                                      bottomLeft: Radius.circular(15),
                                     ),
                                     child: SizedBox(
                                       child: FuturePicture(
@@ -78,14 +79,11 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                 right: 0,
                                 child: Container(
                                   height: 100,
-                                  width: MediaQuery.of(context).orientation ==
-                                          Orientation.landscape
-                                      ? 95.h
-                                      : 95.w,
+                                  width: 0.95 * width,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(5.h),
-                                        topLeft: Radius.circular(5.h)),
+                                        bottomLeft: Radius.circular(15),
+                                        topLeft: Radius.circular(15)),
                                     color: Colors.white,
                                   ),
                                   child: Row(
@@ -156,11 +154,17 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                                 ),
                                               ],
                                             )
-                                          : SizedBox(
+                                          : Container(
                                               height: 64,
                                               width: 64,
-                                              child: ElevatedButton(
-                                                  onPressed: () {
+                                              decoration: BoxDecoration(
+                                                  color: AppColors
+                                                      .kPrimaryRedColor,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(15))),
+                                              child: InkWell(
+                                                  onTap: () {
                                                     setState(() {
                                                       isEdited = true;
                                                     });
@@ -184,22 +188,6 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                                             category: recipe
                                                                 .category));
                                                   },
-                                                  style: ButtonStyle(
-                                                    shape: MaterialStateProperty.all<
-                                                            RoundedRectangleBorder>(
-                                                        RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        18.0),
-                                                            side: const BorderSide(
-                                                                color: AppColors
-                                                                    .kPrimaryRedColor))),
-                                                    backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all<Color>(AppColors
-                                                                .kPrimaryRedColor),
-                                                  ),
                                                   child: const Icon(
                                                     Icons.edit,
                                                     size: 28,

@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/view/widgets/field.dart';
 import 'package:what_can_i_cook/services/authorization/auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../blocs/registration/bloc/registration_bloc.dart';
-
-
 
 class RegistrationBody extends StatefulWidget {
   const RegistrationBody({Key? key}) : super(key: key);
@@ -22,14 +19,16 @@ class _RegistrationBodyState extends State<RegistrationBody> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(top: 40),
           child: Center(
             child: Container(
-              width: 90.w,
-              height: 70.h,
+              width: 0.90 * width,
+              height: 0.70 * height,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
@@ -67,7 +66,8 @@ class _RegistrationBodyState extends State<RegistrationBody> {
                           true,
                           (value) => context
                               .read<RegistrationBloc>()
-                              .add(EmailChangedEvent(email: value))),
+                              .add(EmailChangedEvent(email: value)),
+                          context),
                       SizedBox(
                         height: 20,
                       ),
@@ -78,7 +78,8 @@ class _RegistrationBodyState extends State<RegistrationBody> {
                           false,
                           (value) => context
                               .read<RegistrationBloc>()
-                              .add(PasswordChangedEvent(password: value))),
+                              .add(PasswordChangedEvent(password: value)),
+                          context),
                       SizedBox(
                         height: 20,
                       ),
@@ -88,7 +89,8 @@ class _RegistrationBodyState extends State<RegistrationBody> {
                           true,
                           false,
                           (value) => context.read<RegistrationBloc>().add(
-                              CheckPasswordChangedEvent(checkPassword: value))),
+                              CheckPasswordChangedEvent(checkPassword: value)),
+                          context),
                       const Spacer(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -103,12 +105,13 @@ class _RegistrationBodyState extends State<RegistrationBody> {
                                     email: state.email,
                                     password: state.password);
                               } else {
-                                Fluttertoast.showToast(msg: 'Пароли не совпадают!');
+                                Fluttertoast.showToast(
+                                    msg: 'Пароли не совпадают!');
                               }
                             },
                             child: Container(
-                              height: 7.h,
-                              width: 40.w,
+                              height: 0.07 * height,
+                              width: 0.40 * width,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 color: const Color(0xff4796ff),

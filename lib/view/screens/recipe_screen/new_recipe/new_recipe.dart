@@ -6,7 +6,6 @@ import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_recip
 import 'package:what_can_i_cook/view/screens/recipe_screen/widgets/new/new_recipe_time.dart';
 import 'package:what_can_i_cook/view/widgets/transparent_appbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
 import 'package:what_can_i_cook/blocs/filtered_items/bloc/filtered_items_bloc.dart';
 import 'package:what_can_i_cook/services/firebase/firestore.dart';
 import 'package:what_can_i_cook/services/storage_service/future_picture.dart';
@@ -21,6 +20,8 @@ class NewRecipe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColors.kWhitethemecolor,
       extendBodyBehindAppBar: true,
@@ -39,14 +40,14 @@ class NewRecipe extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: 40.h,
+                  height: 0.40 * height,
                   child: Stack(children: <Widget>[
                     SizedBox(
-                        width: 100.h,
-                        height: 40.h - 30,
+                        width: height,
+                        height: 0.40 * height - 30,
                         child: ClipRRect(
                             borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(5.h),
+                              bottomLeft: Radius.circular(15),
                             ),
                             child:
                                 FuturePicture(pictureUrl: state.pictureUrl))),
@@ -55,14 +56,11 @@ class NewRecipe extends StatelessWidget {
                         right: 0,
                         child: Container(
                           height: 100,
-                          width: MediaQuery.of(context).orientation ==
-                                  Orientation.landscape
-                              ? 95.h
-                              : 95.w,
+                          width: 0.95 * width,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(5.h),
-                                topLeft: Radius.circular(5.h)),
+                                bottomLeft: Radius.circular(15),
+                                topLeft: Radius.circular(15)),
                             color: Colors.white,
                           ),
                           child: Row(
@@ -70,44 +68,38 @@ class NewRecipe extends StatelessWidget {
                               const SizedBox(
                                 width: 20,
                               ),
-                              Expanded(
-                                  child: NewRecipeName()),
+                              Expanded(child: NewRecipeName()),
                               //*edit button
-                              SizedBox(
+                              Container(
                                 height: 64,
                                 width: 64,
-                                child: ElevatedButton(
-                                    onPressed: () async {
+                                decoration: BoxDecoration(
+                                    color: AppColors.kPrimaryRedColor,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15))),
+                                child: InkWell(
+                                    onTap: () async {
                                       context.read<RecipeBloc>().add(
                                           RecipePicUrlEvent(
                                               pictureUrl: await StorageService()
                                                   .pickPictire(context)));
                                     },
-                                    style: ButtonStyle(
-                                      shape: MaterialStateProperty.all<
-                                              RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              side: const BorderSide(
-                                                  color: AppColors
-                                                      .kPrimaryRedColor))),
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              AppColors.kPrimaryRedColor),
-                                    ),
                                     child: const Icon(
                                       Icons.photo_camera,
-                                      size: 28,
+                                      size: 25,
                                       color: Colors.white,
                                     )),
                               ),
                               const SizedBox(width: 5),
-                              SizedBox(
+                              Container(
                                 height: 64,
                                 width: 64,
-                                child: ElevatedButton(
-                                    onPressed: () {
+                                decoration: BoxDecoration(
+                                    color: AppColors.kPrimaryRedColor,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15))),
+                                child: InkWell(
+                                    onTap: () {
                                       FireStore().createRecipe(
                                           state.name,
                                           state.ingredients,
@@ -115,23 +107,9 @@ class NewRecipe extends StatelessWidget {
                                           state.pictureUrl,
                                           state.description,
                                           state.tags,
-                                          state.category
-                                          );
+                                          state.category);
                                       Navigator.pop(context);
                                     },
-                                    style: ButtonStyle(
-                                      shape: MaterialStateProperty.all<
-                                              RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              side: const BorderSide(
-                                                  color: AppColors
-                                                      .kPrimaryRedColor))),
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              AppColors.kPrimaryRedColor),
-                                    ),
                                     child: const Icon(
                                       Icons.check,
                                       size: 28,

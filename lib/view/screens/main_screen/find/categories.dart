@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../../utils/constants.dart';
 
@@ -21,8 +20,10 @@ class _CategoriesState extends State<Categories> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 1.h),
+      padding: EdgeInsets.symmetric(vertical: 0.01 * height),
       child: SizedBox(
         height: 40,
         child: ListView.builder(
@@ -36,9 +37,9 @@ class _CategoriesState extends State<Categories> {
                   },
                   child: Container(
                     alignment: Alignment.center,
-                    margin: EdgeInsets.only(left: 1.w),
+                    margin: EdgeInsets.only(left: 0.01 * width),
                     padding: EdgeInsets.symmetric(
-                      horizontal: 5.w,
+                      horizontal: 0.05 * width,
                     ),
                     decoration: BoxDecoration(
                         border: Border.all(
