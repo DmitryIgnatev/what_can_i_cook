@@ -4,10 +4,12 @@ class FilteredItemsState extends Equatable {
   final List<Ingredient> items;
   const FilteredItemsState({required this.items});
 
-  factory FilteredItemsState.initial() => FilteredItemsState(items: []);
+  factory FilteredItemsState.initial() => const FilteredItemsState(items: []);
 
-  FilteredItemsState copyWith(
-      {List<Ingredient>? items, Ingredient? ingredient}) {
+  FilteredItemsState copyWith({
+    List<Ingredient>? items,
+    Ingredient? ingredient,
+  }) {
     return FilteredItemsState(items: items ?? this.items);
   }
 

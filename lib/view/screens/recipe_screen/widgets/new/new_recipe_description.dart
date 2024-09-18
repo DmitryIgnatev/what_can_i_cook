@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../blocs/recipe/bloc/recipe_bloc.dart';
-import '../../../../../utils/constants.dart';
+import 'package:what_can_i_cook/blocs/recipe/bloc/recipe_bloc.dart';
+import 'package:what_can_i_cook/utils/constants.dart';
 
 class NewRecipeDescription extends StatelessWidget {
   const NewRecipeDescription({
@@ -15,7 +15,7 @@ class NewRecipeDescription extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
       child: BlocBuilder<RecipeBloc, RecipeState>(
         builder: (context, state) {
-          return Container(
+          return DecoratedBox(
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(15)),
             ),
@@ -25,18 +25,20 @@ class NewRecipeDescription extends StatelessWidget {
               cursorColor: AppColors.kPrimaryRedColor,
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(15),
                   borderSide: const BorderSide(color: Colors.transparent),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.transparent),
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(15),
                 ),
                 fillColor: Theme.of(context).cardColor,
                 filled: true,
                 hintText: 'Опишите развернуто свой рецепт',
                 hintStyle: const TextStyle(
-                    color: AppColors.kTextLigntColor, fontSize: 16),
+                  color: AppColors.kTextLigntColor,
+                  fontSize: 16,
+                ),
               ),
               keyboardType: TextInputType.text,
               style: const TextStyle(

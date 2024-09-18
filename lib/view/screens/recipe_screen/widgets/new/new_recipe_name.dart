@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../blocs/recipe/bloc/recipe_bloc.dart';
-import '../../../../../utils/constants.dart';
+import 'package:what_can_i_cook/blocs/recipe/bloc/recipe_bloc.dart';
+import 'package:what_can_i_cook/utils/constants.dart';
 
 class NewRecipeName extends StatelessWidget {
   const NewRecipeName({
@@ -19,18 +19,20 @@ class NewRecipeName extends StatelessWidget {
             initialValue: state.name,
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15.0),
+                borderRadius: BorderRadius.circular(15),
                 borderSide: const BorderSide(color: Colors.transparent),
               ),
               enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: Colors.transparent),
-                borderRadius: BorderRadius.circular(15.0),
+                borderRadius: BorderRadius.circular(15),
               ),
               fillColor: Theme.of(context).cardColor,
               filled: true,
               hintText: 'Название рецепта',
               hintStyle: const TextStyle(
-                  color: AppColors.kTextLigntColor, fontSize: 20),
+                color: AppColors.kTextLigntColor,
+                fontSize: 20,
+              ),
             ),
             onChanged: (String value) {
               context.read<RecipeBloc>().add(RecipeNameEvent(name: value));

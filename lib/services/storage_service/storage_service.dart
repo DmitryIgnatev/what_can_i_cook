@@ -11,7 +11,7 @@ class StorageService {
     String filePath,
     String fileName,
   ) async {
-    File file = File(filePath);
+    final File file = File(filePath);
 
     try {
       await storage.ref('pics/$fileName').putFile(file);
@@ -23,33 +23,35 @@ class StorageService {
   Future<String> downloadURL(String imageName) async {
     await Future.delayed(const Duration(seconds: 3));
     try {
-      String downloadURL =
+      final String downloadURL =
           await storage.ref('pics/$imageName').getDownloadURL();
       return downloadURL;
     } catch (e) {
-      debugPrint("$e");
+      debugPrint('$e');
     }
-    return "";
+    return '';
   }
 
-  Future <String>  pickPictire(context) async {
+  Future<String> pickPictire(BuildContext context) async {
     final StorageService storage = StorageService();
     final results = await FilePicker.platform.pickFiles(
-      allowMultiple: false,
       type: FileType.custom,
       allowedExtensions: ['jpg', 'jpeg', 'bmp', 'png'],
     );
     if (results == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Вы не выбрали ни одного файла")));
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Вы не выбрали ни одного файла')),
+        );
+      }
 
       return 'DefaultPicture.jpg';
     }
     final path = results.files.single.path!;
     final fileName = results.files.single.name;
 
-    storage.uploadFile(path, fileName);
-    
+    await storage.uploadFile(path, fileName);
+
     return fileName;
   }
 }

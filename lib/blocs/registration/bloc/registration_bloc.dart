@@ -11,17 +11,23 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     on<CheckPasswordChangedEvent>(_onCheckPasswordChanged);
   }
   void _onEmailChanged(
-      EmailChangedEvent event, Emitter<RegistrationState> emit) {
+    EmailChangedEvent event,
+    Emitter<RegistrationState> emit,
+  ) {
     emit(state.copyWith(email: event.email));
   }
 
   void _onPasswordChanged(
-      PasswordChangedEvent event, Emitter<RegistrationState> emit) {
+    PasswordChangedEvent event,
+    Emitter<RegistrationState> emit,
+  ) {
     emit(state.copyWith(password: event.password));
   }
 
   void _onCheckPasswordChanged(
-      CheckPasswordChangedEvent event, Emitter<RegistrationState> emit) {
+    CheckPasswordChangedEvent event,
+    Emitter<RegistrationState> emit,
+  ) {
     emit(state.copyWith(checkPassword: event.checkPassword));
   }
 }

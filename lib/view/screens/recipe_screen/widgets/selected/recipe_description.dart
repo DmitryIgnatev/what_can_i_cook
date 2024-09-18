@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../models/recipe.dart';
-import '../../../../../utils/constants.dart';
+import 'package:what_can_i_cook/models/recipe.dart';
+import 'package:what_can_i_cook/utils/constants.dart';
 
 class RecipeDescription extends StatelessWidget {
   final Recipe recipe;
-  const RecipeDescription({super.key, required this.recipe});
+  const RecipeDescription({required this.recipe, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10),
       child: Text(
-        "${recipe.description}",
+        recipe.description,
         textAlign: TextAlign.start,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16,
           color: AppColors.kTextLigntColor,
           fontFamily: 'museosanscyrl',

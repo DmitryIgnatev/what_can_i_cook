@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:what_can_i_cook/utils/recipe_bundle.dart';
-import 'recipe_bundle_card.dart';
+import 'package:what_can_i_cook/view/screens/main_screen/home/recipe_bundle_card.dart';
 
 class HomeBody extends StatelessWidget {
-  const HomeBody({Key? key}) : super(key: key);
+  const HomeBody({super.key});
 
   @override
   Widget build(BuildContext context) {

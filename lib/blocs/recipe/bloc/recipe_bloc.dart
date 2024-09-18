@@ -24,15 +24,25 @@ class RecipeBloc extends Bloc<RecipeEvent, RecipeState> {
   }
 
   void _onAddIngredients(
-      RecipeAddIngredientsEvent event, Emitter<RecipeState> emit) {
-    emit(state.copyWith(
-        ingredients: List.from(state.ingredients)..add(event.ingredient)));
+    RecipeAddIngredientsEvent event,
+    Emitter<RecipeState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        ingredients: List.from(state.ingredients)..add(event.ingredient),
+      ),
+    );
   }
 
   void _onDeleteIngredients(
-      RecipeDeleteIngredientsEvent event, Emitter<RecipeState> emit) {
-    emit(state.copyWith(
-        ingredients: List.from(state.ingredients)..remove(event.ingredient)));
+    RecipeDeleteIngredientsEvent event,
+    Emitter<RecipeState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        ingredients: List.from(state.ingredients)..remove(event.ingredient),
+      ),
+    );
   }
 
   void _onMinutesChanged(RecipeMinutesEvent event, Emitter<RecipeState> emit) {
@@ -44,12 +54,14 @@ class RecipeBloc extends Bloc<RecipeEvent, RecipeState> {
   }
 
   void _onDescriptionChanged(
-      RecipeDescriptionEvent event, Emitter<RecipeState> emit) {
+    RecipeDescriptionEvent event,
+    Emitter<RecipeState> emit,
+  ) {
     emit(state.copyWith(description: event.description));
   }
 
   void _onPicUrlChanged(RecipePicUrlEvent event, Emitter<RecipeState> emit) {
-    emit(state.copyWith(pictireUrl: event.pictureUrl));
+    emit(state.copyWith(pictureUrl: event.pictureUrl));
   }
 
   void _onAddTags(RecipeAddTagEvent event, Emitter<RecipeState> emit) {
@@ -61,19 +73,24 @@ class RecipeBloc extends Bloc<RecipeEvent, RecipeState> {
   }
 
   void _onCategoryChanged(
-      RecipeCategoryEvent event, Emitter<RecipeState> emit) {
+    RecipeCategoryEvent event,
+    Emitter<RecipeState> emit,
+  ) {
     emit(state.copyWith(category: event.category));
   }
 
   void _onRecipeCopy(RecipeCopyEvent event, Emitter<RecipeState> emit) {
-    emit(state.copyWith(
+    emit(
+      state.copyWith(
         name: event.name,
         ingredients: event.ingredients,
         hours: event.hours,
         minutes: event.minutes,
         description: event.description,
-        pictireUrl: event.pictureUrl,
+        pictureUrl: event.pictureUrl,
         tags: event.tags,
-        category: event.category));
+        category: event.category,
+      ),
+    );
   }
 }

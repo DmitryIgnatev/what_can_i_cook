@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:what_can_i_cook/services/firebase/init_firebase.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/view/screens/main_screen/add/add_body.dart';
-import 'package:what_can_i_cook/services/firebase/init_firebase.dart';
 import 'package:what_can_i_cook/view/screens/main_screen/add/add_recipe_button.dart';
 
 class AddPage extends StatefulWidget {
-  const AddPage({Key? key}) : super(key: key);
+  const AddPage({super.key});
 
   @override
   State<AddPage> createState() => _AddPageState();

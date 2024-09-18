@@ -7,7 +7,7 @@ abstract class BaseItemModel {
     required this.name,
   });
 
-  factory BaseItemModel.fromJson(Map<String, dynamic> json) {
+  factory BaseItemModel.fromJson() {
     throw UnimplementedError('fromJson method must be implemented');
   }
 

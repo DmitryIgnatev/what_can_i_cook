@@ -87,13 +87,14 @@ class RecipeCopyEvent extends RecipeEvent {
   final List<String> tags;
   final String category;
 
-  const RecipeCopyEvent(
-      {required this.name,
-      required this.ingredients,
-      required this.minutes,
-      required this.hours,
-      required this.description,
-      required this.pictureUrl,
-      required this.tags,
-      required this.category});
+  const RecipeCopyEvent({
+    required this.name,
+    required this.ingredients,
+    required this.minutes,
+    required this.hours,
+    required this.description,
+    required this.pictureUrl,
+    required this.tags,
+    required this.category,
+  });
 }

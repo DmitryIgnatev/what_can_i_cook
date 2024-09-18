@@ -3,13 +3,13 @@ import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/view/screens/main_screen/find/find_body.dart';
 
 class FindPage extends StatelessWidget {
-  const FindPage({Key? key}) : super(key: key);
+  const FindPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: AppColors.kWhitethemecolor,
-      body:FindBody(),
+      body: FindBody(),
     );
   }
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../models/recipe.dart';
-import '../../../../../utils/constants.dart';
+import 'package:what_can_i_cook/models/recipe.dart';
+import 'package:what_can_i_cook/utils/constants.dart';
 
 class RecipeIngredients extends StatelessWidget {
   final Recipe recipe;
-  const RecipeIngredients({super.key, required this.recipe});
+  const RecipeIngredients({required this.recipe, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +14,8 @@ class RecipeIngredients extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Ингредиенты:",
+          const Text(
+            'Ингредиенты:',
             textAlign: TextAlign.start,
             style: TextStyle(
               //fontWeight: FontWeight.w500,
@@ -32,8 +32,10 @@ class RecipeIngredients extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return Text(
                   recipe.ingredients[index],
-                  style:
-                      TextStyle(fontSize: 18, color: AppColors.kTextLigntColor),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: AppColors.kTextLigntColor,
+                  ),
                 );
               },
             ),
