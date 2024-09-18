@@ -57,7 +57,6 @@ class _FindBodyState extends State<FindBody> {
                                             state.ingredients.contains(element),
                                       ) &&
                                       thisRecipe.category == state.category,
-                                  //TODO добавить функционал, чтобы рецепты с тэгами были в приоритете
                                 )
                                 .toList();
                             return ListView.builder(

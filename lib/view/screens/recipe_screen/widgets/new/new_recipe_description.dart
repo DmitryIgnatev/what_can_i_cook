@@ -43,7 +43,6 @@ class NewRecipeDescription extends StatelessWidget {
               keyboardType: TextInputType.text,
               style: const TextStyle(
                 fontSize: 18,
-                // fontWeight: FontWeight.w500,
                 color: AppColors.kTextColor,
               ),
               onChanged: (String value) {

@@ -18,7 +18,6 @@ class RecipeIngredients extends StatelessWidget {
             'Ингредиенты:',
             textAlign: TextAlign.start,
             style: TextStyle(
-              //fontWeight: FontWeight.w500,
               color: AppColors.kTextColor,
               fontSize: 24,
             ),
