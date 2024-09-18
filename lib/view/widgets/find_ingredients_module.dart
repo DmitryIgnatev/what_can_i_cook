@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:what_can_i_cook/blocs/filtered_items/bloc/filtered_items_bloc.dart';
 import 'package:what_can_i_cook/blocs/recipe/bloc/recipe_bloc.dart';
+import 'package:what_can_i_cook/models/ingredient.dart';
 import 'package:what_can_i_cook/services/firebase/firestore.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
-import '../../../../models/ingredient.dart';
-import '../screens/main_screen/add/widgets/add_ingredient.dart';
+import 'package:what_can_i_cook/view/screens/main_screen/add/widgets/add_ingredient.dart';
 
 class FindIngreidentsModule extends StatelessWidget {
   final bool isAddButtonEnabled;
@@ -31,30 +31,30 @@ class FindIngreidentsModule extends StatelessWidget {
                         onTap: () {
                           context.read<RecipeBloc>().add(
                               RecipeAddIngredientsEvent(
-                                  ingredient: state.items[index].name));
+                                  ingredient: state.items[index].name,),);
                         },
                         child: Container(
                             width: 100,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
+                                  const BorderRadius.all(Radius.circular(25)),
                               boxShadow: [
                                 BoxShadow(
-                                  offset: Offset(0, 3),
+                                  offset: const Offset(0, 3),
                                   blurRadius: 1,
                                   color: AppColors.kTextLigntColor
                                       .withOpacity(0.3),
-                                )
+                                ),
                               ],
                             ),
                             child: Center(
                                 child: Text(
                               state.items[index].name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: AppColors.kTextLigntColor,
-                                  fontWeight: FontWeight.bold),
-                            ))),
+                                  fontWeight: FontWeight.bold,),
+                            ),),),
                       ),
                     );
                   },
@@ -62,32 +62,30 @@ class FindIngreidentsModule extends StatelessWidget {
               ),
               Row(
                 children: [
-                  isAddButtonEnabled
-                      ? Padding(
+                  if (isAddButtonEnabled) Padding(
                           padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                           child: GestureDetector(
                             onTap: () {
                               showDialog(
                                 context: context,
-                                builder: (_) => AddIngredient(),
+                                builder: (_) => const AddIngredient(),
                               );
                             },
                             child: Container(
                               height: 40,
                               width: 40,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   color: AppColors.kBlueColor,
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(25),
-                                  )),
-                              child: Icon(
+                                  ),),
+                              child: const Icon(
                                 Icons.add,
                                 color: Colors.white,
                               ),
                             ),
                           ),
-                        )
-                      : SizedBox(),
+                        ) else const SizedBox(),
                   Expanded(
                     child: StreamBuilder<List<Ingredient>>(
                       stream: ReadStore()
@@ -97,27 +95,27 @@ class FindIngreidentsModule extends StatelessWidget {
                           return const Center(
                               child: Text(
                             'Функция недоступна',
-                          ));
+                          ),);
                         } else {
                           final items = snapshot.data!;
                           return TextField(
                             decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0),
+                                borderRadius: BorderRadius.circular(15),
                                 borderSide:
                                     const BorderSide(color: Colors.transparent),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide:
                                     const BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(15.0),
+                                borderRadius: BorderRadius.circular(15),
                               ),
                               fillColor: Theme.of(context).cardColor,
                               filled: true,
                               hintText: 'Ингредиенты',
                               hintStyle: const TextStyle(
                                   color: AppColors.kTextLigntColor,
-                                  fontSize: 16),
+                                  fontSize: 16,),
                             ),
                             onChanged: (value) {
                               context.read<FilteredItemsBloc>().add(
@@ -125,8 +123,8 @@ class FindIngreidentsModule extends StatelessWidget {
                                       items: items
                                           .where((item) => item.name
                                               .toLowerCase()
-                                              .contains(value.toLowerCase()))
-                                          .toList()));
+                                              .contains(value.toLowerCase()),)
+                                          .toList(),),);
                             },
                           );
                         }
@@ -139,7 +137,7 @@ class FindIngreidentsModule extends StatelessWidget {
                 builder: (context, state) {
                   return Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -150,22 +148,20 @@ class FindIngreidentsModule extends StatelessWidget {
                           shrinkWrap: true,
                           itemCount: state.ingredients.length,
                           gridDelegate:
-                              SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 120, mainAxisExtent: 50),
+                              const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 120, mainAxisExtent: 50,),
                           itemBuilder: (context, index) {
                             final item = state.ingredients[index];
                             return Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Container(
-                                  decoration: BoxDecoration(
+                              padding: const EdgeInsets.all(4),
+                              child: DecoratedBox(
+                                  decoration: const BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.all(
-                                          Radius.circular(25))),
+                                          Radius.circular(25),),),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
+                                    padding: const EdgeInsets.all(4),
                                     child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
@@ -174,24 +170,24 @@ class FindIngreidentsModule extends StatelessWidget {
                                           onTap: () {
                                             context.read<RecipeBloc>().add(
                                                 RecipeDeleteIngredientsEvent(
-                                                    ingredient: item));
+                                                    ingredient: item,),);
                                           },
-                                          child: Icon(
+                                          child: const Icon(
                                             Icons.close,
                                             size: 15,
                                           ),
-                                        )
+                                        ),
                                       ],
                                     ),
-                                  )),
+                                  ),),
                             );
                           },
                         ),
-                      )),
+                      ),),
                     ],
                   );
                 },
-              )
+              ),
             ],
           ),
         );

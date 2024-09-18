@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:what_can_i_cook/models/recipe.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
-import '../../../../../models/recipe.dart';
 
 class RecipeTagList extends StatelessWidget {
   final Recipe recipe;
-  const RecipeTagList({super.key, required this.recipe});
+  const RecipeTagList({required this.recipe, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +12,10 @@ class RecipeTagList extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
       child: Row(
         children: [
-          Text(
-            "Тэги:",
+          const Text(
+            'Тэги:',
             style:
-                const TextStyle(fontSize: 20, color: AppColors.kTextLigntColor),
+                TextStyle(fontSize: 20, color: AppColors.kTextLigntColor),
           ),
           Expanded(
             child: SizedBox(
@@ -26,24 +26,24 @@ class RecipeTagList extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: Container(
+                      child: DecoratedBox(
                           decoration: BoxDecoration(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                                  const BorderRadius.all(Radius.circular(10)),
                               color: Colors.transparent,
                               border: Border.all(
-                                  color: AppColors.kPrimaryRedColor)),
+                                  color: AppColors.kPrimaryRedColor,),),
                           child: Center(
                               child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8),
                             child: Text(
-                              "${recipe.tags[index]}",
+                              '${recipe.tags[index]}',
                               style:
-                                  TextStyle(color: AppColors.kPrimaryRedColor),
+                                  const TextStyle(color: AppColors.kPrimaryRedColor),
                             ),
-                          ))),
+                          ),),),
                     );
-                  }),
+                  },),
             ),
           ),
         ],

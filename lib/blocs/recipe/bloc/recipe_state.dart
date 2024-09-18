@@ -18,17 +18,17 @@ class RecipeState extends Equatable {
       required this.description,
       required this.pictureUrl,
       required this.tags,
-      required this.category});
+      required this.category,});
 
-  factory RecipeState.initial() => RecipeState(
-      name: "",
+  factory RecipeState.initial() => const RecipeState(
+      name: '',
       ingredients: [],
       hours: 0,
       minutes: 0,
-      description: "",
-      pictureUrl: "DefaultPicture.jpg",
+      description: '',
+      pictureUrl: 'DefaultPicture.jpg',
       tags: [],
-      category: "");
+      category: '',);
 
   RecipeState copyWith(
       {String? name,
@@ -38,7 +38,7 @@ class RecipeState extends Equatable {
       String? description,
       String? pictireUrl,
       List<String>? tags,
-      String? category}) {
+      String? category,}) {
     return RecipeState(
         name: name ?? this.name,
         ingredients: ingredients ?? this.ingredients,
@@ -47,7 +47,7 @@ class RecipeState extends Equatable {
         description: description ?? this.description,
         pictureUrl: pictireUrl ?? this.pictureUrl,
         tags: tags ?? this.tags,
-        category: category ?? this.category);
+        category: category ?? this.category,);
   }
 
   @override
@@ -59,6 +59,6 @@ class RecipeState extends Equatable {
         description,
         pictureUrl,
         tags,
-        category
+        category,
       ];
 }

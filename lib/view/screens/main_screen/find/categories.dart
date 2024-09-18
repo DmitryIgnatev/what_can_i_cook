@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../utils/constants.dart';
+import 'package:what_can_i_cook/utils/constants.dart';
 
 class Categories extends StatefulWidget {
-  const Categories({Key? key}) : super(key: key);
+  const Categories({super.key});
 
   @override
   State<Categories> createState() => _CategoriesState();
@@ -11,10 +11,10 @@ class Categories extends StatefulWidget {
 
 class _CategoriesState extends State<Categories> {
   List<String> categories = [
-    "Хочу посмотреть все рецепты",
-    "Быстрые рецепты",
-    "Простые рецепты",
-    "Популярные рецепты"
+    'Хочу посмотреть все рецепты',
+    'Быстрые рецепты',
+    'Простые рецепты',
+    'Популярные рецепты',
   ];
   int selectedIndex = 0;
 
@@ -29,7 +29,7 @@ class _CategoriesState extends State<Categories> {
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: categories.length,
-            itemBuilder: ((context, index) => GestureDetector(
+            itemBuilder: (context, index) => GestureDetector(
                   onTap: () {
                     setState(() {
                       selectedIndex = index;
@@ -45,21 +45,21 @@ class _CategoriesState extends State<Categories> {
                         border: Border.all(
                             color: selectedIndex == index
                                 ? AppColors.kPrimaryRedColor
-                                : AppColors.kTextLigntColor),
+                                : AppColors.kTextLigntColor,),
                         color: selectedIndex == index
                             ? const Color.fromARGB(255, 235, 235, 235)
                             : Colors.transparent,
-                        borderRadius: BorderRadius.circular(5)),
+                        borderRadius: BorderRadius.circular(5),),
                     child: Text(
                       categories[index],
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: selectedIndex == index
                               ? AppColors.kPrimaryRedColor
-                              : AppColors.kTextLigntColor),
+                              : AppColors.kTextLigntColor,),
                     ),
                   ),
-                ))),
+                ),),
       ),
     );
   }

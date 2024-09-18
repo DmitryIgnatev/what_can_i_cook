@@ -95,5 +95,5 @@ class RecipeCopyEvent extends RecipeEvent {
       required this.description,
       required this.pictureUrl,
       required this.tags,
-      required this.category});
+      required this.category,});
 }

@@ -24,15 +24,15 @@ class RecipeBloc extends Bloc<RecipeEvent, RecipeState> {
   }
 
   void _onAddIngredients(
-      RecipeAddIngredientsEvent event, Emitter<RecipeState> emit) {
+      RecipeAddIngredientsEvent event, Emitter<RecipeState> emit,) {
     emit(state.copyWith(
-        ingredients: List.from(state.ingredients)..add(event.ingredient)));
+        ingredients: List.from(state.ingredients)..add(event.ingredient),),);
   }
 
   void _onDeleteIngredients(
-      RecipeDeleteIngredientsEvent event, Emitter<RecipeState> emit) {
+      RecipeDeleteIngredientsEvent event, Emitter<RecipeState> emit,) {
     emit(state.copyWith(
-        ingredients: List.from(state.ingredients)..remove(event.ingredient)));
+        ingredients: List.from(state.ingredients)..remove(event.ingredient),),);
   }
 
   void _onMinutesChanged(RecipeMinutesEvent event, Emitter<RecipeState> emit) {
@@ -44,7 +44,7 @@ class RecipeBloc extends Bloc<RecipeEvent, RecipeState> {
   }
 
   void _onDescriptionChanged(
-      RecipeDescriptionEvent event, Emitter<RecipeState> emit) {
+      RecipeDescriptionEvent event, Emitter<RecipeState> emit,) {
     emit(state.copyWith(description: event.description));
   }
 
@@ -61,7 +61,7 @@ class RecipeBloc extends Bloc<RecipeEvent, RecipeState> {
   }
 
   void _onCategoryChanged(
-      RecipeCategoryEvent event, Emitter<RecipeState> emit) {
+      RecipeCategoryEvent event, Emitter<RecipeState> emit,) {
     emit(state.copyWith(category: event.category));
   }
 
@@ -74,6 +74,6 @@ class RecipeBloc extends Bloc<RecipeEvent, RecipeState> {
         description: event.description,
         pictireUrl: event.pictureUrl,
         tags: event.tags,
-        category: event.category));
+        category: event.category,),);
   }
 }

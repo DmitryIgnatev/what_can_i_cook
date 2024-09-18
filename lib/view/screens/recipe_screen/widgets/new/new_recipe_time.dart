@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../blocs/recipe/bloc/recipe_bloc.dart';
-import '../../../../../utils/constants.dart';
+import 'package:what_can_i_cook/blocs/recipe/bloc/recipe_bloc.dart';
+import 'package:what_can_i_cook/utils/constants.dart';
 
 class NewRecipeTime extends StatelessWidget {
   const NewRecipeTime({
@@ -14,31 +14,30 @@ class NewRecipeTime extends StatelessWidget {
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-          child: Container(
-            decoration: BoxDecoration(
+          child: DecoratedBox(
+            decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(15))),
+                borderRadius: BorderRadius.all(Radius.circular(15)),),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: Row(
                 children: [
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Время приготовления: ",
-                        style: const TextStyle(
-                            fontSize: 20, color: AppColors.kTextLigntColor),
+                      const Text(
+                        'Время приготовления: ',
+                        style: TextStyle(
+                            fontSize: 20, color: AppColors.kTextLigntColor,),
                       ),
                       Text(
-                        "ч:${state.hours} мин: ${state.minutes}",
+                        'ч:${state.hours} мин: ${state.minutes}',
                         style: const TextStyle(
-                            color: AppColors.kTextLigntColor),
-                      )
+                            color: AppColors.kTextLigntColor,),
+                      ),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Row(
                     children: [
                       SizedBox(
@@ -48,41 +47,40 @@ class NewRecipeTime extends StatelessWidget {
                           context: context,
                           removeTop: true,
                           child: ListView.builder(
-                              scrollDirection: Axis.vertical,
                               itemCount: 60,
-                              itemBuilder: ((context, index) => GestureDetector(
+                              itemBuilder: (context, index) => GestureDetector(
                                     onTap: () {
                                       context.read<RecipeBloc>().add(
-                                          RecipeHoursEvent(hours: (index)));
+                                          RecipeHoursEvent(hours: index),);
                                     },
                                     child: Container(
                                       alignment: Alignment.center,
-                                      margin: EdgeInsets.only(bottom: 3),
+                                      margin: const EdgeInsets.only(bottom: 3),
                                       decoration: BoxDecoration(
                                           border: Border.all(
                                               color: state.hours == index
                                                   ? AppColors.kPrimaryRedColor
-                                                  : AppColors.kTextLigntColor),
+                                                  : AppColors.kTextLigntColor,),
                                           color: state.hours == index
                                               ? const Color.fromARGB(
-                                                  255, 235, 235, 235)
+                                                  255, 235, 235, 235,)
                                               : Colors.transparent,
                                           borderRadius:
-                                              BorderRadius.circular(5)),
+                                              BorderRadius.circular(5),),
                                       child: Text(
-                                        "$index",
+                                        '$index',
                                         style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
                                             color: state.hours == index
                                                 ? AppColors.kPrimaryRedColor
-                                                : AppColors.kTextLigntColor),
+                                                : AppColors.kTextLigntColor,),
                                       ),
                                     ),
-                                  ))),
+                                  ),),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       SizedBox(
@@ -92,38 +90,37 @@ class NewRecipeTime extends StatelessWidget {
                           context: context,
                           removeTop: true,
                           child: ListView.builder(
-                              scrollDirection: Axis.vertical,
                               itemCount: 60,
-                              itemBuilder: ((context, index) => GestureDetector(
+                              itemBuilder: (context, index) => GestureDetector(
                                     onTap: () {
                                       context.read<RecipeBloc>().add(
-                                          RecipeMinutesEvent(minutes: (index)));
+                                          RecipeMinutesEvent(minutes: index),);
                                     },
                                     child: Container(
                                       alignment: Alignment.center,
-                                      margin: EdgeInsets.only(bottom: 2),
+                                      margin: const EdgeInsets.only(bottom: 2),
                                       decoration: BoxDecoration(
                                           border: Border.all(
                                               color: state.minutes == index
                                                   ? AppColors.kPrimaryRedColor
-                                                  : AppColors.kTextLigntColor),
+                                                  : AppColors.kTextLigntColor,),
                                           color: state.minutes == index
                                               ? const Color.fromARGB(
-                                                  255, 235, 235, 235)
+                                                  255, 235, 235, 235,)
                                               : Colors.transparent,
                                           borderRadius:
-                                              BorderRadius.circular(5)),
+                                              BorderRadius.circular(5),),
                                       child: Text(
-                                        "$index",
+                                        '$index',
                                         style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
                                             color: state.minutes == index
                                                 ? AppColors.kPrimaryRedColor
-                                                : AppColors.kTextLigntColor),
+                                                : AppColors.kTextLigntColor,),
                                       ),
                                     ),
-                                  ))),
+                                  ),),
                         ),
                       ),
                     ],

@@ -4,7 +4,7 @@ import 'package:what_can_i_cook/services/storage_service/storage_service.dart';
 class FuturePicture extends StatelessWidget {
   final String pictureUrl;
   final StorageService storage = StorageService();
-  FuturePicture({Key? key, required this.pictureUrl}) : super(key: key);
+  FuturePicture({required this.pictureUrl, super.key});
   
   @override
   Widget build(BuildContext context) {
@@ -24,6 +24,6 @@ class FuturePicture extends StatelessWidget {
               }
               
               return Container();
-            });
+            },);
   }
   }

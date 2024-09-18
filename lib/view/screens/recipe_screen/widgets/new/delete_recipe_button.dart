@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../models/recipe.dart';
-import '../../../../../services/firebase/firestore.dart';
-import '../../../../../utils/constants.dart';
+import 'package:what_can_i_cook/models/recipe.dart';
+import 'package:what_can_i_cook/services/firebase/firestore.dart';
+import 'package:what_can_i_cook/utils/constants.dart';
 
 class DeleteRecipeButton extends StatelessWidget {
   final Recipe recipe;
-  const DeleteRecipeButton({super.key, required this.recipe});
+  const DeleteRecipeButton({required this.recipe, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +18,14 @@ class DeleteRecipeButton extends StatelessWidget {
             Navigator.pop(context);
             FireStore().deleteRecipe(recipe);
           },
-          child: Container(
+          child: const DecoratedBox(
             decoration: BoxDecoration(
                 color: AppColors.kPrimaryRedColor,
-                borderRadius: BorderRadius.all(Radius.circular(15))),
+                borderRadius: BorderRadius.all(Radius.circular(15)),),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8),
               child: Text(
-                "Удалить рецепт",
+                'Удалить рецепт',
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
             ),

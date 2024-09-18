@@ -22,6 +22,6 @@ class AddRecipeButton extends StatelessWidget {
             context,
             MaterialPageRoute(builder: (context) => const NewRecipe()),
           );
-        });
+        },);
   }
 }

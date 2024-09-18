@@ -8,17 +8,17 @@ class RegistrationState extends Equatable {
   const RegistrationState(
       {required this.email,
       required this.password,
-      required this.checkPassword});
+      required this.checkPassword,});
 
   factory RegistrationState.initial() =>
-      const RegistrationState(email: "", password: "", checkPassword: "");
+      const RegistrationState(email: '', password: '', checkPassword: '');
 
   RegistrationState copyWith(
-      {String? email, String? password, String? checkPassword}) {
+      {String? email, String? password, String? checkPassword,}) {
     return RegistrationState(
         email: email ?? this.email,
         password: password ?? this.password,
-        checkPassword: checkPassword ?? this.checkPassword);
+        checkPassword: checkPassword ?? this.checkPassword,);
   }
 
   @override

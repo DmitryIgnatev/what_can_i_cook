@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:what_can_i_cook/models/ingredient.dart';
+import 'package:what_can_i_cook/services/firebase/firestore.dart';
 import 'package:what_can_i_cook/utils/constants.dart';
-
-import '../../../../../models/ingredient.dart';
-import '../../../../../services/firebase/firestore.dart';
 
 class AddIngredient extends StatefulWidget {
   const AddIngredient({
@@ -16,7 +15,7 @@ class AddIngredient extends StatefulWidget {
 
 class _AddIngredientState extends State<AddIngredient> {
   bool preloader = true;
-  String _ingredient = "";
+  String _ingredient = '';
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -36,7 +35,7 @@ class _AddIngredientState extends State<AddIngredient> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.close,
                         //color: Theme.of(context).primaryIconTheme.color,
                         color: AppColors.kTextColor,
@@ -46,13 +45,13 @@ class _AddIngredientState extends State<AddIngredient> {
                         HapticFeedback.lightImpact();
                         Navigator.pop(context);
                       },
-                    )
+                    ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(36, 0, 36, 26),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(36, 0, 36, 26),
                   child: Text(
-                    "Добавить",
+                    'Добавить',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 30, color: AppColors.kTextColor),
                   ),
@@ -68,25 +67,25 @@ class _AddIngredientState extends State<AddIngredient> {
                         return const Center(
                             child: Text(
                           'Функция недоступна',
-                        ));
+                        ),);
                       } else {
                         return TextField(
                           decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
+                              borderRadius: BorderRadius.circular(15),
                               borderSide:
                                   const BorderSide(color: Colors.transparent),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   const BorderSide(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(15.0),
+                              borderRadius: BorderRadius.circular(15),
                             ),
                             fillColor: Theme.of(context).cardColor,
                             filled: true,
                             hintText: 'Добавить новый ингредиент в базу данных',
                             hintStyle: const TextStyle(
-                                color: AppColors.kTextLigntColor, fontSize: 16),
+                                color: AppColors.kTextLigntColor, fontSize: 16,),
                           ),
                           onChanged: (String value) {
                             setState(() {
@@ -119,16 +118,16 @@ class _AddIngredientState extends State<AddIngredient> {
                     ),
                   ),
                   child: preloader
-                      ? Text(
+                      ? const Text(
                           textAlign: TextAlign.center,
-                          "ОК",
+                          'ОК',
                           style: TextStyle(fontSize: 22, color: Colors.white),
                         )
                       : const CircularProgressIndicator(),
                 ),
                 const SizedBox(
                   height: 30,
-                )
+                ),
               ],
             ),
           ),

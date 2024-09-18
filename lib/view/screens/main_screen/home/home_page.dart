@@ -4,7 +4,7 @@ import 'package:what_can_i_cook/view/screens/main_screen/home/home_body.dart';
 
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/main_screen/main_screen.dart';
+import 'package:what_can_i_cook/view/screens/main_screen/main_screen.dart';
 
 PreferredSizeWidget transparentAppBar(BuildContext context) {
   return AppBar(
@@ -17,6 +17,6 @@ PreferredSizeWidget transparentAppBar(BuildContext context) {
                 ),
               );
             },
-            icon: const Icon(Icons.close))
-      ]);
+            icon: const Icon(Icons.close),),
+      ],);
 }

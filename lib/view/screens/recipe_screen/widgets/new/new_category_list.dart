@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:what_can_i_cook/blocs/recipe/bloc/recipe_bloc.dart';
 import 'package:what_can_i_cook/models/category.dart';
-import 'package:what_can_i_cook/utils/constants.dart';
 import 'package:what_can_i_cook/services/firebase/firestore.dart';
-
-import '../../../../../blocs/recipe/bloc/recipe_bloc.dart';
+import 'package:what_can_i_cook/utils/constants.dart';
 
 class NewCategoryList extends StatelessWidget {
   const NewCategoryList({super.key});
@@ -16,8 +15,8 @@ class NewCategoryList extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: Row(
           children: [
-            Text(
-              "Категория:",
+            const Text(
+              'Категория:',
               style: TextStyle(
                 color: AppColors.kTextLigntColor,
                 fontSize: 24,
@@ -32,7 +31,7 @@ class NewCategoryList extends StatelessWidget {
                     return const Center(
                         child: Text(
                       'Нет записей',
-                    ));
+                    ),);
                   } else {
                     final categories = snapshot.data!;
                     return SizedBox(
@@ -41,40 +40,40 @@ class NewCategoryList extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemCount: categories.length,
                           itemBuilder: (BuildContext context, int index) {
-                            String widgetCategory = categories[index].name;
+                            final String widgetCategory = categories[index].name;
                             return Padding(
                               padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                               child: GestureDetector(
                                 onTap: () {
                                   context.read<RecipeBloc>().add(
                                       RecipeCategoryEvent(
-                                          category: widgetCategory));
+                                          category: widgetCategory,),);
                                 },
-                                child: Container(
+                                child: DecoratedBox(
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10),),
                                         color: Colors.transparent,
                                         border: Border.all(
                                             color: state.category ==
                                                     widgetCategory
                                                 ? AppColors.kPrimaryRedColor
-                                                : AppColors.kTextLigntColor)),
+                                                : AppColors.kTextLigntColor,),),
                                     child: Center(
                                         child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(8),
                                       child: Text(
-                                        "${categories[index].name}",
+                                        '${categories[index].name}',
                                         style: TextStyle(
                                             color: state.category ==
                                                     widgetCategory
                                                 ? AppColors.kPrimaryRedColor
-                                                : AppColors.kTextLigntColor),
+                                                : AppColors.kTextLigntColor,),
                                       ),
-                                    ))),
+                                    ),),),
                               ),
                             );
-                          }),
+                          },),
                     );
                   }
                 },
@@ -83,6 +82,6 @@ class NewCategoryList extends StatelessWidget {
           ],
         ),
       );
-    });
+    },);
   }
 }

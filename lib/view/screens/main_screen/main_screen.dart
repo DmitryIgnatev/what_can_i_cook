@@ -6,7 +6,7 @@ import 'package:what_can_i_cook/view/screens/main_screen/find/find_page.dart';
 import 'package:what_can_i_cook/view/screens/main_screen/home/home_page.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -54,7 +54,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         title: SizedBox(
           height: 35,
           child: Image.asset(
-            "assets/images/pretty_title.png",
+            'assets/images/pretty_title.png',
             color: AppColors.kPrimaryRedColor,
           ),
         ),

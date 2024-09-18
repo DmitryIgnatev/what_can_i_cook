@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../models/recipe.dart';
+import 'package:what_can_i_cook/models/recipe.dart';
 
 class RecipeName extends StatelessWidget {
   final Recipe recipe;
-  const RecipeName({super.key, required this.recipe});
+  const RecipeName({required this.recipe, super.key});
 
   @override
   Widget build(BuildContext context) {

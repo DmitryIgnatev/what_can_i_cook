@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../models/recipe.dart';
-import '../../../../../utils/constants.dart';
+import 'package:what_can_i_cook/models/recipe.dart';
+import 'package:what_can_i_cook/utils/constants.dart';
 
 class RecipeTime extends StatelessWidget {
   final Recipe recipe;
-  const RecipeTime({super.key, required this.recipe});
+  const RecipeTime({required this.recipe, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,15 +13,15 @@ class RecipeTime extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
       child: Row(
         children: [
-          Text(
-            "Время на приготовление: ",
+          const Text(
+            'Время на приготовление: ',
             style:
-                const TextStyle(fontSize: 20, color: AppColors.kTextLigntColor),
+                TextStyle(fontSize: 20, color: AppColors.kTextLigntColor),
           ),
           Text(
-            "${recipe.time ~/ 60} ч ${recipe.time % 60} минут",
+            '${recipe.time ~/ 60} ч ${recipe.time % 60} минут',
             style: const TextStyle(
-                fontSize: 20, color: AppColors.kPrimaryRedColor),
+                fontSize: 20, color: AppColors.kPrimaryRedColor,),
           ),
         ],
       ),
