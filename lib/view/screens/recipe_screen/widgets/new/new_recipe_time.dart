@@ -16,8 +16,9 @@ class NewRecipeTime extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
           child: DecoratedBox(
             decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(15)),),
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: Row(
@@ -28,12 +29,15 @@ class NewRecipeTime extends StatelessWidget {
                       const Text(
                         'Время приготовления: ',
                         style: TextStyle(
-                            fontSize: 20, color: AppColors.kTextLigntColor,),
+                          fontSize: 20,
+                          color: AppColors.kTextLigntColor,
+                        ),
                       ),
                       Text(
                         'ч:${state.hours} мин: ${state.minutes}',
                         style: const TextStyle(
-                            color: AppColors.kTextLigntColor,),
+                          color: AppColors.kTextLigntColor,
+                        ),
                       ),
                     ],
                   ),
@@ -47,37 +51,45 @@ class NewRecipeTime extends StatelessWidget {
                           context: context,
                           removeTop: true,
                           child: ListView.builder(
-                              itemCount: 60,
-                              itemBuilder: (context, index) => GestureDetector(
-                                    onTap: () {
-                                      context.read<RecipeBloc>().add(
-                                          RecipeHoursEvent(hours: index),);
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      margin: const EdgeInsets.only(bottom: 3),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: state.hours == index
-                                                  ? AppColors.kPrimaryRedColor
-                                                  : AppColors.kTextLigntColor,),
-                                          color: state.hours == index
-                                              ? const Color.fromARGB(
-                                                  255, 235, 235, 235,)
-                                              : Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(5),),
-                                      child: Text(
-                                        '$index',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                            color: state.hours == index
-                                                ? AppColors.kPrimaryRedColor
-                                                : AppColors.kTextLigntColor,),
-                                      ),
-                                    ),
-                                  ),),
+                            itemCount: 60,
+                            itemBuilder: (context, index) => GestureDetector(
+                              onTap: () {
+                                context.read<RecipeBloc>().add(
+                                      RecipeHoursEvent(hours: index),
+                                    );
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                margin: const EdgeInsets.only(bottom: 3),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: state.hours == index
+                                        ? AppColors.kPrimaryRedColor
+                                        : AppColors.kTextLigntColor,
+                                  ),
+                                  color: state.hours == index
+                                      ? const Color.fromARGB(
+                                          255,
+                                          235,
+                                          235,
+                                          235,
+                                        )
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Text(
+                                  '$index',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: state.hours == index
+                                        ? AppColors.kPrimaryRedColor
+                                        : AppColors.kTextLigntColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -90,37 +102,45 @@ class NewRecipeTime extends StatelessWidget {
                           context: context,
                           removeTop: true,
                           child: ListView.builder(
-                              itemCount: 60,
-                              itemBuilder: (context, index) => GestureDetector(
-                                    onTap: () {
-                                      context.read<RecipeBloc>().add(
-                                          RecipeMinutesEvent(minutes: index),);
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      margin: const EdgeInsets.only(bottom: 2),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: state.minutes == index
-                                                  ? AppColors.kPrimaryRedColor
-                                                  : AppColors.kTextLigntColor,),
-                                          color: state.minutes == index
-                                              ? const Color.fromARGB(
-                                                  255, 235, 235, 235,)
-                                              : Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(5),),
-                                      child: Text(
-                                        '$index',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                            color: state.minutes == index
-                                                ? AppColors.kPrimaryRedColor
-                                                : AppColors.kTextLigntColor,),
-                                      ),
-                                    ),
-                                  ),),
+                            itemCount: 60,
+                            itemBuilder: (context, index) => GestureDetector(
+                              onTap: () {
+                                context.read<RecipeBloc>().add(
+                                      RecipeMinutesEvent(minutes: index),
+                                    );
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                margin: const EdgeInsets.only(bottom: 2),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: state.minutes == index
+                                        ? AppColors.kPrimaryRedColor
+                                        : AppColors.kTextLigntColor,
+                                  ),
+                                  color: state.minutes == index
+                                      ? const Color.fromARGB(
+                                          255,
+                                          235,
+                                          235,
+                                          235,
+                                        )
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Text(
+                                  '$index',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: state.minutes == index
+                                        ? AppColors.kPrimaryRedColor
+                                        : AppColors.kTextLigntColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ],

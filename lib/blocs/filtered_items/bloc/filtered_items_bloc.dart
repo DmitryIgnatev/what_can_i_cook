@@ -12,8 +12,9 @@ class FilteredItemsBloc extends Bloc<FilteredItemsEvent, FilteredItemsState> {
   }
 
   void _filteredItemsChanged(
-      FilteredItemsChangedEvent event, Emitter<FilteredItemsState> emit,) {
+    FilteredItemsChangedEvent event,
+    Emitter<FilteredItemsState> emit,
+  ) {
     emit(state.copyWith(items: event.items));
   }
-
 }

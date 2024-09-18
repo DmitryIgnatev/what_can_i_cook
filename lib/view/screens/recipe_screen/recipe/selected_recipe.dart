@@ -49,9 +49,10 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
             create: (context) => FilteredItemsBloc(),
           ),
         ],
-        child: BlocBuilder<RecipeBloc, RecipeState>(builder: (context, state) {
-          return SingleChildScrollView(
-            child: StreamBuilder<List<Recipe>>(
+        child: BlocBuilder<RecipeBloc, RecipeState>(
+          builder: (context, state) {
+            return SingleChildScrollView(
+              child: StreamBuilder<List<Recipe>>(
                 stream: ReadStore().readData('recipes', Recipe.fromJson),
                 builder: (BuildContext context, snapshot) {
                   if (snapshot.hasData) {
@@ -61,19 +62,23 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                       children: [
                         SizedBox(
                           height: 0.40 * height,
-                          child: Stack(children: <Widget>[
-                            SizedBox(
+                          child: Stack(
+                            children: <Widget>[
+                              SizedBox(
                                 width: height,
                                 height: 0.40 * height - 30,
                                 child: ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                      bottomLeft: Radius.circular(15),
+                                  borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(15),
+                                  ),
+                                  child: SizedBox(
+                                    child: FuturePicture(
+                                      pictureUrl: recipe.pictureUrl,
                                     ),
-                                    child: SizedBox(
-                                      child: FuturePicture(
-                                          pictureUrl: recipe.pictureUrl,),
-                                    ),),),
-                            Positioned(
+                                  ),
+                                ),
+                              ),
+                              Positioned(
                                 bottom: 0,
                                 right: 0,
                                 child: Container(
@@ -81,8 +86,9 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                   width: 0.95 * width,
                                   decoration: const BoxDecoration(
                                     borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(15),
-                                        topLeft: Radius.circular(15),),
+                                      bottomLeft: Radius.circular(15),
+                                      topLeft: Radius.circular(15),
+                                    ),
                                     color: Colors.white,
                                   ),
                                   child: Row(
@@ -91,112 +97,115 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                                         width: 20,
                                       ),
                                       Expanded(
-                                          child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: isEdited
-                                            ? <Widget>[
-                                                const NewRecipeName(),
-                                              ]
-                                            : <Widget>[
-                                                RecipeName(recipe: recipe),
-                                              ],
-                                      ),),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: isEdited
+                                              ? <Widget>[
+                                                  const NewRecipeName(),
+                                                ]
+                                              : <Widget>[
+                                                  RecipeName(recipe: recipe),
+                                                ],
+                                        ),
+                                      ),
                                       //*edit button
-                                      if (isEdited) Row(
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      isEdited = false;
-                                                    });
-                                                  },
-                                                  child: const Icon(
-                                                    Icons.close,
-                                                    size: 28,
-                                                    color: AppColors
-                                                        .kPrimaryRedColor,
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      isEdited = false;
-                                                    });
-                                                    FireStore().updateRecipe(
-                                                      recipe,
-                                                      state.name,
-                                                      state.ingredients,
-                                                      state.hours * 60 +
-                                                          state.minutes,
-                                                      state.pictureUrl,
-                                                      state.description,
-                                                      state.tags,
-                                                      state.category,
-                                                    );
-                                                  },
-                                                  child: const Icon(
-                                                    Icons.check,
-                                                    size: 28,
-                                                    color: AppColors
-                                                        .kPrimaryRedColor,
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                              ],
-                                            ) else Container(
-                                              height: 64,
-                                              width: 64,
-                                              decoration: const BoxDecoration(
-                                                  color: AppColors
-                                                      .kPrimaryRedColor,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(15),),),
-                                              child: InkWell(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      isEdited = true;
-                                                    });
-                                                    context
-                                                        .read<RecipeBloc>()
-                                                        .add(RecipeCopyEvent(
-                                                            name: recipe.name,
-                                                            ingredients: recipe
-                                                                .ingredients,
-                                                            hours:
-                                                                recipe.time ~/
-                                                                    60,
-                                                            minutes:
-                                                                recipe.time %
-                                                                    60,
-                                                            description: recipe
-                                                                .description,
-                                                            pictureUrl: recipe
-                                                                .pictureUrl,
-                                                            tags: recipe.tags,
-                                                            category: recipe
-                                                                .category,),);
-                                                  },
-                                                  child: const Icon(
-                                                    Icons.edit,
-                                                    size: 28,
-                                                    color: Colors.white,
-                                                  ),),
+                                      if (isEdited)
+                                        Row(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  isEdited = false;
+                                                });
+                                              },
+                                              child: const Icon(
+                                                Icons.close,
+                                                size: 28,
+                                                color:
+                                                    AppColors.kPrimaryRedColor,
+                                              ),
                                             ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  isEdited = false;
+                                                });
+                                                FireStore().updateRecipe(
+                                                  recipe,
+                                                  state.name,
+                                                  state.ingredients,
+                                                  state.hours * 60 +
+                                                      state.minutes,
+                                                  state.pictureUrl,
+                                                  state.description,
+                                                  state.tags,
+                                                  state.category,
+                                                );
+                                              },
+                                              child: const Icon(
+                                                Icons.check,
+                                                size: 28,
+                                                color:
+                                                    AppColors.kPrimaryRedColor,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                          ],
+                                        )
+                                      else
+                                        Container(
+                                          height: 64,
+                                          width: 64,
+                                          decoration: const BoxDecoration(
+                                            color: AppColors.kPrimaryRedColor,
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(15),
+                                            ),
+                                          ),
+                                          child: InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                isEdited = true;
+                                              });
+                                              context.read<RecipeBloc>().add(
+                                                    RecipeCopyEvent(
+                                                      name: recipe.name,
+                                                      ingredients:
+                                                          recipe.ingredients,
+                                                      hours: recipe.time ~/ 60,
+                                                      minutes: recipe.time % 60,
+                                                      description:
+                                                          recipe.description,
+                                                      pictureUrl:
+                                                          recipe.pictureUrl,
+                                                      tags: recipe.tags,
+                                                      category: recipe.category,
+                                                    ),
+                                                  );
+                                            },
+                                            child: const Icon(
+                                              Icons.edit,
+                                              size: 28,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
                                       //*edit button end
                                       const SizedBox(width: 5),
                                     ],
                                   ),
-                                ),),
-                          ],),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -224,9 +233,11 @@ class _SelectedRecipeState extends State<SelectedRecipe> {
                   } else {
                     return const Text('Error');
                   }
-                },),
-          );
-        },),
+                },
+              ),
+            );
+          },
+        ),
       ),
     );
   }

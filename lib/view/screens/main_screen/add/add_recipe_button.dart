@@ -8,20 +8,21 @@ class AddRecipeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
-        backgroundColor: Colors.white,
-        icon: const Icon(
-          Icons.add_box_sharp,
-          color: AppColors.kPrimaryRedColor,
-        ),
-        label: const Text(
-          'Добавить собственный рецепт',
-          style: TextStyle(color: AppColors.kPrimaryRedColor),
-        ),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const NewRecipe()),
-          );
-        },);
+      backgroundColor: Colors.white,
+      icon: const Icon(
+        Icons.add_box_sharp,
+        color: AppColors.kPrimaryRedColor,
+      ),
+      label: const Text(
+        'Добавить собственный рецепт',
+        style: TextStyle(color: AppColors.kPrimaryRedColor),
+      ),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const NewRecipe()),
+        );
+      },
+    );
   }
 }

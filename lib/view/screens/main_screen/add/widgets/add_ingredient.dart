@@ -65,9 +65,10 @@ class _AddIngredientState extends State<AddIngredient> {
                     builder: (BuildContext context, snapshot) {
                       if (!snapshot.hasData) {
                         return const Center(
-                            child: Text(
-                          'Функция недоступна',
-                        ),);
+                          child: Text(
+                            'Функция недоступна',
+                          ),
+                        );
                       } else {
                         return TextField(
                           decoration: InputDecoration(
@@ -85,7 +86,9 @@ class _AddIngredientState extends State<AddIngredient> {
                             filled: true,
                             hintText: 'Добавить новый ингредиент в базу данных',
                             hintStyle: const TextStyle(
-                                color: AppColors.kTextLigntColor, fontSize: 16,),
+                              color: AppColors.kTextLigntColor,
+                              fontSize: 16,
+                            ),
                           ),
                           onChanged: (String value) {
                             setState(() {

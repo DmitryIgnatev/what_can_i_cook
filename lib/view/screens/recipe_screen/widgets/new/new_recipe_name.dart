@@ -30,7 +30,9 @@ class NewRecipeName extends StatelessWidget {
               filled: true,
               hintText: 'Название рецепта',
               hintStyle: const TextStyle(
-                  color: AppColors.kTextLigntColor, fontSize: 20,),
+                color: AppColors.kTextLigntColor,
+                fontSize: 20,
+              ),
             ),
             onChanged: (String value) {
               context.read<RecipeBloc>().add(RecipeNameEvent(name: value));

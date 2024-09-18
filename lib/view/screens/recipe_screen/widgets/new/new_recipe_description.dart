@@ -36,7 +36,9 @@ class NewRecipeDescription extends StatelessWidget {
                 filled: true,
                 hintText: 'Опишите развернуто свой рецепт',
                 hintStyle: const TextStyle(
-                    color: AppColors.kTextLigntColor, fontSize: 16,),
+                  color: AppColors.kTextLigntColor,
+                  fontSize: 16,
+                ),
               ),
               keyboardType: TextInputType.text,
               style: const TextStyle(

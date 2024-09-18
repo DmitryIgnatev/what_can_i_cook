@@ -20,8 +20,9 @@ class DeleteRecipeButton extends StatelessWidget {
           },
           child: const DecoratedBox(
             decoration: BoxDecoration(
-                color: AppColors.kPrimaryRedColor,
-                borderRadius: BorderRadius.all(Radius.circular(15)),),
+              color: AppColors.kPrimaryRedColor,
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+            ),
             child: Padding(
               padding: EdgeInsets.all(8),
               child: Text(

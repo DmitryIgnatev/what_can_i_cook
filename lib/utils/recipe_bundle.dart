@@ -11,14 +11,15 @@ class RecipeBundle {
   final String imageSrc;
   final Color color;
 
-  RecipeBundle(
-      {required this.id,
-      required this.chefs,
-      required this.recipes,
-      required this.title,
-      required this.description,
-      required this.imageSrc,
-      required this.color,});
+  RecipeBundle({
+    required this.id,
+    required this.chefs,
+    required this.recipes,
+    required this.title,
+    required this.description,
+    required this.imageSrc,
+    required this.color,
+  });
 }
 
 // Demo list
@@ -37,7 +38,8 @@ List<RecipeBundle> recipeBundles = [
     chefs: 8,
     recipes: 26,
     title: 'Добавляйте любимые рецепты в избранное',
-    description: 'Вы сможете в люой момент посмотреть список понравившихся вам рецептов',
+    description:
+        'Вы сможете в люой момент посмотреть список понравившихся вам рецептов',
     imageSrc: 'assets/images/cooking_book.png',
     color: AppColors.kPrimaryRedColor,
   ),

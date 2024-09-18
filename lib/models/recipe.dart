@@ -24,7 +24,8 @@ class Recipe extends BaseItemModel {
     final List<dynamic> tagData = json['tags'];
     final List<String> ingredientsList =
         ingredientData.map((item) => item.toString()).toList();
-    final List<String> tagList = tagData.map((item) => item.toString()).toList();
+    final List<String> tagList =
+        tagData.map((item) => item.toString()).toList();
     return Recipe(
       id: json['id'] ?? '',
       name: json['name'] ?? '',

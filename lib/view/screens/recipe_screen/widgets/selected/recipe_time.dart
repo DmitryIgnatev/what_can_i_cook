@@ -15,13 +15,14 @@ class RecipeTime extends StatelessWidget {
         children: [
           const Text(
             'Время на приготовление: ',
-            style:
-                TextStyle(fontSize: 20, color: AppColors.kTextLigntColor),
+            style: TextStyle(fontSize: 20, color: AppColors.kTextLigntColor),
           ),
           Text(
             '${recipe.time ~/ 60} ч ${recipe.time % 60} минут',
             style: const TextStyle(
-                fontSize: 20, color: AppColors.kPrimaryRedColor,),
+              fontSize: 20,
+              color: AppColors.kPrimaryRedColor,
+            ),
           ),
         ],
       ),

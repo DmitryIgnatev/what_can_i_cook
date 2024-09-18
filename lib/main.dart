@@ -16,19 +16,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      return MultiBlocProvider(
-        providers: [
-          BlocProvider<RegistrationBloc>(
-            create: (context) => RegistrationBloc(),
-          ),
-        ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSwatch(),
-          ),
-          home: const SplashScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<RegistrationBloc>(
+          create: (context) => RegistrationBloc(),
         ),
-      );
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch(),
+        ),
+        home: const SplashScreen(),
+      ),
+    );
   }
 }

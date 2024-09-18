@@ -26,9 +26,12 @@ class _SplashScreenState extends State<SplashScreen>
     _controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 3));
 
-    animation1 = Tween<double>(begin: 40, end: 20).animate(CurvedAnimation(
-        parent: _controller, curve: Curves.fastLinearToSlowEaseIn,),)
-      ..addListener(() {
+    animation1 = Tween<double>(begin: 40, end: 20).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.fastLinearToSlowEaseIn,
+      ),
+    )..addListener(() {
         setState(() {
           _textOpacity = 1.0;
         });
@@ -72,9 +75,10 @@ class _SplashScreenState extends State<SplashScreen>
           Column(
             children: [
               AnimatedContainer(
-                  duration: const Duration(milliseconds: 2000),
-                  curve: Curves.fastLinearToSlowEaseIn,
-                  height: height / _fontSize,),
+                duration: const Duration(milliseconds: 2000),
+                curve: Curves.fastLinearToSlowEaseIn,
+                height: height / _fontSize,
+              ),
               AnimatedOpacity(
                 duration: const Duration(milliseconds: 1000),
                 opacity: _textOpacity,
@@ -100,8 +104,10 @@ class _SplashScreenState extends State<SplashScreen>
                 height: 0.90 * height,
                 width: 0.90 * width,
                 alignment: Alignment.center,
-                child: Image.asset('assets/images/cooking_book.png',
-                    fit: BoxFit.contain,),
+                child: Image.asset(
+                  'assets/images/cooking_book.png',
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ),

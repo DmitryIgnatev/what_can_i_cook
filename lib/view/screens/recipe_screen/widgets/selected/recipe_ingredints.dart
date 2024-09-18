@@ -32,8 +32,10 @@ class RecipeIngredients extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return Text(
                   recipe.ingredients[index],
-                  style:
-                      const TextStyle(fontSize: 18, color: AppColors.kTextLigntColor),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: AppColors.kTextLigntColor,
+                  ),
                 );
               },
             ),
