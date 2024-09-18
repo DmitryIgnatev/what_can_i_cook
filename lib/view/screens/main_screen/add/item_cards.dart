@@ -57,8 +57,7 @@ class _ItemCardsState extends State<ItemCards> {
                       : 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  childAspectRatio:
-                      0.6, //?длина карточки, но есть проблемы с версткой экрана !
+                  childAspectRatio: 0.6,
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return Stack(

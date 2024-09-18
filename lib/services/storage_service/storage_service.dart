@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 
@@ -13,11 +12,7 @@ class StorageService {
   ) async {
     final File file = File(filePath);
 
-    try {
-      await storage.ref('pics/$fileName').putFile(file);
-    } on firebase_core.FirebaseException {
-      //
-    }
+    await storage.ref('pics/$fileName').putFile(file);
   }
 
   Future<String> downloadURL(String imageName) async {
@@ -28,8 +23,8 @@ class StorageService {
       return downloadURL;
     } catch (e) {
       debugPrint('$e');
+      throw Exception(e);
     }
-    return '';
   }
 
   Future<String> pickPictire(BuildContext context) async {
