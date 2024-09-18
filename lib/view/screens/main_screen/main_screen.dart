@@ -15,11 +15,9 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   late TabController _tabController;
   static const _kTabPages = <Widget>[
-    Center(
-      child: HomePage(),
-    ),
-    Center(child: AddPage()),
-    Center(child: FindPage()),
+    HomePage(),
+    AddPage(),
+    FindPage(),
   ];
   static const _kTabs = <Tab>[
     Tab(
@@ -66,20 +64,14 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         centerTitle: true,
       ),
-      body: Stack(
-        children: [
-          TabBarView(
-            controller: _tabController,
-            children: _kTabPages,
-          ),
-        ],
+      body: TabBarView(
+        controller: _tabController,
+        children: _kTabPages,
       ),
-      bottomNavigationBar: Material(
-        color: const Color.fromARGB(255, 255, 255, 255),
+      bottomNavigationBar: SafeArea(
         child: TabBar(
           unselectedLabelColor: Colors.grey,
           labelColor: AppColors.kPrimaryRedColor,
-          //indicatorColor: Colors.transparent,
           indicatorColor: AppColors.kPrimaryRedColor,
           tabs: _kTabs,
           controller: _tabController,
