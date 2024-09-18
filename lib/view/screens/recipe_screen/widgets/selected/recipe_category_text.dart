@@ -14,22 +14,24 @@ class RecipeCategoryText extends StatelessWidget {
         children: [
           const Text(
             'Категория: ',
-            style:
-                TextStyle(fontSize: 20, color: AppColors.kTextLigntColor),
+            style: TextStyle(fontSize: 20, color: AppColors.kTextLigntColor),
           ),
           DecoratedBox(
-              decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  color: Colors.transparent,
-                  border: Border.all(color: AppColors.kPrimaryRedColor),),
-              child: Center(
-                  child: Padding(
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              color: Colors.transparent,
+              border: Border.all(color: AppColors.kPrimaryRedColor),
+            ),
+            child: Center(
+              child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: Text(
-                  '${recipe.category}',
+                  recipe.category,
                   style: const TextStyle(color: AppColors.kPrimaryRedColor),
                 ),
-              ),),),
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -12,7 +12,7 @@ class RecipeDescription extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Text(
-        '${recipe.description}',
+        recipe.description,
         textAlign: TextAlign.start,
         style: const TextStyle(
           fontSize: 16,

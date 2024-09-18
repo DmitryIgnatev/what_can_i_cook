@@ -14,36 +14,41 @@ class RecipeTagList extends StatelessWidget {
         children: [
           const Text(
             'Тэги:',
-            style:
-                TextStyle(fontSize: 20, color: AppColors.kTextLigntColor),
+            style: TextStyle(fontSize: 20, color: AppColors.kTextLigntColor),
           ),
           Expanded(
             child: SizedBox(
               height: 35,
               child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: recipe.tags.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: DecoratedBox(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10)),
-                              color: Colors.transparent,
-                              border: Border.all(
-                                  color: AppColors.kPrimaryRedColor,),),
-                          child: Center(
-                              child: Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Text(
-                              '${recipe.tags[index]}',
-                              style:
-                                  const TextStyle(color: AppColors.kPrimaryRedColor),
+                scrollDirection: Axis.horizontal,
+                itemCount: recipe.tags.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                        color: Colors.transparent,
+                        border: Border.all(
+                          color: AppColors.kPrimaryRedColor,
+                        ),
+                      ),
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(
+                            recipe.tags[index],
+                            style: const TextStyle(
+                              color: AppColors.kPrimaryRedColor,
                             ),
-                          ),),),
-                    );
-                  },),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],

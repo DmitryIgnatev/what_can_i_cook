@@ -10,32 +10,34 @@ class NewTagList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RecipeBloc, RecipeState>(builder: (context, state) {
-      return Padding(
-        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-        child: Row(
-          children: [
-            const Text(
-              'Тэги:',
-              style: TextStyle(
-                color: AppColors.kTextLigntColor,
-                fontSize: 24,
+    return BlocBuilder<RecipeBloc, RecipeState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+          child: Row(
+            children: [
+              const Text(
+                'Тэги:',
+                style: TextStyle(
+                  color: AppColors.kTextLigntColor,
+                  fontSize: 24,
+                ),
               ),
-            ),
-            Expanded(
-              child: StreamBuilder<List<Tag>>(
-                stream: ReadStore().readData('tags', Tag.fromJson),
-                builder: (BuildContext context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Center(
+              Expanded(
+                child: StreamBuilder<List<Tag>>(
+                  stream: ReadStore().readData('tags', Tag.fromJson),
+                  builder: (BuildContext context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(
                         child: Text(
-                      'Нет записей',
-                    ),);
-                  } else {
-                    final tags = snapshot.data!;
-                    return SizedBox(
-                      height: 35,
-                      child: ListView.builder(
+                          'Нет записей',
+                        ),
+                      );
+                    } else {
+                      final tags = snapshot.data!;
+                      return SizedBox(
+                        height: 35,
+                        child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: tags.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -50,43 +52,50 @@ class NewTagList extends StatelessWidget {
                                         .add(RecipeAddTagEvent(tag: widgetTag));
                                   } else {
                                     context.read<RecipeBloc>().add(
-                                        RecipeDeleteTagEvent(tag: widgetTag),);
+                                          RecipeDeleteTagEvent(tag: widgetTag),
+                                        );
                                   }
                                   debugPrint('${state.tags}');
                                 },
                                 child: DecoratedBox(
-                                    decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(10),),
-                                        color: Colors.transparent,
-                                        border: Border.all(
-                                            color: state.tags
-                                                    .contains(widgetTag)
-                                                ? AppColors.kPrimaryRedColor
-                                                : AppColors.kTextLigntColor,),),
-                                    child: Center(
-                                        child: Padding(
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                    color: Colors.transparent,
+                                    border: Border.all(
+                                      color: state.tags.contains(widgetTag)
+                                          ? AppColors.kPrimaryRedColor
+                                          : AppColors.kTextLigntColor,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Padding(
                                       padding: const EdgeInsets.all(8),
                                       child: Text(
-                                        '${tags[index].name}',
+                                        tags[index].name,
                                         style: TextStyle(
-                                            color: state.tags
-                                                    .contains(widgetTag)
-                                                ? AppColors.kPrimaryRedColor
-                                                : AppColors.kTextLigntColor,),
+                                          color: state.tags.contains(widgetTag)
+                                              ? AppColors.kPrimaryRedColor
+                                              : AppColors.kTextLigntColor,
+                                        ),
                                       ),
-                                    ),),),
+                                    ),
+                                  ),
+                                ),
                               ),
                             );
-                          },),
-                    );
-                  }
-                },
+                          },
+                        ),
+                      );
+                    }
+                  },
+                ),
               ),
-            ),
-          ],
-        ),
-      );
-    },);
+            ],
+          ),
+        );
+      },
+    );
   }
 }

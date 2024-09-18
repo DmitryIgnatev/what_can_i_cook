@@ -10,44 +10,48 @@ class RecipeState extends Equatable {
   final List<String> tags;
   final String category;
 
-  const RecipeState(
-      {required this.name,
-      required this.ingredients,
-      required this.hours,
-      required this.minutes,
-      required this.description,
-      required this.pictureUrl,
-      required this.tags,
-      required this.category,});
+  const RecipeState({
+    required this.name,
+    required this.ingredients,
+    required this.hours,
+    required this.minutes,
+    required this.description,
+    required this.pictureUrl,
+    required this.tags,
+    required this.category,
+  });
 
   factory RecipeState.initial() => const RecipeState(
-      name: '',
-      ingredients: [],
-      hours: 0,
-      minutes: 0,
-      description: '',
-      pictureUrl: 'DefaultPicture.jpg',
-      tags: [],
-      category: '',);
+        name: '',
+        ingredients: [],
+        hours: 0,
+        minutes: 0,
+        description: '',
+        pictureUrl: 'DefaultPicture.jpg',
+        tags: [],
+        category: '',
+      );
 
-  RecipeState copyWith(
-      {String? name,
-      List<String>? ingredients,
-      int? hours,
-      int? minutes,
-      String? description,
-      String? pictireUrl,
-      List<String>? tags,
-      String? category,}) {
+  RecipeState copyWith({
+    String? name,
+    List<String>? ingredients,
+    int? hours,
+    int? minutes,
+    String? description,
+    String? pictureUrl,
+    List<String>? tags,
+    String? category,
+  }) {
     return RecipeState(
-        name: name ?? this.name,
-        ingredients: ingredients ?? this.ingredients,
-        hours: hours ?? this.hours,
-        minutes: minutes ?? this.minutes,
-        description: description ?? this.description,
-        pictureUrl: pictireUrl ?? this.pictureUrl,
-        tags: tags ?? this.tags,
-        category: category ?? this.category,);
+      name: name ?? this.name,
+      ingredients: ingredients ?? this.ingredients,
+      hours: hours ?? this.hours,
+      minutes: minutes ?? this.minutes,
+      description: description ?? this.description,
+      pictureUrl: pictureUrl ?? this.pictureUrl,
+      tags: tags ?? this.tags,
+      category: category ?? this.category,
+    );
   }
 
   @override
